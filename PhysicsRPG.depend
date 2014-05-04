@@ -7,7 +7,7 @@
 	<vector>
 	<cmath>
 
-1399172876 source:/home/gust/Documents/Gust/PhysicsRPG/src/main.cpp
+1399188090 source:/home/gust/Documents/Gust/PhysicsRPG/src/main.cpp
 	<Box2D/Box2D.h>
 	<SFML/Graphics.hpp>
 	<iostream>
@@ -15,13 +15,15 @@
 	"BoxBody.h"
 	"Globals.h"
 	"DebugRender.h"
+	"SpriteBody.h"
+	"TextureManager.h"
 
-1399173258 source:/home/gust/Documents/Gust/PhysicsRPG/src/BoxBody.cpp
+1399174628 source:/home/gust/Documents/Gust/PhysicsRPG/src/BoxBody.cpp
 	"BoxBody.h"
 	"Globals.h"
 	<math.h>
 
-1399168439 /home/gust/Documents/Gust/PhysicsRPG/include/BoxBody.h
+1399187541 /home/gust/Documents/Gust/PhysicsRPG/include/BoxBody.h
 	<Box2D/Box2D.h>
 	<SFML/Graphics.hpp>
 
@@ -45,4 +47,31 @@
 1399170957 /home/gust/Documents/Gust/PhysicsRPG/include/DebugRender.h
 	<Box2D/Box2D.h>
 	<SFML/Graphics.hpp>
+
+1399184575 source:/home/gust/Documents/Gust/PhysicsRPG/src/TextureManager.cpp
+	"TextureManager.h"
+	<stdexcept>
+	<cassert>
+
+1399184577 /home/gust/Documents/Gust/PhysicsRPG/include/TextureManager.h
+	<SFML/Graphics.hpp>
+	<map>
+	<string>
+	<memory>
+
+1399186738 source:/home/gust/Documents/Gust/PhysicsRPG/src/Body.cpp
+	"Body.h"
+
+1399186820 /home/gust/Documents/Gust/PhysicsRPG/include/Body.h
+	<Box2D/Box2D.h>
+	<SFML/Graphics.hpp>
+
+1399187163 source:/home/gust/Documents/Gust/PhysicsRPG/src/SpriteBody.cpp
+	"SpriteBody.h"
+	"Globals.h"
+
+1399187043 /home/gust/Documents/Gust/PhysicsRPG/include/SpriteBody.h
+	<Box2D/Box2D.h>
+	<SFML/Graphics.hpp>
+	"Body.h"
 

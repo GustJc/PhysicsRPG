@@ -15,7 +15,7 @@ class BoxBody
         sf::Shape& getShape();
         void update();
         void destroyBody(b2World & world);
-    protected:
+    //protected:
         b2Body* m_body;
         b2BodyDef m_bodyDef;
         b2PolygonShape m_bodyShape;

@@ -29,6 +29,7 @@
 			</Target>
 		</Build>
 		<Compiler>
+			<Add option="-std=c++0x" />
 			<Add option="-Wall" />
 			<Add directory="include" />
 		</Compiler>
@@ -36,14 +37,20 @@
 			<Add option="-lsfml-system -lsfml-graphics -lsfml-window" />
 			<Add option="-lBox2D" />
 		</Linker>
+		<Unit filename="include/Body.h" />
 		<Unit filename="include/BoxBody.h" />
 		<Unit filename="include/DebugRender.h" />
 		<Unit filename="include/Globals.h" />
 		<Unit filename="include/PolygonBody.h" />
+		<Unit filename="include/SpriteBody.h" />
+		<Unit filename="include/TextureManager.h" />
+		<Unit filename="src/Body.cpp" />
 		<Unit filename="src/BoxBody.cpp" />
 		<Unit filename="src/DebugRender.cpp" />
 		<Unit filename="src/Globals.cpp" />
 		<Unit filename="src/PolygonBody.cpp" />
+		<Unit filename="src/SpriteBody.cpp" />
+		<Unit filename="src/TextureManager.cpp" />
 		<Unit filename="src/main.cpp" />
 		<Extensions>
 			<envvars />
