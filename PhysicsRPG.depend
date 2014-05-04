@@ -1,0 +1,48 @@
+# depslib dependency file v1.0
+1397652248 source:/home/gust/Documents/Gust/PhysicsRPG/main.cpp
+	<SFML/Graphics.hpp>
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<vector>
+	<cmath>
+
+1399172876 source:/home/gust/Documents/Gust/PhysicsRPG/src/main.cpp
+	<Box2D/Box2D.h>
+	<SFML/Graphics.hpp>
+	<iostream>
+	<stdio.h>
+	"BoxBody.h"
+	"Globals.h"
+	"DebugRender.h"
+
+1399173258 source:/home/gust/Documents/Gust/PhysicsRPG/src/BoxBody.cpp
+	"BoxBody.h"
+	"Globals.h"
+	<math.h>
+
+1399168439 /home/gust/Documents/Gust/PhysicsRPG/include/BoxBody.h
+	<Box2D/Box2D.h>
+	<SFML/Graphics.hpp>
+
+1399167843 source:/home/gust/Documents/Gust/PhysicsRPG/src/Globals.cpp
+	"Globals.h"
+
+1399171183 /home/gust/Documents/Gust/PhysicsRPG/include/Globals.h
+	<iostream>
+
+1399163654 source:/home/gust/Documents/Gust/PhysicsRPG/src/PolygonBody.cpp
+	"PolygonBody.h"
+
+1399167701 /home/gust/Documents/Gust/PhysicsRPG/include/PolygonBody.h
+	<Box2D/Box2D.h>
+	<SFML/Graphics.hpp>
+
+1399172805 source:/home/gust/Documents/Gust/PhysicsRPG/src/DebugRender.cpp
+	"DebugRender.h"
+	"Globals.h"
+
+1399170957 /home/gust/Documents/Gust/PhysicsRPG/include/DebugRender.h
+	<Box2D/Box2D.h>
+	<SFML/Graphics.hpp>
+

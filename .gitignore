@@ -1,3 +1,5 @@
+/bin
+*.layout
 # Compiled Object files
 *.slo
 *.lo
