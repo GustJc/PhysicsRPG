@@ -7,7 +7,7 @@
 	<vector>
 	<cmath>
 
-1399188090 source:/home/gust/Documents/Gust/PhysicsRPG/src/main.cpp
+1399252645 source:/home/gust/Documents/Gust/PhysicsRPG/src/main.cpp
 	<Box2D/Box2D.h>
 	<SFML/Graphics.hpp>
 	<iostream>
@@ -17,8 +17,9 @@
 	"DebugRender.h"
 	"SpriteBody.h"
 	"TextureManager.h"
+	"Animation.h"
 
-1399174628 source:/home/gust/Documents/Gust/PhysicsRPG/src/BoxBody.cpp
+1399234512 source:/home/gust/Documents/Gust/PhysicsRPG/src/BoxBody.cpp
 	"BoxBody.h"
 	"Globals.h"
 	<math.h>
@@ -74,4 +75,11 @@
 	<Box2D/Box2D.h>
 	<SFML/Graphics.hpp>
 	"Body.h"
+
+1399222803 source:/home/gust/Documents/Gust/PhysicsRPG/src/Animation.cpp
+	"Animation.h"
+	<iostream>
+
+1399222160 /home/gust/Documents/Gust/PhysicsRPG/include/Animation.h
+	<SFML/Graphics.hpp>
 

@@ -37,6 +37,7 @@
 			<Add option="-lsfml-system -lsfml-graphics -lsfml-window" />
 			<Add option="-lBox2D" />
 		</Linker>
+		<Unit filename="include/Animation.h" />
 		<Unit filename="include/Body.h" />
 		<Unit filename="include/BoxBody.h" />
 		<Unit filename="include/DebugRender.h" />
@@ -44,6 +45,7 @@
 		<Unit filename="include/PolygonBody.h" />
 		<Unit filename="include/SpriteBody.h" />
 		<Unit filename="include/TextureManager.h" />
+		<Unit filename="src/Animation.cpp" />
 		<Unit filename="src/Body.cpp" />
 		<Unit filename="src/BoxBody.cpp" />
 		<Unit filename="src/DebugRender.cpp" />

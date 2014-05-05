@@ -13,7 +13,7 @@ BoxBody::BoxBody(b2World & world)
     m_bodyFix.shape = &m_bodyShape;
     m_bodyFix.density = 0.3f;
     m_bodyFix.friction = 0.5f;
-    m_bodyFix.restitution = 0.1f;
+    m_bodyFix.restitution = 0.2f;
     m_body = world.CreateBody(&m_bodyDef);
     m_body->CreateFixture(&m_bodyFix);
 }
