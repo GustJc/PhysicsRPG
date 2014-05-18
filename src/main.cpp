@@ -2,6 +2,15 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <stdio.h>
+#include "GameManager.h"
+using namespace std;
+int main(int args, char** argv)
+{
+    GameManager game;
+
+    return game.run(args, argv);
+}
+/*
 
 #include "BoxBody.h"
 #include "Globals.h"
@@ -11,8 +20,8 @@
 
 #include "TextureManager.h"
 #include "Animation.h"
-using namespace std;
-
+*/
+/*
 int main() {
 
     sf::RenderWindow window(sf::VideoMode(800,600,32),"Game-Box");
@@ -39,6 +48,8 @@ int main() {
     //Dinamico
     BoxBody body(world);
     body.getBody()->SetAngularVelocity(100.f);
+
+*/
 /*
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
@@ -54,7 +65,7 @@ int main() {
     fixtureDef.friction = 0.3f;
     bbody->CreateFixture(&fixtureDef);
 */
-
+/*
 //TESTES
     TextureManager::TextureControl.load("catapult", "data/img/catapult-fix.png");
     sf::Sprite sp(TextureManager::TextureControl.get("catapult") );
@@ -112,7 +123,7 @@ int main() {
 
         float32 angle = body.getBody()->GetAngle();
 
-        //printf("%4.2f %4.2f %4.2f\n", position.x, position.y, angle);
+        printf("%4.2f %4.2f %4.2f\n", position.x, position.y, angle);
         an_sp.update(dt);
         body.update();
         sp_body.update();
@@ -129,4 +140,4 @@ int main() {
 
     return 0;
 }
-
+*/

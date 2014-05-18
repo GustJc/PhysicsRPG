@@ -54,6 +54,7 @@ void BoxBody::destroyBody(b2World & world)
 {
     m_body->DestroyFixture(m_body->GetFixtureList());
 	world.DestroyBody(m_body);
+
 }
 
 

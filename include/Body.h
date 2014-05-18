@@ -15,7 +15,7 @@ class Body
 
         void setWorld(b2World & world);
 
-        virtual void update() = 0;
+        virtual void update(float dt = 0) = 0;
         virtual void render(sf::RenderWindow& window) = 0;
 
         void destroyBody(b2World & world);

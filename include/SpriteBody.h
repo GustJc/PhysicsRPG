@@ -13,7 +13,7 @@ class SpriteBody : public Body
         SpriteBody(sf::Sprite sprite);
         virtual ~SpriteBody();
 
-        void update();
+        void update(float dt = 0);
         void render(sf::RenderWindow& window);
 
         void setTexture(sf::Texture& texture);

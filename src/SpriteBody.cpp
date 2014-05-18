@@ -16,7 +16,7 @@ SpriteBody::~SpriteBody()
 {
     //dtor
 }
-void SpriteBody::update()
+void SpriteBody::update(float dt)
 {
     m_sprite.setRotation( 180.f*m_body->GetAngle()/(M_PI) );
     m_sprite.setPosition( m_body->GetPosition().x*pixelsPerMeter, m_body->GetPosition().y*pixelsPerMeter);

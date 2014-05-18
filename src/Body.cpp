@@ -13,6 +13,7 @@ Body::~Body()
 void Body::setWorld(b2World & world)
 {
     m_body = world.CreateBody(&m_bodyDef);
+    m_bodyFix.shape = &m_bodyShape;
     m_body->CreateFixture(&m_bodyFix);
 }
 
