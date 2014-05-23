@@ -7,7 +7,7 @@
 	<vector>
 	<cmath>
 
-1400380851 source:/home/gust/Documents/Gust/PhysicsRPG/src/main.cpp
+1400798746 source:/home/gust/Documents/Gust/PhysicsRPG/src/main.cpp
 	<Box2D/Box2D.h>
 	<SFML/Graphics.hpp>
 	<iostream>
@@ -61,10 +61,10 @@
 	<string>
 	<memory>
 
-1400388865 source:/home/gust/Documents/Gust/PhysicsRPG/src/Body.cpp
+1400800988 source:/home/gust/Documents/Gust/PhysicsRPG/src/Body.cpp
 	"Body.h"
 
-1400383798 /home/gust/Documents/Gust/PhysicsRPG/include/Body.h
+1400800812 /home/gust/Documents/Gust/PhysicsRPG/include/Body.h
 	<Box2D/Box2D.h>
 	<SFML/Graphics.hpp>
 
@@ -90,7 +90,7 @@
 1400375941 /home/gust/Documents/Gust/PhysicsRPG/include/State.h
 	<SFML/Graphics.hpp>
 
-1400387023 source:/home/gust/Documents/Gust/PhysicsRPG/src/GameManager.cpp
+1400796970 source:/home/gust/Documents/Gust/PhysicsRPG/src/GameManager.cpp
 	"GameManager.h"
 	"TestState.h"
 	"GameState.h"
@@ -121,7 +121,7 @@
 1400388088 /home/gust/Documents/Gust/PhysicsRPG/include/Engine.h
 	<SFML/Graphics.hpp>
 
-1400387383 /home/gust/Documents/Gust/PhysicsRPG/include/GameState.h
+1400802195 /home/gust/Documents/Gust/PhysicsRPG/include/GameState.h
 	"State.h"
 	"DebugRender.h"
 	<Box2D/Box2D.h>
@@ -131,12 +131,14 @@
 	<SFML/Graphics.hpp>
 	<vector>
 	"Body.h"
+	"ContactListenner.h"
 
-1400389124 source:/home/gust/Documents/Gust/PhysicsRPG/src/GameState.cpp
+1400802194 source:/home/gust/Documents/Gust/PhysicsRPG/src/GameState.cpp
 	"GameState.h"
 	"Globals.h"
 	"TextureManager.h"
 	"Engine.h"
+	"Flag.h"
 	<cmath>
 	<iostream>
 
@@ -144,4 +146,18 @@
 	"Interfaces.h"
 
 1400383329 /home/gust/Documents/Gust/PhysicsRPG/include/Interfaces.h
+
+1400800766 source:/home/gust/Documents/Gust/PhysicsRPG/src/ContactListenner.cpp
+	"ContactListenner.h"
+	"Body.h"
+
+1400799987 /home/gust/Documents/Gust/PhysicsRPG/include/ContactListenner.h
+	<Box2D/Box2D.h>
+
+1400801319 source:/home/gust/Documents/Gust/PhysicsRPG/src/Flag.cpp
+	<iostream>
+	"Flag.h"
+
+1400801240 /home/gust/Documents/Gust/PhysicsRPG/include/Flag.h
+	"SpriteBody.h"
 

@@ -24,6 +24,9 @@ class Body
         b2BodyDef* getBodyDef();
         b2PolygonShape* getBodyShape();
         b2FixtureDef* getBodyFixture();
+
+        virtual void startContact(Body * body);
+        virtual void endContact(Body * body);
     protected:
         b2Body* m_body;
         b2BodyDef m_bodyDef;

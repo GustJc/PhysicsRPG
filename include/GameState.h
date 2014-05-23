@@ -9,6 +9,8 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include "Body.h"
+#include "ContactListenner.h"
+
 using namespace std;
 
 class GameState : public State
@@ -29,6 +31,7 @@ class GameState : public State
 
         vector<Body*> bodylist;
     private:
+        ContactListenner listenner;
 };
 
 #endif // GAMESTATE_H

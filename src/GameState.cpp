@@ -2,6 +2,7 @@
 #include "Globals.h"
 #include "TextureManager.h"
 #include "Engine.h"
+#include "Flag.h"
 #include <cmath>
 
 #include <iostream>
@@ -40,6 +41,22 @@ void GameState::load(int stack)
     groundBox.SetAsBox(50.f, 50.f/pixelsPerMeter);
     m_ground->CreateFixture(&groundBox, 0.0f);
 
+    Flag * flag = new Flag();
+    flag->setTexture(TextureManager::TextureControl.get("catapult"));
+    flag->getSprite()->setOrigin(48,48);
+    flag->getBodyDef()->position.Set(300.0f/pixelsPerMeter, 200.0f/pixelsPerMeter);
+    flag->getBodyShape()->SetAsBox(48.0f/pixelsPerMeter,48.0f/pixelsPerMeter);
+
+    flag->setWorld(*world);
+
+    flag->getBody()->SetUserData(flag);
+
+    bodylist.push_back(flag);
+
+    //in FooTest constructor
+    world->SetContactListener(&listenner);
+
+
 //Dinamico
 
 /*
@@ -49,7 +66,8 @@ void GameState::load(int stack)
     *sp_body.getBodyDef() = body->m_bodyDef;
     sp_body.getBodyDef()->position.Set(250.0f/pixelsPerMeter, 0.0f/pixelsPerMeter);
     sp_body.getBodyShape()->SetAsBox(8.0f/pixelsPerMeter,8.0f/pixelsPerMeter);
-    *sp_body.getBodyFixture() = body->m_bodyFix;
+    *sp_body.getBodyFixture() = body->m_bovoid startContact(Body * body);
+        void endContact(Body * body);dyFix;
     sp_body.getBodyFixture()->shape = sp_body.getBodyShape();
 
     sp_body.setWorld(*world);
@@ -113,9 +131,12 @@ void GameState::events(sf::Event& event)
 
             sp_body->getBodyDef()->linearVelocity.Set(velX/pixelsPerMeter, velY/pixelsPerMeter);
             sp_body->getBodyFixture()->friction = 0.5f;
-            sp_body->getBodyDef()->angularVelocity = 2.f;
+            sp_body->getBodyFixture()->density = 0.1f;
 
             sp_body->setWorld(*world);
+            sp_body->getBody()->SetFixedRotation(false);
+            sp_body->getBody()->ApplyAngularImpulse(0.2f, true);
+
 
             bodylist.push_back(sp_body);
         }
@@ -132,8 +153,11 @@ void GameState::events(sf::Event& event)
         sp_body->getBodyShape()->SetAsBox(8.0f/pixelsPerMeter,8.0f/pixelsPerMeter);
         sp_body->getBodyDef()->position.Set((8+mouseX)/pixelsPerMeter, (8+mouseY)/pixelsPerMeter);
         sp_body->getBodyDef()->type = b2_dynamicBody;
+        sp_body->getBodyFixture()->friction = 0.5f;
+        sp_body->getBodyFixture()->density = 0.1f;
 
         sp_body->setWorld(*world);
+        sp_body->getBody()->SetFixedRotation(false);
 
         bodylist.push_back(sp_body);
     }

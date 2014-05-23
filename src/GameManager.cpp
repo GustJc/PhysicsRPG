@@ -52,6 +52,7 @@ int GameManager::run(int argc, char* args[])
                 stack = mEstadoAtual->unload();
                 delete mEstadoAtual;
                 mEstadoAtual = new TestState(window);
+                mEstadoAtual->load(stack);
                 break;
             }
             case GST_MENU:

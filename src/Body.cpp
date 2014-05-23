@@ -39,3 +39,11 @@ b2FixtureDef* Body::getBodyFixture()
 {
     return &m_bodyFix;
 }
+
+void Body::startContact(Body * body)
+{
+}
+
+void Body::endContact(Body * body)
+{
+}
