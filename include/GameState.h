@@ -29,6 +29,10 @@ class GameState : public State
 
         float rotation = 0;
 
+        bool isDebug = true;
+
+        int selectedId = 1;
+
         vector<Body*> bodylist;
     private:
         ContactListenner listenner;

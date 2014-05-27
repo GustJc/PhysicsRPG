@@ -32,6 +32,7 @@ class DebugRender : public b2Draw
     protected:
     private:
         sf::RenderWindow* window;
+        sf::CircleShape cs;
 };
 
 #endif // DEBUGRENDER_H

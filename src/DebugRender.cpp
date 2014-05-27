@@ -54,21 +54,33 @@ void DebugRender::DrawSolidPolygon(const b2Vec2* vertices, int32 vertexCount, co
 /// Draw a circle.
 void DebugRender::DrawCircle(const b2Vec2& center, float32 radius, const b2Color& color)
 {
-    cout << "DrawCircle " << endl;
-
+    cs.setPosition(center.x*pixelsPerMeter, center.y*pixelsPerMeter);
+    cs.setRadius(radius*pixelsPerMeter);
+    cs.setOutlineColor(sf::Color(color.r, color.g, color.b));
+    window->draw(cs);
 }
 
 /// Draw a solid circle.
 void DebugRender::DrawSolidCircle(const b2Vec2& center, float32 radius, const b2Vec2& axis, const b2Color& color)
 {
-    cout << "DrawSolidCircle " << endl;
+    cs.setFillColor(sf::Color(0,0,0,0));
+    cs.setOutlineColor(sf::Color(255.f/color.r, 255.f/color.g, 255.f/color.b));
+    cs.setOutlineThickness(2.f);
+    cs.setPosition(center.x*pixelsPerMeter, center.y*pixelsPerMeter);
+    cs.setRadius(radius*pixelsPerMeter);
+    cs.setOrigin(radius*pixelsPerMeter, radius*pixelsPerMeter);
+    window->draw(cs);
 
+    b2Vec2 seg = center;
+    seg.x += axis.x*radius;
+    seg.y += axis.y*radius;
+    DrawSegment(center, seg, color);
 }
 
 /// Draw a line segment.
 void DebugRender::DrawSegment(const b2Vec2& p1, const b2Vec2& p2, const b2Color& color)
 {
-    cout << "DrawSegment " << endl;
+    //cout << "DrawSegment " << endl;
     // 1.f = 255
     // 0.3f   = y
     sf::Vertex* vert = new sf::Vertex[2];

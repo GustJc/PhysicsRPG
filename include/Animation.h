@@ -15,7 +15,10 @@ class Animation
         void render(sf::RenderWindow& window);
 
         void forceFrame(int frame_id);
+
         bool isReady();
+
+        sf::Sprite& getSprite() { return m_sprite;}
     protected:
         sf::Sprite m_sprite;
         float current_time;

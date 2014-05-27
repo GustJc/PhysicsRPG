@@ -22,6 +22,7 @@ void Animation::setAnimation(sf::Texture& tex, int frameSizeX, int frameSizeY, i
     this->frame_sizeY = frameSizeY;
     this->max_frames = nFrames;
     this->change_time = msTime*0.001f;
+    forceFrame(0);
 }
 
 void Animation::update(float dt)
@@ -42,6 +43,7 @@ void Animation::update(float dt)
             current_frame -= max_frames;
         }
         m_sprite.setTextureRect(sf::IntRect(current_frame*frame_sizeX, 0, frame_sizeX, frame_sizeY));
+        m_sprite.setOrigin(frame_sizeX/2, frame_sizeY/2);
     }
 }
 void Animation::render(sf::RenderWindow& window)
@@ -58,9 +60,11 @@ void Animation::forceFrame(int frame_id)
     }
 
     m_sprite.setTextureRect(sf::IntRect(current_frame*frame_sizeX, 0, frame_sizeX, frame_sizeY));
+    m_sprite.setOrigin(frame_sizeX/2, frame_sizeY/2);
     current_time = 0;
 }
 bool Animation::isReady()
 {
     return is_ready;
 }
+

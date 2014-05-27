@@ -11,6 +11,8 @@ class Flag : public SpriteBody
         void startContact(Body * body);
         void endContact(Body * body);
     protected:
+        int HP = 10;
+        int touching_objs=0;
     private:
 };
 

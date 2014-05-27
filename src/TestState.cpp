@@ -49,7 +49,7 @@ void TestState::load(int stack)
     //clone
     *sp_body.getBodyDef() = body->m_bodyDef;
     sp_body.getBodyDef()->position.Set(250.0f/pixelsPerMeter, 0.0f/pixelsPerMeter);
-    sp_body.getBodyShape()->SetAsBox(8.0f/pixelsPerMeter,8.0f/pixelsPerMeter);
+    ((b2PolygonShape*)sp_body.getBodyShape())->SetAsBox(8.0f/pixelsPerMeter,8.0f/pixelsPerMeter);
     *sp_body.getBodyFixture() = body->m_bodyFix;
     sp_body.getBodyFixture()->shape = sp_body.getBodyShape();
 

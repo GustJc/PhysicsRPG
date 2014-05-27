@@ -22,15 +22,15 @@ class Body
 
         b2Body* getBody();
         b2BodyDef* getBodyDef();
-        b2PolygonShape* getBodyShape();
+        b2Shape* getBodyShape();
         b2FixtureDef* getBodyFixture();
 
         virtual void startContact(Body * body);
         virtual void endContact(Body * body);
+        b2Shape* m_bodyShape = nullptr;
     protected:
         b2Body* m_body;
         b2BodyDef m_bodyDef;
-        b2PolygonShape m_bodyShape;
         b2FixtureDef m_bodyFix;
 };
 

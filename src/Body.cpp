@@ -3,17 +3,20 @@
 Body::Body()
 {
     //ctor
+    m_bodyShape = new b2PolygonShape();
 }
 
 Body::~Body()
 {
     //dtor
+    if(m_bodyShape != nullptr)
+        delete m_bodyShape;
 }
 
 void Body::setWorld(b2World & world)
 {
     m_body = world.CreateBody(&m_bodyDef);
-    m_bodyFix.shape = &m_bodyShape;
+    m_bodyFix.shape = m_bodyShape;
     m_body->CreateFixture(&m_bodyFix);
 }
 
@@ -31,9 +34,9 @@ b2BodyDef* Body::getBodyDef()
 {
     return &m_bodyDef;
 }
-b2PolygonShape* Body::getBodyShape()
+b2Shape* Body::getBodyShape()
 {
-    return &m_bodyShape;
+    return m_bodyShape;
 }
 b2FixtureDef* Body::getBodyFixture()
 {
