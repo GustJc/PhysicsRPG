@@ -3,6 +3,7 @@
 #include "TextureManager.h"
 #include "Engine.h"
 #include "Flag.h"
+#include "Character.h"
 #include <cmath>
 
 #include <iostream>
@@ -18,7 +19,7 @@ GameState::~GameState()
 
 }
 
-void GameState::load(int stack)
+void GameState::load(int )
 {
     m_debug_render = new DebugRender(&window);
     m_debug_render->SetFlags( b2Draw::e_shapeBit | b2Draw::e_jointBit | b2Draw::e_aabbBit | b2Draw::e_pairBit | b2Draw::e_centerOfMassBit);
@@ -62,6 +63,27 @@ void GameState::load(int stack)
 
     //in FooTest constructor
     world->SetContactListener(&listenner);
+
+
+/**/
+    Character* c = new Character();
+
+    c->setTexture(TextureManager::TextureControl.get("yellow"));
+    c->getSprite()->setOrigin(8,8);
+
+    ((b2PolygonShape*)c->getBodyShape())->SetAsBox(8.0f/pixelsPerMeter,8.0f/pixelsPerMeter);
+
+    c->getBodyDef()->position.Set((500)/pixelsPerMeter, (560)/pixelsPerMeter);
+    c->getBodyDef()->type = b2_dynamicBody;
+
+    c->getBodyFixture()->density = 0.01f;
+
+    c->setWorld(*world);
+    c->getBody()->SetFixedRotation(true);
+    c->getBody()->SetUserData(c);
+
+
+    bodylist.push_back(c);
 
 
 //Dinamico

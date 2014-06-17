@@ -6,6 +6,7 @@ typedef enum eStateType {
     GST_GAME,
     GST_MENU,
     GST_TESTE,
+    GST_MAP,
     GST_NONE
 } StateType;
 

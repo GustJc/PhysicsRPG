@@ -2,6 +2,7 @@
 
 #include "TestState.h"
 #include "GameState.h"
+#include "MapState.h"
 #include "Engine.h"
 GameManager::GameManager()
 {
@@ -20,10 +21,10 @@ GameManager::~GameManager()
     //dtor
 }
 
-int GameManager::run(int argc, char* args[])
+int GameManager::run(int , char*[])
 {
     sf::RenderWindow& window = Engine::EngineControl.getWindowReference();
-    mEstadoAtual = new GameState(window);
+    mEstadoAtual = new MapState(window);
     mEstadoAtual->load();
 
     window.setFramerateLimit(60);
@@ -35,6 +36,7 @@ int GameManager::run(int argc, char* args[])
         while(window.pollEvent(event)){
             if(event.type == sf::Event::Closed){
                 window.close();
+                break;
             }
             mEstadoAtual->events(event);
         }
@@ -46,7 +48,13 @@ int GameManager::run(int argc, char* args[])
         switch(mEstadoAtual->update(dt))
         {
             case GST_GAME:
+            {
+                stack = mEstadoAtual->unload();
+                delete mEstadoAtual;
+                mEstadoAtual = new GameState(window);
+                mEstadoAtual->load(stack);
                 break;
+            }
             case GST_TESTE:
             {
                 stack = mEstadoAtual->unload();
@@ -56,6 +64,8 @@ int GameManager::run(int argc, char* args[])
                 break;
             }
             case GST_MENU:
+                break;
+            case GST_MAP:
                 break;
             case GST_NONE:
                 break;

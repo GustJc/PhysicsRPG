@@ -13,20 +13,14 @@ Flag::~Flag()
     //dtor
 }
 
-void Flag::startContact(Body * body)
+void Flag::startContact(Body * )
 {
-    touching_objs++;
-    if(touching_objs >= HP)
-        cout << "I'm dead!!!" << endl;
+    die();
 
-    cout << touching_objs << endl;
-    int green = touching_objs * 25;
-    if(green > 255 ) green = 255;
-
-    m_animation.getSprite().setColor(sf::Color(0,green, 0));
+    m_animation.getSprite().setColor(sf::Color(0,255, 0));
 }
 
-void Flag::endContact(Body * body)
+void Flag::endContact(Body * )
 {
     touching_objs--;
 }

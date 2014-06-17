@@ -11,7 +11,7 @@ TestState::~TestState()
     //dtor
 }
 
-void TestState::load(int stack)
+void TestState::load(int )
 {
     m_debug_render = new DebugRender(&window);
     m_debug_render->SetFlags( b2Draw::e_shapeBit | b2Draw::e_jointBit | b2Draw::e_aabbBit | b2Draw::e_pairBit | b2Draw::e_centerOfMassBit);

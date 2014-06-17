@@ -41,9 +41,11 @@
 		<Unit filename="include/Animation.h" />
 		<Unit filename="include/Body.h" />
 		<Unit filename="include/BoxBody.h" />
+		<Unit filename="include/Character.h" />
 		<Unit filename="include/ContactListenner.h" />
 		<Unit filename="include/DebugRender.h" />
 		<Unit filename="include/Engine.h" />
+		<Unit filename="include/Entity.h" />
 		<Unit filename="include/Flag.h" />
 		<Unit filename="include/GameManager.h">
 			<Option virtualFolder="Estados/" />
@@ -52,6 +54,7 @@
 			<Option virtualFolder="Estados/" />
 		</Unit>
 		<Unit filename="include/Globals.h" />
+		<Unit filename="include/MapState.h" />
 		<Unit filename="include/PolygonBody.h" />
 		<Unit filename="include/SpriteBody.h" />
 		<Unit filename="include/State.h">
@@ -64,9 +67,11 @@
 		<Unit filename="src/Animation.cpp" />
 		<Unit filename="src/Body.cpp" />
 		<Unit filename="src/BoxBody.cpp" />
+		<Unit filename="src/Character.cpp" />
 		<Unit filename="src/ContactListenner.cpp" />
 		<Unit filename="src/DebugRender.cpp" />
 		<Unit filename="src/Engine.cpp" />
+		<Unit filename="src/Entity.cpp" />
 		<Unit filename="src/Flag.cpp" />
 		<Unit filename="src/GameManager.cpp">
 			<Option virtualFolder="Estados/" />
@@ -75,6 +80,7 @@
 			<Option virtualFolder="Estados/" />
 		</Unit>
 		<Unit filename="src/Globals.cpp" />
+		<Unit filename="src/MapState.cpp" />
 		<Unit filename="src/PolygonBody.cpp" />
 		<Unit filename="src/SpriteBody.cpp" />
 		<Unit filename="src/State.cpp">

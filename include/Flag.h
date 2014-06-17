@@ -1,9 +1,9 @@
 #ifndef FLAG_H
 #define FLAG_H
 
-#include "SpriteBody.h"
+#include "Entity.h"
 
-class Flag : public SpriteBody
+class Flag : public Entity
 {
     public:
         Flag();

@@ -134,12 +134,13 @@
 	"Body.h"
 	"ContactListenner.h"
 
-1401155341 source:/home/gust/Documents/Gust/PhysicsRPG/src/GameState.cpp
+1402412025 source:/home/gust/Documents/Gust/PhysicsRPG/src/GameState.cpp
 	"GameState.h"
 	"Globals.h"
 	"TextureManager.h"
 	"Engine.h"
 	"Flag.h"
+	"Character.h"
 	<cmath>
 	<iostream>
 
@@ -156,11 +157,31 @@
 1400799987 /home/gust/Documents/Gust/PhysicsRPG/include/ContactListenner.h
 	<Box2D/Box2D.h>
 
-1401057214 source:/home/gust/Documents/Gust/PhysicsRPG/src/Flag.cpp
+1402408608 source:/home/gust/Documents/Gust/PhysicsRPG/src/Flag.cpp
 	<iostream>
 	"Flag.h"
 	<iostream>
 
-1401056457 /home/gust/Documents/Gust/PhysicsRPG/include/Flag.h
+1402408480 /home/gust/Documents/Gust/PhysicsRPG/include/Flag.h
+	"Entity.h"
+
+1402408577 /home/gust/Documents/Gust/PhysicsRPG/include/Entity.h
 	"SpriteBody.h"
+
+1402411037 source:/home/gust/Documents/Gust/PhysicsRPG/src/Entity.cpp
+	"Entity.h"
+
+1402412131 source:/home/gust/Documents/Gust/PhysicsRPG/src/Character.cpp
+	"Character.h"
+	"Globals.h"
+
+1402411792 /home/gust/Documents/Gust/PhysicsRPG/include/Character.h
+	"Entity.h"
+
+1402971433 source:/home/gust/Documents/Gust/PhysicsRPG/src/MapState.cpp
+	"MapState.h"
+
+1402971264 /home/gust/Documents/Gust/PhysicsRPG/include/MapState.h
+	"State.h"
+	<SFML/Graphics.hpp>
 

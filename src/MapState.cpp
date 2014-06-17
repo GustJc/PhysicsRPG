@@ -1,0 +1,155 @@
+#include "MapState.h"
+#include "TextureManager.h"
+#include "Globals.h"
+
+class NodeData
+{
+public:
+    NodeData(float x, float y, NodeData* parent = nullptr);
+
+    sf::Vector2f pos;
+
+    bool complete = false;
+
+    vector<NodeData*> adjacent;
+};
+
+vector<NodeData*> nodes;
+
+
+MapState::MapState(sf::RenderWindow& wnd)
+: State(wnd)
+{
+    //ctor
+}
+
+MapState::~MapState()
+{
+    for(auto item : nodes) {
+        delete item;
+    }
+}
+
+void MapState::load(int )
+{
+    TextureManager::TextureControl.load("map", "data/map.png");
+    TextureManager::TextureControl.load("dot", "data/dot.png");
+
+    sp_map.setTexture(TextureManager::TextureControl.get("map") );
+    sp_dot.setTexture(TextureManager::TextureControl.get("dot") );
+    sp_dot.setOrigin(10,9);
+
+    auto node = new NodeData(180, 514);
+    auto node2 = new NodeData(255,400, node);
+        auto node3 = new NodeData(380,340, node2);
+        auto node4 = new NodeData(565,384, node3);
+    auto node5 = new NodeData(145,310, node2);
+    auto node6 = new NodeData(190,90, node5);
+    auto node7 = new NodeData(410,70, node6);
+        auto node8 = new NodeData(520,50, node7);
+    auto node9 = new NodeData(370,210, node7);
+
+    auto node10 = new NodeData(505,140, node9);
+    auto node11 = new NodeData(540,170, node10);
+    auto node12 = new NodeData(565,210, node11);
+    auto node13 = new NodeData(680,365, node12);
+
+    nodes.push_back( node );
+    nodes.push_back( node2 );
+    nodes.push_back( node3 );
+    nodes.push_back( node4 );
+    nodes.push_back( node5 );
+    nodes.push_back( node6 );
+    nodes.push_back( node7 );
+    nodes.push_back( node8 );
+    nodes.push_back( node9 );
+    nodes.push_back( node10 );
+    nodes.push_back( node11 );
+    nodes.push_back( node12 );
+    nodes.push_back( node13 );
+
+    mStack = GST_NONE;
+
+}
+int MapState::unload()
+{
+    return mStack;
+}
+eStateType MapState::update(float )
+{
+    return (eStateType)mStack;
+}
+void MapState::events(sf::Event& event)
+{
+    if(event.type == sf::Event::KeyPressed)
+    {
+        if(event.key.code == sf::Keyboard::Q){
+
+            auto node = nodes[0];
+
+            openNode(node);
+         }
+
+        if(event.key.code == sf::Keyboard::Escape) {
+            cout << "ESCape" << endl;
+            mStack = GST_MENU;
+        }
+
+    }
+}
+#include <iostream>
+void MapState::renderNode(NodeData* node)
+{
+    while(node != nullptr) {
+        if(node->complete)
+            sp_dot.setScale(2.0, 2.0);
+        else
+            sp_dot.setScale(1.0, 1.0);
+
+        sp_dot.setPosition(node->pos);
+        window.draw(sp_dot);
+
+        if( node->complete ){
+            for(auto item : node->adjacent) {
+                cout << "Render: " << node->pos.x << " " << node->adjacent.size() << endl;
+                renderNode(item);
+            }
+        }
+
+        node = nullptr;
+    }
+}
+
+void MapState::openNode(NodeData* node)
+{
+    if(!node->complete){
+        node->complete = true;
+        return;
+    }
+
+
+    for(auto item : node->adjacent) {
+        openNode(item);
+    }
+
+}
+
+
+void MapState::render()
+{
+    window.draw(sp_map);
+
+    auto startNode = nodes[0];
+    renderNode(startNode);
+}
+
+
+NodeData::NodeData(float x, float y, NodeData *parent)
+{
+    pos.x = x;
+    pos.y =y;
+    if(parent != nullptr){
+        parent->adjacent.push_back(this);
+        cout << this->pos.x << endl;
+    }
+}
