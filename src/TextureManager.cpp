@@ -27,6 +27,14 @@ void TextureManager::load(std::string id, const std::string& filename)
     //assert(inserted.second);
 }
 
+void TextureManager::unload(std::string id)
+{
+    auto found = mTextureMap.find(id);
+
+    if(found != mTextureMap.end())
+        mTextureMap.erase(found);
+}
+
 sf::Texture& TextureManager::get(std::string id)
 {
     auto found = mTextureMap.find(id);

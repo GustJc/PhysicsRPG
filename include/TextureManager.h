@@ -15,6 +15,7 @@ class TextureManager
         static TextureManager TextureControl;
 
         void load(std::string id, const std::string& filename);
+        void unload(std::string id);
         const sf::Texture& get(std::string id) const;
         sf::Texture& get(std::string id);
     protected:

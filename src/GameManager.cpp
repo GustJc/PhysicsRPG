@@ -3,7 +3,9 @@
 #include "TestState.h"
 #include "GameState.h"
 #include "MapState.h"
+#include "MenuState.h"
 #include "Engine.h"
+
 GameManager::GameManager()
 {
     //ctor
@@ -24,7 +26,7 @@ GameManager::~GameManager()
 int GameManager::run(int , char*[])
 {
     sf::RenderWindow& window = Engine::EngineControl.getWindowReference();
-    mEstadoAtual = new MapState(window);
+    mEstadoAtual = new MenuState(window);
     mEstadoAtual->load();
 
     window.setFramerateLimit(60);
@@ -64,9 +66,25 @@ int GameManager::run(int , char*[])
                 break;
             }
             case GST_MENU:
+            {
+                stack = mEstadoAtual->unload();
+                delete mEstadoAtual;
+                mEstadoAtual = new MenuState(window);
+                mEstadoAtual->load(stack);
                 break;
+            }
             case GST_MAP:
+            {
+                stack = mEstadoAtual->unload();
+                delete mEstadoAtual;
+                mEstadoAtual = new MapState(window);
+                mEstadoAtual->load(stack);
                 break;
+            }
+            case GST_EXIT:
+            {
+                window.close();
+            }
             case GST_NONE:
                 break;
         }

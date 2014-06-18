@@ -21,6 +21,7 @@ GameState::~GameState()
 
 void GameState::load(int )
 {
+    cout << "[Estado] Carregando estado GameState. " << endl;
     m_debug_render = new DebugRender(&window);
     m_debug_render->SetFlags( b2Draw::e_shapeBit | b2Draw::e_jointBit | b2Draw::e_aabbBit | b2Draw::e_pairBit | b2Draw::e_centerOfMassBit);
 
@@ -137,13 +138,17 @@ eStateType GameState::update(float dt)
     }
 
 
-    return GST_NONE;
+    return mStado;
 }
 
 void GameState::events(sf::Event& event)
 {
     if(event.type == sf::Event::KeyPressed)
     {
+        if(event.key.code == sf::Keyboard::Escape)
+        {
+            mStado = GST_MENU;
+        }
         if(event.key.code == sf::Keyboard::Q){
             isDebug = !isDebug;
         }

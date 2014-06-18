@@ -3,11 +3,12 @@
 
 #include <SFML/Graphics.hpp>
 typedef enum eStateType {
+    GST_NONE,
     GST_GAME,
     GST_MENU,
     GST_TESTE,
     GST_MAP,
-    GST_NONE
+    GST_EXIT
 } StateType;
 
 class State

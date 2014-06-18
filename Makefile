@@ -65,7 +65,9 @@ SOURCES       = src/TextureManager.cpp \
 		src/Character.cpp \
 		src/BoxBody.cpp \
 		src/Body.cpp \
-		src/Animation.cpp 
+		src/Animation.cpp \
+		src/MenuState.cpp \
+		src/UiButton.cpp 
 OBJECTS       = TextureManager.o \
 		TestState.o \
 		State.o \
@@ -86,7 +88,9 @@ OBJECTS       = TextureManager.o \
 		Character.o \
 		BoxBody.o \
 		Body.o \
-		Animation.o
+		Animation.o \
+		MenuState.o \
+		UiButton.o
 DIST          = /opt/Qt5.2.1/5.2.1/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt5.2.1/5.2.1/gcc_64/mkspecs/common/shell-unix.conf \
 		/opt/Qt5.2.1/5.2.1/gcc_64/mkspecs/common/unix.conf \
@@ -480,7 +484,9 @@ PolygonBody.o: src/PolygonBody.cpp include/PolygonBody.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PolygonBody.o src/PolygonBody.cpp
 
 MapState.o: src/MapState.cpp include/MapState.h \
-		include/State.h
+		include/State.h \
+		include/TextureManager.h \
+		include/Globals.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o MapState.o src/MapState.cpp
 
 main.o: src/main.cpp include/GameManager.h \
@@ -519,6 +525,8 @@ GameManager.o: src/GameManager.cpp include/GameManager.h \
 		include/Animation.h \
 		include/GameState.h \
 		include/ContactListenner.h \
+		include/MapState.h \
+		include/MenuState.h \
 		include/Engine.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o GameManager.o src/GameManager.cpp
 
@@ -567,6 +575,14 @@ Body.o: src/Body.cpp include/Body.h
 
 Animation.o: src/Animation.cpp include/Animation.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Animation.o src/Animation.cpp
+
+MenuState.o: src/MenuState.cpp include/MenuState.h \
+		include/State.h \
+		include/TextureManager.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o MenuState.o src/MenuState.cpp
+
+UiButton.o: src/UiButton.cpp include/UiButton.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o UiButton.o src/UiButton.cpp
 
 ####### Install
 

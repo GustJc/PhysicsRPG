@@ -18,9 +18,9 @@ void DebugRender::DrawPolygon(const b2Vec2* vertices, int32 vertexCount, const b
     {
         vert[i].position.x = vertices[i].x * pixelsPerMeter;
         vert[i].position.y = vertices[i].y * pixelsPerMeter;
-        vert[i].color.r    = 255;
-        vert[i].color.g    = 0;
-        vert[i].color.b    = 0;
+        vert[i].color.r    = 255.f/color.r;
+        vert[i].color.g    = 255.f/color.g;
+        vert[i].color.b    = 255.f/color.b;
         vert[i].color.a    = 255;
         vert[i].texCoords.x = 0.0f;
         vert[i].texCoords.y = 0.0f;

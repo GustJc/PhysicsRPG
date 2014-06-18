@@ -2,6 +2,15 @@
 #include "TextureManager.h"
 #include "Globals.h"
 
+ostream& operator << (ostream& os, const sf::Vector2i& s)
+{
+    return os << "Vector2i[ x: " << s.x << " y: " << s.y << " ]" << endl;
+}
+ostream& operator << (ostream& os, const sf::Vector2f& s)
+{
+    return os << "Vector2f[ x: " << s.x << " y: " << s.y << " ]" << endl;
+}
+
 class NodeData
 {
 public:
@@ -10,8 +19,13 @@ public:
     sf::Vector2f pos;
 
     bool complete = false;
+    bool over = false;
+    bool selected = false;
+    bool visible = false;
 
     vector<NodeData*> adjacent;
+
+    void updateSelection(sf::Vector2i mousePos);
 };
 
 vector<NodeData*> nodes;
@@ -32,6 +46,7 @@ MapState::~MapState()
 
 void MapState::load(int )
 {
+    cout << "[Estado] Carregando estado MapState. " << endl;
     TextureManager::TextureControl.load("map", "data/map.png");
     TextureManager::TextureControl.load("dot", "data/dot.png");
 
@@ -68,16 +83,19 @@ void MapState::load(int )
     nodes.push_back( node12 );
     nodes.push_back( node13 );
 
-    mStack = GST_NONE;
-
 }
 int MapState::unload()
 {
     return mStack;
 }
+
 eStateType MapState::update(float )
 {
-    return (eStateType)mStack;
+    for(NodeData* item : nodes){
+        item->updateSelection(sf::Mouse::getPosition(window) );
+    }
+
+    return mStado;
 }
 void MapState::events(sf::Event& event)
 {
@@ -91,13 +109,33 @@ void MapState::events(sf::Event& event)
          }
 
         if(event.key.code == sf::Keyboard::Escape) {
-            cout << "ESCape" << endl;
-            mStack = GST_MENU;
+            mStado = GST_MENU;
         }
-
     }
+    else
+    if(event.type == sf::Event::MouseButtonPressed)
+    {
+        if(event.mouseButton.button == sf::Mouse::Left)
+        {
+            bool found = false;
+            for(NodeData* item : nodes) {
+                if( item->over )
+                {
+                    item->selected = true;
+                    found = true;
+                    break;
+                }
+            }
+            if(found)
+                for(NodeData* item : nodes)
+                    if(! item->over)
+                        item->selected = false;
+
+        }
+    }
+
 }
-#include <iostream>
+
 void MapState::renderNode(NodeData* node)
 {
     while(node != nullptr) {
@@ -106,12 +144,18 @@ void MapState::renderNode(NodeData* node)
         else
             sp_dot.setScale(1.0, 1.0);
 
+        if(node->selected)
+            sp_dot.setColor(sf::Color(255,0,0) );
+        else
+            sp_dot.setColor(sf::Color(255,255,255) );
+
         sp_dot.setPosition(node->pos);
         window.draw(sp_dot);
+        node->visible = true;
 
         if( node->complete ){
             for(auto item : node->adjacent) {
-                cout << "Render: " << node->pos.x << " " << node->adjacent.size() << endl;
+                //cout << "Render: " << node->pos.x << " " << node->adjacent.size() << endl;
                 renderNode(item);
             }
         }
@@ -152,4 +196,20 @@ NodeData::NodeData(float x, float y, NodeData *parent)
         parent->adjacent.push_back(this);
         cout << this->pos.x << endl;
     }
+}
+
+void NodeData::updateSelection(sf::Vector2i mousePos)
+{
+    this->over = false;
+
+    if(mousePos.x < pos.x - 10)
+        return;
+    if(mousePos.y > pos.y + 10)
+        return;
+    if(mousePos.x > pos.x + 10)
+        return;
+    if(mousePos.y < pos.y - 10)
+        return;
+
+    this->over = true;
 }
