@@ -53,7 +53,7 @@ void TestState::load(int )
     *sp_body.getBodyFixture() = body->m_bodyFix;
     sp_body.getBodyFixture()->shape = sp_body.getBodyShape();
 
-    sp_body.setWorld(*world);
+    sp_body.createBody(*world);
 
     sp_body.getBody()->SetAngularVelocity(-2);
 }

@@ -86,6 +86,11 @@ void MapState::load(int )
 }
 int MapState::unload()
 {
+    for( auto item : nodes)
+        delete item;
+
+    nodes.clear();
+
     return mStack;
 }
 

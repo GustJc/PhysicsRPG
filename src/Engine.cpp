@@ -10,7 +10,7 @@ mWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_NAME, sf::Style::Clos
     mViewGame.reset(sf::FloatRect(0, 0, 800, 600));
     mViewGame.setCenter(WINDOW_WIDTH/2.f, WINDOW_HEIGHT/2.f);
 
-   // mWindow.setView(mViewGame);
+    mWindow.setView(mViewGame);
 
     mEventsPaused = false;
 }

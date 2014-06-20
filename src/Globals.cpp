@@ -1,3 +1,3 @@
 #include "Globals.h"
 
-float pixelsPerMeter = 30.f;
+float pixelsPerMeter = 32.f;

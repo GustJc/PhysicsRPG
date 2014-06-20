@@ -13,11 +13,12 @@ Body::~Body()
         delete m_bodyShape;
 }
 
-void Body::setWorld(b2World & world)
+void Body::createBody(b2World & world)
 {
     m_body = world.CreateBody(&m_bodyDef);
     m_bodyFix.shape = m_bodyShape;
-    m_body->CreateFixture(&m_bodyFix);
+    b2Fixture* fix = m_body->CreateFixture(&m_bodyFix);
+    m_fixture.push_back(fix);
 }
 
 void Body::destroyBody(b2World & world)
@@ -29,6 +30,11 @@ void Body::destroyBody(b2World & world)
 b2Body* Body::getBody()
 {
     return m_body;
+}
+
+b2Fixture *Body::getFixture(int id)
+{
+    return m_fixture[id];
 }
 b2BodyDef* Body::getBodyDef()
 {

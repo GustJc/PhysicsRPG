@@ -26,7 +26,8 @@ SOURCES += \
     src/Body.cpp \
     src/Animation.cpp \
     src/MenuState.cpp \
-    src/UiButton.cpp
+    src/UiButton.cpp \
+    src/EditorState.cpp
 
 HEADERS += \
     include/Animation.h \
@@ -50,7 +51,8 @@ HEADERS += \
     include/TestState.h \
     include/TextureManager.h \
     include/MenuState.h \
-    include/UiButton.h
+    include/UiButton.h \
+    include/EditorState.h
 
 #SFML
 QMAKE_CXXFLAGS += -std=c++11

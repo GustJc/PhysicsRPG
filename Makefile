@@ -67,7 +67,8 @@ SOURCES       = src/TextureManager.cpp \
 		src/Body.cpp \
 		src/Animation.cpp \
 		src/MenuState.cpp \
-		src/UiButton.cpp 
+		src/UiButton.cpp \
+		src/EditorState.cpp 
 OBJECTS       = TextureManager.o \
 		TestState.o \
 		State.o \
@@ -90,7 +91,8 @@ OBJECTS       = TextureManager.o \
 		Body.o \
 		Animation.o \
 		MenuState.o \
-		UiButton.o
+		UiButton.o \
+		EditorState.o
 DIST          = /opt/Qt5.2.1/5.2.1/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt5.2.1/5.2.1/gcc_64/mkspecs/common/shell-unix.conf \
 		/opt/Qt5.2.1/5.2.1/gcc_64/mkspecs/common/unix.conf \
@@ -527,6 +529,7 @@ GameManager.o: src/GameManager.cpp include/GameManager.h \
 		include/ContactListenner.h \
 		include/MapState.h \
 		include/MenuState.h \
+		include/UiButton.h \
 		include/Engine.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o GameManager.o src/GameManager.cpp
 
@@ -578,11 +581,24 @@ Animation.o: src/Animation.cpp include/Animation.h
 
 MenuState.o: src/MenuState.cpp include/MenuState.h \
 		include/State.h \
-		include/TextureManager.h
+		include/UiButton.h \
+		include/TextureManager.h \
+		include/Globals.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o MenuState.o src/MenuState.cpp
 
 UiButton.o: src/UiButton.cpp include/UiButton.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o UiButton.o src/UiButton.cpp
+
+EditorState.o: src/EditorState.cpp include/Globals.h \
+		include/TextureManager.h \
+		include/Engine.h \
+		include/Flag.h \
+		include/Entity.h \
+		include/SpriteBody.h \
+		include/Body.h \
+		include/Animation.h \
+		include/Character.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o EditorState.o src/EditorState.cpp
 
 ####### Install
 
