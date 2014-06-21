@@ -17,7 +17,6 @@ SOURCES += \
     src/GameManager.cpp \
     src/Flag.cpp \
     src/Entity.cpp \
-    src/Entidade.cpp \
     src/Engine.cpp \
     src/DebugRender.cpp \
     src/ContactListenner.cpp \
@@ -27,7 +26,8 @@ SOURCES += \
     src/Animation.cpp \
     src/MenuState.cpp \
     src/UiButton.cpp \
-    src/EditorState.cpp
+    src/EditorState.cpp \
+    src/PlayerEntity.cpp
 
 HEADERS += \
     include/Animation.h \
@@ -37,7 +37,6 @@ HEADERS += \
     include/ContactListenner.h \
     include/DebugRender.h \
     include/Engine.h \
-    include/Entidade.h \
     include/Entity.h \
     include/Flag.h \
     include/GameManager.h \
@@ -52,7 +51,8 @@ HEADERS += \
     include/TextureManager.h \
     include/MenuState.h \
     include/UiButton.h \
-    include/EditorState.h
+    include/EditorState.h \
+    include/PlayerEntity.h
 
 #SFML
 QMAKE_CXXFLAGS += -std=c++11

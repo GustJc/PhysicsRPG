@@ -6,6 +6,7 @@ using namespace std;
 Flag::Flag()
 {
     //ctor
+    type = 1;
 }
 
 Flag::~Flag()

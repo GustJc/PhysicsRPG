@@ -11,6 +11,8 @@
 #include "Body.h"
 #include "ContactListenner.h"
 
+class PlayerEntity;
+
 using namespace std;
 
 class GameState : public State
@@ -25,15 +27,18 @@ class GameState : public State
         void render();
     protected:
         DebugRender* m_debug_render = nullptr;
+
         b2World* world = nullptr;
 
         float rotation = 0;
 
         bool isDebug = true;
+        bool isGrid  = true;
 
         int selectedId = 1;
 
-        vector<Body*> bodylist;
+        PlayerEntity* player;
+
     private:
         ContactListenner listenner;
 };

@@ -2,6 +2,10 @@
 
 #include <SFML/Graphics.hpp>
 
+class Body;
+class b2World;
+#include <vector>
+
 class Engine
 {
     public:
@@ -9,6 +13,8 @@ class Engine
         virtual ~Engine();
 
         static Engine EngineControl;
+        static std::vector<Body*> bodylist;
+        static b2World* world;
 
         sf::RenderWindow& getWindowReference();
         sf::Font& getFont();

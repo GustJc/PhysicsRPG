@@ -15,7 +15,7 @@ class Body
         Body();
         virtual ~Body();
 
-        void createBody(b2World & world);
+        virtual void createBody(b2World & world, bool isCircle = false);
 
         virtual void update(float dt = 0) = 0;
         virtual void render(sf::RenderWindow& window) = 0;
@@ -23,19 +23,21 @@ class Body
         void destroyBody(b2World & world);
 
         b2Body* getBody();
-        b2Fixture *getFixture(int id = 0);
+        b2Fixture *getFixture();
         b2BodyDef* getBodyDef();
         b2Shape* getBodyShape();
         b2FixtureDef* getBodyFixture();
 
         virtual void startContact(Body * body);
         virtual void endContact(Body * body);
-        b2Shape* m_bodyShape = nullptr;
+        b2PolygonShape m_bodyShape;
+        b2CircleShape  m_bodyCircleShape;
+
+        int type = 0;
     protected:
         b2Body* m_body;
-        vector<b2Fixture*> m_fixture;
         b2BodyDef m_bodyDef;
-        b2FixtureDef m_bodyFix;
+        b2FixtureDef m_fixtureDef;
 };
 
 #endif // BODY_H

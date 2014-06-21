@@ -100,6 +100,11 @@ eStateType MapState::update(float )
         item->updateSelection(sf::Mouse::getPosition(window) );
     }
 
+    if(nodes[0]->selected)
+    {
+        mStado = GST_EDITOR;
+    }
+
     return mStado;
 }
 void MapState::events(sf::Event& event)

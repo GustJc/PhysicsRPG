@@ -9,8 +9,8 @@ class Entity : public SpriteBody
         Entity();
         virtual ~Entity();
 
-        virtual void startContact(Body * ) {};
-        virtual void endContact(Body * ) {};
+        virtual void startContact(Body * ) {}
+        virtual void endContact(Body * ) {}
 
         void die();
 

@@ -2,6 +2,7 @@
 
 #include "TestState.h"
 #include "GameState.h"
+#include "EditorState.h"
 #include "MapState.h"
 #include "MenuState.h"
 #include "Engine.h"
@@ -49,6 +50,14 @@ int GameManager::run(int , char*[])
 
         switch(mEstadoAtual->update(dt))
         {
+            case GST_EDITOR:
+            {
+                stack = mEstadoAtual->unload();
+                delete mEstadoAtual;
+                mEstadoAtual = new EditorState(window);
+                mEstadoAtual->load(stack);
+                break;
+            }
             case GST_GAME:
             {
                 stack = mEstadoAtual->unload();

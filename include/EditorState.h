@@ -31,6 +31,7 @@ protected:
     float rotation = 0;
 
     bool isDebug = true;
+    bool isGrid = true;
 
     int selectedId = 1;
 

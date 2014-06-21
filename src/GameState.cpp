@@ -4,6 +4,7 @@
 #include "Engine.h"
 #include "Flag.h"
 #include "Character.h"
+#include "PlayerEntity.h"
 #include <cmath>
 
 #include <iostream>
@@ -22,6 +23,7 @@ GameState::~GameState()
 void GameState::load(int )
 {
     cout << "[Estado] Carregando estado GameState. " << endl;
+
     m_debug_render = new DebugRender(&window);
     m_debug_render->SetFlags( b2Draw::e_shapeBit | b2Draw::e_jointBit | b2Draw::e_aabbBit | b2Draw::e_pairBit | b2Draw::e_centerOfMassBit);
 
@@ -36,7 +38,9 @@ void GameState::load(int )
     b2Vec2 gravity(0.0f, 10.0f);
 
     //Prepara mundo
-    world = new b2World(gravity);
+    Engine::world = new b2World(gravity);
+    world =  Engine::world;
+
     world->SetAllowSleeping(true);
     world->SetDebugDraw(m_debug_render);
 
@@ -56,28 +60,24 @@ void GameState::load(int )
     ((b2PolygonShape*)flag->getBodyShape() )->SetAsBox(14.0f/pixelsPerMeter,23.0f/pixelsPerMeter);
     flag->createBody(*world);
     flag->getBody()->SetUserData(flag);
-    bodylist.push_back(flag);
+    Engine::bodylist.push_back(flag);
 
-//    flag = new Flag();
-//        flag->setTexture(TextureManager::TextureControl.get("player"), 47, 40);
-//        flag->getSprite()->setOrigin(23,20);
-//        flag->getBodyDef()->position.Set(300.0f/pixelsPerMeter, (520.f-20.f)/pixelsPerMeter);
-//        ((b2PolygonShape*)flag->getBodyShape() )->SetAsBox(23.0f/pixelsPerMeter,20.0f/pixelsPerMeter);
-//        flag->createBody(*world);
-//        flag->getBody()->SetUserData(flag);
-//        bodylist.push_back(flag);
+//        Character* c = new Character();
+//        c->setTexture(TextureManager::TextureControl.get("player"), 47, 40);
+//        c->getSprite()->setOrigin(23,20);
+//        ((b2PolygonShape*)c->getBodyShape())->SetAsBox(23.0f/pixelsPerMeter,20.0f/pixelsPerMeter);
+//        c->getBodyDef()->position.Set((300)/pixelsPerMeter, (500)/pixelsPerMeter);
+//        c->getBodyDef()->type = b2_dynamicBody;
+//        c->getBodyFixture()->density = 0.002f;
+//        c->createBody(*world);
+//        c->getBody()->SetFixedRotation(true);
+//        c->getBody()->SetUserData(c);
+//        bodylist.push_back(c);
 
-        Character* c = new Character();
-        c->setTexture(TextureManager::TextureControl.get("player"), 47, 40);
-        c->getSprite()->setOrigin(23,20);
-        ((b2PolygonShape*)c->getBodyShape())->SetAsBox(23.0f/pixelsPerMeter,20.0f/pixelsPerMeter);
-        c->getBodyDef()->position.Set((300)/pixelsPerMeter, (500)/pixelsPerMeter);
-        c->getBodyDef()->type = b2_dynamicBody;
-        c->getBodyFixture()->density = 0.002f;
-        c->createBody(*world);
-        c->getBody()->SetFixedRotation(true);
-        c->getBody()->SetUserData(c);
-        bodylist.push_back(c);
+    player = new PlayerEntity(world);
+    player->setTexture(TextureManager::TextureControl.get("player"), 47, 40);
+    player->getSprite()->setOrigin(23,20);
+    Engine::bodylist.push_back(player);
 
     //in FooTest constructor
     world->SetContactListener(&listenner);
@@ -90,12 +90,12 @@ int GameState::unload()
     if(world != nullptr)
         delete world;
 
-    if(bodylist.empty() == false)
+    if(Engine::bodylist.empty() == false)
     {
-        for(int i = 0; i < (int) bodylist.size(); i++)
-            delete bodylist[i];
+        for(int i = 0; i < (int) Engine::bodylist.size(); i++)
+            delete Engine::bodylist[i];
 
-        bodylist.clear();
+        Engine::bodylist.clear();
     }
 
     return mStack;
@@ -105,17 +105,17 @@ eStateType GameState::update(float dt)
 {
     world->Step(dt, 8, 4);
 
-    for(int i = 0; i < (int) bodylist.size(); i++)
+    for(int i = 0; i < (int) Engine::bodylist.size(); i++)
     {
-        bodylist[i]->update(dt);
+        Engine::bodylist[i]->update(dt);
     }
-
 
     return mStado;
 }
 
 void GameState::events(sf::Event& event)
 {
+    player->events(event);
     if(event.type == sf::Event::KeyPressed)
     {
         if(event.key.code == sf::Keyboard::Escape)
@@ -125,6 +125,11 @@ void GameState::events(sf::Event& event)
         else if(event.key.code == sf::Keyboard::Q){
             isDebug = !isDebug;
         }
+        else if(event.key.code == sf::Keyboard::E){
+            isGrid = !isGrid;
+        }
+//Debug Controls
+
 //Move camera
         else if(event.key.code == sf::Keyboard::D)
         {
@@ -138,26 +143,57 @@ void GameState::events(sf::Event& event)
             view.move(sf::Vector2f(-20,0));
             window.setView(view);
         }
+        else if(event.key.code == sf::Keyboard::W)
+        {
+            sf::View& view = Engine::EngineControl.getViewGame();
+            view.move(sf::Vector2f(0,-20));
+            window.setView(view);
+        }
+        else if(event.key.code == sf::Keyboard::S)
+        {
+            sf::View& view = Engine::EngineControl.getViewGame();
+            view.move(sf::Vector2f(0,20));
+            window.setView(view);
+        }
+//Zoom
+        if(event.key.control)
+        {
+            if(event.key.code == sf::Keyboard::Equal)
+            {
+                sf::View& view = Engine::EngineControl.getViewGame();
+                view.zoom(0.8f);
+                window.setView(view);
+            }
+            else
+            if(event.key.code == sf::Keyboard::Dash)
+            {
+                sf::View& view = Engine::EngineControl.getViewGame();
+                view.zoom(1.2f);
+                window.setView(view);
+            }
+        }
 
     }
 }
 
 void GameState::render()
 {
-    for(int i = 0; i < (int) bodylist.size(); i++)
+    for(int i = 0; i < (int) Engine::bodylist.size(); i++)
     {
-        bodylist[i]->render(window);
+        Engine::bodylist[i]->render(window);
     }
 
     sf::Vector2f offset = window.getView().getCenter();
     sf::Vector2f start(offset.x - WINDOW_WIDTH/2.f, offset.y - WINDOW_HEIGHT/2.f);
 
     //Draw grid
-    for(int x = start.x; x < start.x+WINDOW_WIDTH; x+= 16)
-        Engine::EngineControl.drawLine(x, start.y, x, start.y+WINDOW_HEIGHT, sf::Color(0,0,0, 20));
-    for(int y = start.y; y < start.y+WINDOW_HEIGHT; y+= 16)
-        Engine::EngineControl.drawLine(start.x, y, start.x+WINDOW_WIDTH, y, sf::Color(0,0,0, 50) );
-
+    if(isGrid)
+    {
+        for(int x = start.x; x < start.x+WINDOW_WIDTH; x+= 16)
+            Engine::EngineControl.drawLine(x, start.y, x, start.y+WINDOW_HEIGHT, sf::Color(0,0,0, 20));
+        for(int y = start.y; y < start.y+WINDOW_HEIGHT; y+= 16)
+            Engine::EngineControl.drawLine(start.x, y, start.x+WINDOW_WIDTH, y, sf::Color(0,0,0, 50) );
+    }
     //Draw floor
     Engine::EngineControl.drawRectVertex(-400,520,1600,160);
     for(int x = -300; x < 1600; x+= 100)

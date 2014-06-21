@@ -2,23 +2,21 @@
 
 Body::Body()
 {
-    //ctor
-    m_bodyShape = new b2PolygonShape();
 }
 
 Body::~Body()
 {
-    //dtor
-    if(m_bodyShape != nullptr)
-        delete m_bodyShape;
 }
 
-void Body::createBody(b2World & world)
+void Body::createBody(b2World & world, bool isCircle)
 {
     m_body = world.CreateBody(&m_bodyDef);
-    m_bodyFix.shape = m_bodyShape;
-    b2Fixture* fix = m_body->CreateFixture(&m_bodyFix);
-    m_fixture.push_back(fix);
+    if(isCircle)
+        m_fixtureDef.shape = &m_bodyCircleShape;
+   else
+        m_fixtureDef.shape = &m_bodyShape;
+
+    m_body->CreateFixture(&m_fixtureDef);
 }
 
 void Body::destroyBody(b2World & world)
@@ -32,9 +30,9 @@ b2Body* Body::getBody()
     return m_body;
 }
 
-b2Fixture *Body::getFixture(int id)
+b2Fixture *Body::getFixture()
 {
-    return m_fixture[id];
+    return m_body->GetFixtureList();
 }
 b2BodyDef* Body::getBodyDef()
 {
@@ -42,17 +40,17 @@ b2BodyDef* Body::getBodyDef()
 }
 b2Shape* Body::getBodyShape()
 {
-    return m_bodyShape;
+    return &m_bodyShape;
 }
 b2FixtureDef* Body::getBodyFixture()
 {
-    return &m_bodyFix;
+    return &m_fixtureDef;
 }
 
-void Body::startContact(Body * body)
+void Body::startContact(Body * )
 {
 }
 
-void Body::endContact(Body * body)
+void Body::endContact(Body * )
 {
 }

@@ -13,8 +13,8 @@ class SpriteBody : public Body
         SpriteBody();
         virtual ~SpriteBody();
 
-        void update(float dt = 0);
-        void render(sf::RenderWindow& window);
+        virtual void update(float dt = 0);
+        virtual void render(sf::RenderWindow& window);
 
         void setTexture(sf::Texture& texture, int sizeW = -1, int sizeH = -1, int frames = 1, int msTime =0 );
         sf::Sprite* getSprite();
@@ -23,7 +23,6 @@ class SpriteBody : public Body
 
     protected:
         float default_rotation = 0.0f;
-        sf::Sprite m_sprite;
         Animation m_animation;
     private:
 };

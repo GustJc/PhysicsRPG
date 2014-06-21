@@ -1,6 +1,8 @@
 #include "Engine.h"
 #include "Globals.h"
 Engine Engine::EngineControl;
+std::vector<Body*> Engine::bodylist;
+b2World* Engine::world;
 
 Engine::Engine() :
 mWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_NAME, sf::Style::Close)

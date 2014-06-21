@@ -58,7 +58,6 @@ SOURCES       = src/TextureManager.cpp \
 		src/GameManager.cpp \
 		src/Flag.cpp \
 		src/Entity.cpp \
-		src/Entidade.cpp \
 		src/Engine.cpp \
 		src/DebugRender.cpp \
 		src/ContactListenner.cpp \
@@ -68,7 +67,8 @@ SOURCES       = src/TextureManager.cpp \
 		src/Animation.cpp \
 		src/MenuState.cpp \
 		src/UiButton.cpp \
-		src/EditorState.cpp 
+		src/EditorState.cpp \
+		src/PlayerEntity.cpp 
 OBJECTS       = TextureManager.o \
 		TestState.o \
 		State.o \
@@ -82,7 +82,6 @@ OBJECTS       = TextureManager.o \
 		GameManager.o \
 		Flag.o \
 		Entity.o \
-		Entidade.o \
 		Engine.o \
 		DebugRender.o \
 		ContactListenner.o \
@@ -92,7 +91,8 @@ OBJECTS       = TextureManager.o \
 		Animation.o \
 		MenuState.o \
 		UiButton.o \
-		EditorState.o
+		EditorState.o \
+		PlayerEntity.o
 DIST          = /opt/Qt5.2.1/5.2.1/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt5.2.1/5.2.1/gcc_64/mkspecs/common/shell-unix.conf \
 		/opt/Qt5.2.1/5.2.1/gcc_64/mkspecs/common/unix.conf \
@@ -546,9 +546,6 @@ Entity.o: src/Entity.cpp include/Entity.h \
 		include/Animation.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Entity.o src/Entity.cpp
 
-Entidade.o: src/Entidade.cpp include/Entidade.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Entidade.o src/Entidade.cpp
-
 Engine.o: src/Engine.cpp include/Engine.h \
 		include/Globals.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Engine.o src/Engine.cpp
@@ -589,16 +586,28 @@ MenuState.o: src/MenuState.cpp include/MenuState.h \
 UiButton.o: src/UiButton.cpp include/UiButton.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o UiButton.o src/UiButton.cpp
 
-EditorState.o: src/EditorState.cpp include/Globals.h \
+EditorState.o: src/EditorState.cpp include/EditorState.h \
+		include/State.h \
+		include/DebugRender.h \
+		include/BoxBody.h \
+		include/SpriteBody.h \
+		include/Body.h \
+		include/Animation.h \
+		include/ContactListenner.h \
+		include/Globals.h \
 		include/TextureManager.h \
 		include/Engine.h \
 		include/Flag.h \
 		include/Entity.h \
-		include/SpriteBody.h \
-		include/Body.h \
-		include/Animation.h \
 		include/Character.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o EditorState.o src/EditorState.cpp
+
+PlayerEntity.o: src/PlayerEntity.cpp include/PlayerEntity.h \
+		include/Entity.h \
+		include/SpriteBody.h \
+		include/Body.h \
+		include/Animation.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PlayerEntity.o src/PlayerEntity.cpp
 
 ####### Install
 

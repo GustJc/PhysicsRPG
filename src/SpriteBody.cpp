@@ -29,8 +29,6 @@ void SpriteBody::render(sf::RenderWindow& window)
 
 void SpriteBody::setTexture(sf::Texture& texture, int sizeW, int sizeH, int frames, int msTime )
 {
-    m_sprite.setTexture(texture);
-
     if(sizeW <= 0)
         sizeW = texture.getSize().x;
     if(sizeH <= 0)
@@ -42,7 +40,7 @@ void SpriteBody::setTexture(sf::Texture& texture, int sizeW, int sizeH, int fram
 
 sf::Sprite* SpriteBody::getSprite()
 {
-    return &m_sprite;
+    return &m_animation.getSprite();
 }
 
 void SpriteBody::setDefaultRotation(float rotationgraus)
