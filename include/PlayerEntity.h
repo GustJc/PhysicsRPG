@@ -25,6 +25,13 @@ private:
 
     sf::Clock shotTimer;
     float shot_cooldown = 1.f;
+    float shot_max_power = 300.f;
+    float angle = 45;
+    float shot_power = 50.f;
+
+    b2Vec2 power;
+    sf::Sprite arrow;
+    sf::Sprite arrow_full;
 };
 
 #endif // PLAYERENTITY_H

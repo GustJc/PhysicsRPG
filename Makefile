@@ -68,7 +68,8 @@ SOURCES       = src/TextureManager.cpp \
 		src/MenuState.cpp \
 		src/UiButton.cpp \
 		src/EditorState.cpp \
-		src/PlayerEntity.cpp 
+		src/PlayerEntity.cpp \
+		src/map.cpp 
 OBJECTS       = TextureManager.o \
 		TestState.o \
 		State.o \
@@ -92,7 +93,8 @@ OBJECTS       = TextureManager.o \
 		MenuState.o \
 		UiButton.o \
 		EditorState.o \
-		PlayerEntity.o
+		PlayerEntity.o \
+		map.o
 DIST          = /opt/Qt5.2.1/5.2.1/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt5.2.1/5.2.1/gcc_64/mkspecs/common/shell-unix.conf \
 		/opt/Qt5.2.1/5.2.1/gcc_64/mkspecs/common/unix.conf \
@@ -511,7 +513,8 @@ GameState.o: src/GameState.cpp include/GameState.h \
 		include/Engine.h \
 		include/Flag.h \
 		include/Entity.h \
-		include/Character.h
+		include/Character.h \
+		include/PlayerEntity.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o GameState.o src/GameState.cpp
 
 GameObject.o: src/GameObject.cpp include/GameObject.h
@@ -527,6 +530,7 @@ GameManager.o: src/GameManager.cpp include/GameManager.h \
 		include/Animation.h \
 		include/GameState.h \
 		include/ContactListenner.h \
+		include/EditorState.h \
 		include/MapState.h \
 		include/MenuState.h \
 		include/UiButton.h \
@@ -606,8 +610,14 @@ PlayerEntity.o: src/PlayerEntity.cpp include/PlayerEntity.h \
 		include/Entity.h \
 		include/SpriteBody.h \
 		include/Body.h \
-		include/Animation.h
+		include/Animation.h \
+		include/Globals.h \
+		include/Engine.h \
+		include/TextureManager.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PlayerEntity.o src/PlayerEntity.cpp
+
+map.o: src/map.cpp include/map.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o map.o src/map.cpp
 
 ####### Install
 

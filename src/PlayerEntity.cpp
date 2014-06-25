@@ -4,9 +4,18 @@
 #include "Engine.h"
 #include "SpriteBody.h"
 #include "TextureManager.h"
+#include <math.h>
 
 PlayerEntity::PlayerEntity(b2World *world)
 {
+    TextureManager::TextureControl.load("arrow", "data/arrow.png");
+    TextureManager::TextureControl.load("arrow2", "data/arrow_full.png");
+
+    arrow.setTexture(TextureManager::TextureControl.get("arrow"));
+    arrow.setOrigin(0, arrow.getTextureRect().height/2.f);
+    arrow_full.setTexture(TextureManager::TextureControl.get("arrow2"));
+    arrow_full.setOrigin(0, arrow_full.getTextureRect().height/2.f);
+
     m_bodyCircleShape.m_radius = 4.f/pixelsPerMeter;
 
     //Full sprite is 23, 20
@@ -64,12 +73,7 @@ void PlayerEntity::events(sf::Event &event){
     if(event.type == sf::Event::MouseButtonPressed && shotTimer.getElapsedTime().asSeconds() > shot_cooldown)
     {
         shotTimer.restart();
-        sf::Vector2i mouseTemp = sf::Mouse::getPosition(Engine::EngineControl.getWindowReference());
-        sf::Vector2f mouse = Engine::EngineControl.getWindowReference().mapPixelToCoords(mouseTemp);
 
-        sf::Vector2f diff = mouse - this->m_animation.getSprite().getPosition();
-
-        cout << diff.x << " | " << diff.y << endl;
         //Arrow
         SpriteBody* shot = new SpriteBody();
 
@@ -83,16 +87,18 @@ void PlayerEntity::events(sf::Event &event){
                     );
         shot->getBodyDef()->type = b2_dynamicBody;
         shot->getBodyFixture()->friction = 0.5f;
-        shot->getBodyFixture()->restitution = 0.2f;
+        shot->getBodyFixture()->restitution = 0.4f;
         shot->getBodyFixture()->density = 2.f;
         shot->getBodyFixture()->filter.groupIndex = -1;
 
         shot->createBody(*Engine::world, true);
 
         shot->getBody()->SetFixedRotation(false);
-        shot->getBody()->SetAngularDamping(0.8f);
-        shot->getBody()->ApplyLinearImpulse(b2Vec2( shot->getBody()->GetMass()*diff.x/pixelsPerMeter,
-                                                    shot->getBody()->GetMass()*diff.y/pixelsPerMeter  ),shot->getBody()->GetWorldCenter(),true);
+        shot->getBody()->SetAngularDamping(2.5f);
+        float powerX = shot_power*cos(angle*M_PI/180.f);
+        float powerY = shot_power*sin(angle*M_PI/180.f);
+        shot->getBody()->ApplyLinearImpulse(b2Vec2( shot->getBody()->GetMass()*powerX/pixelsPerMeter,
+                                                    shot->getBody()->GetMass()*powerY/pixelsPerMeter  ),shot->getBody()->GetWorldCenter(),true);
 
         Engine::bodylist.push_back(shot);
         //End arrow
@@ -104,11 +110,12 @@ void PlayerEntity::render(sf::RenderWindow &window)
 {
     Entity::render(window);
 
+    int startX = m_animation.getSprite().getPosition().x - m_animation.getSprite().getTextureRect().width/2.f;
+    int startY = m_animation.getSprite().getPosition().y - 10 - m_animation.getSprite().getTextureRect().height/2.f;
+    int width  = m_animation.getSprite().getTextureRect().width;
+    int height = 4;
+
     if(shotTimer.getElapsedTime().asSeconds() < shot_cooldown) {
-        int startX = m_animation.getSprite().getPosition().x - m_animation.getSprite().getTextureRect().width/2.f;
-        int startY = m_animation.getSprite().getPosition().y - 10 - m_animation.getSprite().getTextureRect().height/2.f;
-        int width  = m_animation.getSprite().getTextureRect().width;
-        int height = 4;
 
         float percent = shotTimer.getElapsedTime().asSeconds()/shot_cooldown;
 
@@ -120,6 +127,25 @@ void PlayerEntity::render(sf::RenderWindow &window)
         Engine::EngineControl.drawLine(startX+width   , startY+height , startX+width      , startY, sf::Color::Black);
         Engine::EngineControl.drawLine(startX         , startY+height , startX            , startY       , sf::Color::Black);
     }
+
+    //arrow
+
+    int posX = startX+width;
+    int posY = startY + m_animation.getSprite().getTextureRect().height/2.f;
+
+    sf::IntRect rect = arrow_full.getTextureRect();
+    rect.width = arrow.getTextureRect().width*shot_power/shot_max_power;
+    arrow_full.setTextureRect(rect);
+    arrow.setColor(sf::Color(255, 255, 255, 150));
+    arrow_full.setColor(sf::Color(255, 255, 255, 150));
+
+    arrow_full.setPosition(posX, posY);
+    arrow.setPosition(posX, posY);
+    arrow.setRotation(angle);
+    arrow_full.setRotation(angle);
+
+    window.draw(arrow);
+    window.draw(arrow_full);
 }
 
 void PlayerEntity::update(float dt)
@@ -158,5 +184,26 @@ void PlayerEntity::update(float dt)
     {
         m_body->ApplyLinearImpulse(b2Vec2(0,-0.001f), m_body->GetWorldCenter(), true);
     }
+
+    //Update throw force
+    sf::Vector2i mouseTemp = sf::Mouse::getPosition(Engine::EngineControl.getWindowReference());
+    sf::Vector2f mouse = Engine::EngineControl.getWindowReference().mapPixelToCoords(mouseTemp);
+
+    sf::Vector2f diff = mouse - this->m_animation.getSprite().getPosition();
+
+
+    power = b2Vec2(diff.x, diff.y);
+
+    shot_power = power.Length();
+    if(shot_power > shot_max_power) shot_power = shot_max_power;
+
+    angle = atan( diff.y/diff.x ) * 180.f/M_PI;
+    if(diff.x < 0) angle = -angle;
+
+    //Update camera
+    sf::View& view = Engine::EngineControl.getViewGame();
+    view.setCenter(sf::Vector2f(m_animation.getSprite().getPosition().x + WINDOW_WIDTH/4.f,
+                                m_animation.getSprite().getPosition().y - WINDOW_HEIGHT/4.f  ) );
+    Engine::EngineControl.getWindowReference().setView(view);
 
 }

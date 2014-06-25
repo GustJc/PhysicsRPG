@@ -35,14 +35,18 @@ void Character::onAI()
 {
     if( m_timer_attack.getElapsedTime().asSeconds() > 15.f )
     {
+        m_animation.setFrames(0, 3, 200);
         moveLeft();
     }
     else
     if( m_timer.getElapsedTime().asSeconds() > 2.f )
     {
+        m_animation.setFrames(1, 3, 200);
         moveRight();
-        if(m_timer.getElapsedTime().asSeconds() > 2.f*2)
+        if(m_timer.getElapsedTime().asSeconds() > 2.f*2){
+            m_animation.setFrames(0, 3, 200);
             m_timer.restart();
+        }
     }else
     if( m_timer.getElapsedTime().asSeconds() < 2.f )
     {
@@ -52,14 +56,23 @@ void Character::onAI()
 
 void Character::moveLeft()
 {
-    this->m_body->ApplyForceToCenter( b2Vec2(-0.3/pixelsPerMeter, 0 ), true );
-    //this->m_body->ApplyLinearImpulse(b2Vec2(-2.5/pixelsPerMeter, 0 ), m_body->GetPosition(), true );
+    b2Vec2 vel = m_body->GetLinearVelocity();
+    float desiredVel = b2Min( vel.x - 0.1f, -2.0f );
+    float velChange = desiredVel - vel.x;
+    float impulse = m_body->GetMass() * velChange;
+
+    //this->m_body->ApplyForceToCenter( b2Vec2(-0.3/pixelsPerMeter, 0 ), true );
+    this->m_body->ApplyLinearImpulse(b2Vec2(impulse/pixelsPerMeter, 0 ), m_body->GetWorldCenter(), true );
     //this->m_body->SetLinearVelocity( b2Vec2(-50/pixelsPerMeter, this->m_body->GetLinearVelocity().y ) );
 }
 
 void Character::moveRight()
 {
-    //this->m_body->ApplyLinearImpulse(b2Vec2(+2.5/pixelsPerMeter, 0 ), m_body->GetPosition(), true );
-    this->m_body->ApplyForceToCenter( b2Vec2(0.3/pixelsPerMeter, 0 ), true );
+    b2Vec2 vel = m_body->GetLinearVelocity();
+    float desiredVel = b2Max( vel.x + 0.1f,  2.0f );
+    float velChange = desiredVel - vel.x;
+    float impulse = m_body->GetMass() * velChange;
+    this->m_body->ApplyLinearImpulse(b2Vec2(impulse/pixelsPerMeter, 0 ), m_body->GetWorldCenter(), true );
+    //this->m_body->ApplyForceToCenter( b2Vec2(0.3/pixelsPerMeter, 0 ), true );
     //this->m_body->SetLinearVelocity( b2Vec2(50/pixelsPerMeter, this->m_body->GetLinearVelocity().y ) );
 }

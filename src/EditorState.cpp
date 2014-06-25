@@ -34,6 +34,8 @@ void EditorState::load(int )
     TextureManager::TextureControl.load("player", "data/player.png");
     TextureManager::TextureControl.load("flag", "data/flag.png");
 
+    TextureManager::TextureControl.load("tileset", "data/tileset.png");
+
     TextureManager::TextureControl.load("boulder_8", "data/img/boulder-rad8.png");
     TextureManager::TextureControl.load("boulder_16", "data/img/boulder-rad16.png");
     TextureManager::TextureControl.load("boulder_32", "data/img/boulder-rad32.png");
@@ -57,6 +59,7 @@ void EditorState::load(int )
     world->SetContactListener(&listenner);
 
     Flag * flag = new Flag();
+    flag->type = 0;
     flag->setTexture(TextureManager::TextureControl.get("flag"), 29, 46, 2, 400);
     flag->getSprite()->setOrigin(15,23);
     flag->getBodyDef()->position.Set(700.0f/pixelsPerMeter, (520.f-23.f)/pixelsPerMeter);
@@ -120,7 +123,6 @@ eStateType EditorState::update(float dt)
         bodylist[i]->update(dt);
     }
 
-
     return mStado;
 }
 
@@ -128,6 +130,9 @@ void EditorState::events(sf::Event& event)
 {
     if(event.type == sf::Event::KeyPressed)
     {
+        if(event.key.code == sf::Keyboard::P){
+            saveMap("output.map");
+        }
         if(event.key.code == sf::Keyboard::Escape)
         {
             mStado = GST_MENU;
@@ -137,6 +142,10 @@ void EditorState::events(sf::Event& event)
         }
         else if(event.key.code == sf::Keyboard::E){
             isGrid = !isGrid;
+        }
+        else if(event.key.code == sf::Keyboard::R){
+            unload();
+            load();
         }
 //Move Controls
         else if(event.key.code == sf::Keyboard::D)
@@ -190,18 +199,22 @@ void EditorState::events(sf::Event& event)
             bool isCircle = false;
 
             if(selectedId == 1){
+                sp_body->type = 1;
                 ((b2PolygonShape*)sp_body->getBodyShape())->SetAsBox(8.0f/pixelsPerMeter,8.0f/pixelsPerMeter);
             }else
             {
                 if(selectedId == 2){
+                    sp_body->type = 2;
                     sp_body->setTexture(TextureManager::TextureControl.get("boulder_8"));
                     sp_body->m_bodyCircleShape.m_radius = 4/pixelsPerMeter;
                 } else
                 if(selectedId == 3) {
+                    sp_body->type = 3;
                     sp_body->setTexture(TextureManager::TextureControl.get("boulder_16"));
                     sp_body->m_bodyCircleShape.m_radius = 8/pixelsPerMeter;
                 } else
                 if(selectedId == 4) {
+                    sp_body->type = 4;
                     sp_body->setTexture(TextureManager::TextureControl.get("boulder_32"));
                     sp_body->m_bodyCircleShape.m_radius = 16/pixelsPerMeter;
                 }
@@ -255,13 +268,22 @@ void EditorState::events(sf::Event& event)
         if(selectedId == 1)
         {
             sf::Vector2i mouse = sf::Mouse::getPosition(window);
-            float mouseX = floor(mouse.x/16.f)*16;
-            float mouseY = floor(mouse.y/16.f)*16;
-            SpriteBody* sp_body = new SpriteBody();
+            float mouseX = mouse.x - 8.f;
+            float mouseY = mouse.y - 8.f;
 
-            sp_body->setTexture(TextureManager::TextureControl.get("boulder"));
+            if(isSnap)
+            {
+                mouseX = floor(mouse.x/16.f)*16;
+                mouseY = floor(mouse.y/16.f)*16;
+            }
+
+            SpriteBody* sp_body = new SpriteBody();
+            sp_body->type = 1;
+
+            sp_body->setTexture(TextureManager::TextureControl.get("tileset"), 16,16);
+            sp_body->setFixedSpritePosition(16*7, 16);
             sp_body->getSprite()->setOrigin(8,8);
-            ((b2PolygonShape*)sp_body->getBodyShape())->SetAsBox(8.0f/pixelsPerMeter,8.0f/pixelsPerMeter);
+            ((b2PolygonShape*)sp_body->getBodyShape())->SetAsBox(7.8f/pixelsPerMeter,7.8f/pixelsPerMeter);
             sp_body->getBodyDef()->position.Set((8+mouseX)/pixelsPerMeter, (8+mouseY)/pixelsPerMeter);
             sp_body->getBodyDef()->type = b2_dynamicBody;
             sp_body->getBodyFixture()->friction = 0.5f;
@@ -275,21 +297,31 @@ void EditorState::events(sf::Event& event)
         if(selectedId >= 2 && selectedId <= 3)
         {
             sf::Vector2i mouse = sf::Mouse::getPosition(window);
-            float mouseX = floor(mouse.x/16.f)*16;
-            float mouseY = floor(mouse.y/16.f)*16;
+            float mouseX = mouse.x - 8.f;
+            float mouseY = mouse.y - 8.f;
+
+            if(isSnap)
+            {
+                mouseX = floor(mouse.x/16.f)*16;
+                mouseY = floor(mouse.y/16.f)*16;
+            }
             SpriteBody* sp_body = new SpriteBody();
 
-            sp_body->setTexture(TextureManager::TextureControl.get("boulder_large"));
+            //sp_body->setTexture(TextureManager::TextureControl.get("boulder_large"));
+            sp_body->setTexture(TextureManager::TextureControl.get("tileset"), 16*5,16);
+            sp_body->setFixedSpritePosition(0, 0);
 
             if(selectedId == 2){
+                sp_body->type = 2;
                 sp_body->getSprite()->setOrigin( 16*4/2.f , 16/2.f);
-                ((b2PolygonShape*)sp_body->getBodyShape())->SetAsBox(16*2.f/pixelsPerMeter,8.0f/pixelsPerMeter);
-                sp_body->getBodyDef()->position.Set((16*2+mouseX)/pixelsPerMeter, (8+mouseY)/pixelsPerMeter);
+                ((b2PolygonShape*)sp_body->getBodyShape())->SetAsBox( (16*2.5f-0.2f)/pixelsPerMeter,7.8f/pixelsPerMeter);
+                sp_body->getBodyDef()->position.Set((16*2.5+mouseX)/pixelsPerMeter, (8+mouseY)/pixelsPerMeter);
             } else
             {
+                sp_body->type = 3;
                 sp_body->getSprite()->setOrigin( 16/2.f, 16*4/2.f);
-                ((b2PolygonShape*)sp_body->getBodyShape())->SetAsBox(8.0f/pixelsPerMeter,16*2.f/pixelsPerMeter);
-                sp_body->getBodyDef()->position.Set((8+mouseX)/pixelsPerMeter, (16*2+mouseY)/pixelsPerMeter);
+                ((b2PolygonShape*)sp_body->getBodyShape())->SetAsBox(7.8f/pixelsPerMeter,(16*2.5f-0.2f)/pixelsPerMeter);
+                sp_body->getBodyDef()->position.Set((8+mouseX)/pixelsPerMeter, (16*2.5+mouseY)/pixelsPerMeter);
                 sp_body->setDefaultRotation(90);
             }
 
@@ -305,20 +337,28 @@ void EditorState::events(sf::Event& event)
         if(selectedId >= 4 && selectedId <= 5)
         {
             sf::Vector2i mouse = sf::Mouse::getPosition(window);
-            float mouseX = floor(mouse.x/16.f)*16;
-            float mouseY = floor(mouse.y/16.f)*16;
+            float mouseX = mouse.x - 8.f;
+            float mouseY = mouse.y - 8.f;
+
+            if(isSnap)
+            {
+                mouseX = floor(mouse.x/16.f)*16;
+                mouseY = floor(mouse.y/16.f)*16;
+            }
             SpriteBody* sp_body = new SpriteBody();
 
             sp_body->getSprite()->setOrigin(8,8);
-            ((b2PolygonShape*)sp_body->getBodyShape())->SetAsBox(8.0f/pixelsPerMeter,8.0f/pixelsPerMeter);
+            ((b2PolygonShape*)sp_body->getBodyShape())->SetAsBox(7.8f/pixelsPerMeter,7.8f/pixelsPerMeter);
             sp_body->getBodyDef()->position.Set((8+mouseX)/pixelsPerMeter, (8+mouseY)/pixelsPerMeter);
             sp_body->getBodyDef()->type = b2_dynamicBody;
 
             if(selectedId == 4){
+                sp_body->type = 4;
                 sp_body->setTexture(TextureManager::TextureControl.get("yellow"));
                 sp_body->getBodyFixture()->friction = 0.9f;
                 sp_body->getBodyFixture()->density = 0.6f;
             }else if(selectedId == 5){
+                sp_body->type = 5;
                 sp_body->setTexture(TextureManager::TextureControl.get("metal"));
                 sp_body->getBodyFixture()->friction = 1.0f;
                 sp_body->getBodyFixture()->density = 2.0f;
@@ -361,11 +401,50 @@ void EditorState::render()
 
     int width = 16;
     int height = 16;
-    if(selectedId == 2) width = 16 * 4;
-    if(selectedId == 3) height = 16 * 4;
-    Engine::EngineControl.drawRectVertex( floor(mouse.x/16.f)*16, floor(mouse.y/16.f)*16, width, height, sf::Color(100,50,100,50) );
+    if(selectedId == 2) width = 16 * 5;
+    if(selectedId == 3) height = 16 * 5;
+    int mouseX = mouse.x - 8.f;
+    int mouseY = mouse.y - 8.f;
+    if(isSnap)
+    {
+        mouseX = floor(mouse.x/16.f)*16;
+        mouseY = floor(mouse.y/16.f)*16;
+    }
+
+    Engine::EngineControl.drawRectVertex( mouseX, mouseY, width, height, sf::Color(100,50,100,50) );
 
     //Draw debug data
     if(isDebug)
         world->DrawDebugData();
+}
+
+#include <iostream>
+#include <fstream>
+#include <iostream>
+#include <sstream>
+void EditorState::saveMap(string filename)
+{
+    ofstream file;
+    string absFileName("./data/map/"+filename);
+    file.open( absFileName.c_str(),ios::out | ios::binary);
+
+    //Box2D objects
+    for(unsigned int i = 0; i < bodylist.size(); i++)
+    {
+        Body* b = bodylist[i];
+        if(b->type == 0) continue;
+        file << b->getBody()->GetPosition().x << " " << b->getBody()->GetPosition().y << endl;
+        //b2PolygonShape* poly = (b2PolygonShape*) b->getBody()->GetFixtureList()->GetShape();
+        file << b->type << " " << b->getBody()->GetAngle() << endl;
+//             << " " << poly->GetVertexCount() << endl;
+//        for( int id = 0; id < poly->GetVertexCount(); id++)
+//        {
+//            file << poly->GetVertex(id).x << " " << poly->GetVertex(id).y << endl;
+//        }
+    }
+
+    file.close();
+
+    cout << "Mapa salvo: " << absFileName << endl;
+
 }

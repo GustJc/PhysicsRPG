@@ -27,8 +27,12 @@ void GameState::load(int )
     m_debug_render = new DebugRender(&window);
     m_debug_render->SetFlags( b2Draw::e_shapeBit | b2Draw::e_jointBit | b2Draw::e_aabbBit | b2Draw::e_pairBit | b2Draw::e_centerOfMassBit);
 
+    TextureManager::TextureControl.load("menu_superior", "data/menu_su.png");
+    TextureManager::TextureControl.load("tileset", "data/tileset.png");
+
     TextureManager::TextureControl.load("player", "data/player.png");
     TextureManager::TextureControl.load("flag", "data/flag.png");
+    TextureManager::TextureControl.load("slime", "data/slime.png");
 
     TextureManager::TextureControl.load("wood", "data/img/wood-block-lowres-16.png");
     TextureManager::TextureControl.load("wood_large", "data/img/wood-block-large.png");
@@ -62,17 +66,17 @@ void GameState::load(int )
     flag->getBody()->SetUserData(flag);
     Engine::bodylist.push_back(flag);
 
-//        Character* c = new Character();
-//        c->setTexture(TextureManager::TextureControl.get("player"), 47, 40);
-//        c->getSprite()->setOrigin(23,20);
-//        ((b2PolygonShape*)c->getBodyShape())->SetAsBox(23.0f/pixelsPerMeter,20.0f/pixelsPerMeter);
-//        c->getBodyDef()->position.Set((300)/pixelsPerMeter, (500)/pixelsPerMeter);
-//        c->getBodyDef()->type = b2_dynamicBody;
-//        c->getBodyFixture()->density = 0.002f;
-//        c->createBody(*world);
-//        c->getBody()->SetFixedRotation(true);
-//        c->getBody()->SetUserData(c);
-//        bodylist.push_back(c);
+        Character* c = new Character();
+        c->setTexture(TextureManager::TextureControl.get("slime"), 46, 27,3,200);
+        c->getSprite()->setOrigin(23,20);
+        ((b2PolygonShape*)c->getBodyShape())->SetAsBox(23.0f/pixelsPerMeter,13.0f/pixelsPerMeter);
+        c->getBodyDef()->position.Set((300)/pixelsPerMeter, (500)/pixelsPerMeter);
+        c->getBodyDef()->type = b2_dynamicBody;
+        c->getBodyFixture()->density = 0.2f;
+        c->createBody(*world);
+        c->getBody()->SetFixedRotation(true);
+        c->getBody()->SetUserData(c);
+        Engine::bodylist.push_back(c);
 
     player = new PlayerEntity(world);
     player->setTexture(TextureManager::TextureControl.get("player"), 47, 40);
@@ -81,6 +85,8 @@ void GameState::load(int )
 
     //in FooTest constructor
     world->SetContactListener(&listenner);
+
+    loadMap("output.map");
 }
 
 int GameState::unload()
@@ -209,7 +215,51 @@ void GameState::render()
     if(selectedId == 3) height = 16 * 4;
     Engine::EngineControl.drawRectVertex( floor(mouse.x/16.f)*16, floor(mouse.y/16.f)*16, width, height, sf::Color(100,50,100,50) );
 
+
+    sf::Sprite menu;
+    menu.setTexture(TextureManager::TextureControl.get("menu_superior"));
+    menu.setPosition( window.mapPixelToCoords(sf::Vector2i(0,0) ) );
+    window.draw(menu);
+
+
     //Draw debug data
     if(isDebug)
         world->DrawDebugData();
 }
+
+#include <iostream>
+#include <fstream>
+#include <iostream>
+#include <sstream>
+void GameState::loadMap(string filename)
+{
+    ifstream file;
+    string absFileName("./data/map/"+filename);
+    file.open( absFileName.c_str());
+
+    if(file.is_open() == false){
+        printf("Nao foi possivel abrir o arquivo: %s.\n", absFileName.c_str());
+        return;
+    }
+
+
+    float x, y, angle;
+    int type;
+    while(file >> x >> y >> type >> angle)
+    {
+
+        SpriteBody* sp_body = new SpriteBody(type);
+        sp_body->createBody(*world);
+        sp_body->getBody()->SetFixedRotation(false);
+        sp_body->getBody()->SetTransform(b2Vec2(x,y), angle);
+
+        Engine::bodylist.push_back(sp_body);
+
+    }
+
+    file.close();
+
+    cout << "Map loaded: " << absFileName << endl;
+
+}
+

@@ -1,8 +1,23 @@
 #include "SpriteBody.h"
 #include "Globals.h"
-SpriteBody::SpriteBody()
+
+#include "TextureManager.h"
+SpriteBody::SpriteBody(int id, int px, int py)
 {
-    //ctor
+    type = id;
+
+    if(id == 1)
+    {
+        setTexture(TextureManager::TextureControl.get("tileset"), 16,16);
+        setFixedSpritePosition(16*7, 16);
+        getSprite()->setOrigin(8,8);
+        m_bodyShape.SetAsBox(7.8f/pixelsPerMeter,7.8f/pixelsPerMeter);
+        m_bodyDef.position.Set(px, py);
+        m_bodyDef.type = b2_dynamicBody;
+        m_fixtureDef.friction = 0.5f;
+        m_fixtureDef.density = 0.1f;
+    }
+
 }
 
 SpriteBody::~SpriteBody()
@@ -36,6 +51,11 @@ void SpriteBody::setTexture(sf::Texture& texture, int sizeW, int sizeH, int fram
 
     m_animation.setAnimation(texture, sizeW, sizeH, frames, msTime);
     m_animation.getSprite().setOrigin(sizeW/2, sizeH/2);
+}
+
+void SpriteBody::setFixedSpritePosition(int posX, int posY)
+{
+    m_animation.setFixed(posX, posY);
 }
 
 sf::Sprite* SpriteBody::getSprite()

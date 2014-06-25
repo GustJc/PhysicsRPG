@@ -10,7 +10,7 @@
 class SpriteBody : public Body
 {
     public:
-        SpriteBody();
+        SpriteBody(int id = 0, int px = 0, int py = 0);
         virtual ~SpriteBody();
 
         virtual void update(float dt = 0);
@@ -19,9 +19,8 @@ class SpriteBody : public Body
         void setTexture(sf::Texture& texture, int sizeW = -1, int sizeH = -1, int frames = 1, int msTime =0 );
         sf::Sprite* getSprite();
         void setDefaultRotation(float rotationgraus);
-
-
-    protected:
+        void setFixedSpritePosition(int posX, int posY);
+protected:
         float default_rotation = 0.0f;
         Animation m_animation;
     private:

@@ -32,12 +32,14 @@ class GameState : public State
 
         float rotation = 0;
 
-        bool isDebug = true;
-        bool isGrid  = true;
+        bool isDebug = false;
+        bool isGrid  = false;
 
         int selectedId = 1;
 
         PlayerEntity* player;
+
+        void loadMap(string filename);
 
     private:
         ContactListenner listenner;

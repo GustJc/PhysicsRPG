@@ -27,7 +27,8 @@ SOURCES += \
     src/MenuState.cpp \
     src/UiButton.cpp \
     src/EditorState.cpp \
-    src/PlayerEntity.cpp
+    src/PlayerEntity.cpp \
+    src/map.cpp
 
 HEADERS += \
     include/Animation.h \
@@ -52,7 +53,8 @@ HEADERS += \
     include/MenuState.h \
     include/UiButton.h \
     include/EditorState.h \
-    include/PlayerEntity.h
+    include/PlayerEntity.h \
+    include/map.h
 
 #SFML
 QMAKE_CXXFLAGS += -std=c++11

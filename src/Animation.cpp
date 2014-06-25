@@ -7,7 +7,9 @@ Animation::Animation()
     current_time = 0;
     is_pause = false;
     is_ready = false;
+    stop_last = false;
     current_frame = 0;
+    current_indice = 0;
 }
 
 Animation::~Animation()
@@ -25,8 +27,20 @@ void Animation::setAnimation(sf::Texture& tex, int frameSizeX, int frameSizeY, i
     forceFrame(0);
 }
 
+void Animation::setFrames(unsigned int clipY, unsigned int n_frame, unsigned int uDelay, bool onlyOnce)
+{
+    current_indice = clipY;
+    m_sprite.setTextureRect(sf::IntRect(current_frame*frame_sizeX, current_indice*frame_sizeY, frame_sizeX, frame_sizeY));
+    if(uDelay != 0) //If zero, stays the same
+        this->change_time = uDelay*0.001f;
+    max_frames = n_frame;
+    stop_last = onlyOnce;
+    is_ready = false;
+}
+
 void Animation::update(float dt)
 {
+    m_sprite.setOrigin(frame_sizeX/2, frame_sizeY/2);
     if(is_pause)
         return;
 
@@ -42,7 +56,7 @@ void Animation::update(float dt)
             is_ready = true;
             current_frame -= max_frames;
         }
-        m_sprite.setTextureRect(sf::IntRect(current_frame*frame_sizeX, 0, frame_sizeX, frame_sizeY));
+        m_sprite.setTextureRect(sf::IntRect(current_frame*frame_sizeX, current_indice*frame_sizeY, frame_sizeX, frame_sizeY));
         m_sprite.setOrigin(frame_sizeX/2, frame_sizeY/2);
     }
 }
@@ -58,13 +72,25 @@ void Animation::forceFrame(int frame_id)
     } else {
         current_frame = frame_id;
     }
-
-    m_sprite.setTextureRect(sf::IntRect(current_frame*frame_sizeX, 0, frame_sizeX, frame_sizeY));
+    m_sprite.setTextureRect(sf::IntRect(current_frame*frame_sizeX, current_indice*frame_sizeY, frame_sizeX, frame_sizeY));
     m_sprite.setOrigin(frame_sizeX/2, frame_sizeY/2);
     current_time = 0;
 }
 bool Animation::isReady()
 {
     return is_ready;
+}
+
+void Animation::pauseAnimation(int frame_id)
+{
+    is_pause = true;
+    if(frame_id != -1)
+        current_frame = frame_id;
+}
+
+void Animation::setFixed(int x, int y)
+{
+    m_sprite.setTextureRect(sf::IntRect(x,y,frame_sizeX, frame_sizeY) );
+    is_pause = true;
 }
 
