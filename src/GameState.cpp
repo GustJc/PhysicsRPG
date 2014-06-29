@@ -163,14 +163,14 @@ void GameState::events(sf::Event& event)
         {
             SplashAnimation* sa = new SplashAnimation(TextureManager::TextureControl.get("explosion"), sf::Vector2i(16,16),
                                       b2Vec2(300/pixelsPerMeter, (500)/pixelsPerMeter), 5, 100, sf::Vector2f(5.0, 5.0) );
-            sa->getBody()->ApplyLinearImpulse(b2Vec2(1, 1), sa->getBody()->GetWorldCenter(), true );
+            sa->inicialImpulse = b2Vec2(1, 1);
         }
         if(event.key.code == sf::Keyboard::Z)
         {
             SplashText* sa = new SplashText("Teste",
                                                  b2Vec2((100)/pixelsPerMeter, (500)/pixelsPerMeter)
                                                  ,sf::Color::Blue, 30, 1000);
-            sa->getBody()->ApplyLinearImpulse(b2Vec2(1, 1), sa->getBody()->GetWorldCenter(), true );
+            sa->inicialImpulse = b2Vec2(1, 1);
         }
 
 //Move camera

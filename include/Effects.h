@@ -2,7 +2,7 @@
 #define EFFECTS_H
 
 #include "SpriteBody.h"
-
+#include "Box2D/Box2D.h"
 class SplashAnimation : public SpriteBody
 {
 public:
@@ -10,6 +10,10 @@ public:
     virtual ~SplashAnimation();
 
     virtual void update(float dt = 0);
+    b2Vec2 inicialImpulse = b2Vec2(0,0);
+
+private:
+    bool isCreated = false;
 };
 
 class SplashText : public SpriteBody
@@ -20,8 +24,10 @@ public:
 
     virtual void update(float dt = 0);
     virtual void render(sf::RenderWindow &window);
-    bool preSolve(Body *body, b2Contact *contact, const b2Manifold *manifold);
+    void preSolve(Body *body, b2Contact *contact, const b2Manifold *manifold);
+    b2Vec2 inicialImpulse = b2Vec2(0,0);
 private:
+    bool isCreated = false;
     sf::Text mText;
     sf::Clock mClock;
     int mTimer = 0;

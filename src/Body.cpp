@@ -58,9 +58,9 @@ void Body::endContact(Body * )
 {
 }
 
-bool Body::preSolve(Body *, b2Contact* , const b2Manifold *)
+void Body::preSolve(Body *, b2Contact* , const b2Manifold *)
 {
-    return true;
+
 }
 
 void Body::postSolve(Body *, b2Contact *, const b2ContactImpulse *)

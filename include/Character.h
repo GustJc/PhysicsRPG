@@ -18,12 +18,11 @@ class Character : public Entity
         void moveLeft();
         void moveRight();
 
-        virtual void startContact(Body * body);
-        virtual bool preSolve(Body * body, b2Contact *contact, const b2Manifold *manifold);
+        virtual void preSolve(Body * body, b2Contact *contact, const b2Manifold *manifold);
         virtual void postSolve(Body * body, b2Contact* contact, const b2ContactImpulse* impulse);
 
     protected:
-
+        float m_attack_period = 1;
         sf::Clock m_timer;
         sf::Clock m_timer_attack;
     private:

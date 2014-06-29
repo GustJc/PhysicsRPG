@@ -1,5 +1,7 @@
 #include "Engine.h"
 #include "Globals.h"
+#include <ctime>
+
 Engine Engine::EngineControl;
 std::vector<Body*> Engine::bodylist;
 std::vector<Body*> Engine::effectslist;
@@ -16,6 +18,8 @@ mWindow(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), WINDOW_NAME, sf::Style::Clos
     mWindow.setView(mViewGame);
 
     mEventsPaused = false;
+
+    srand(time(0));
 }
 Engine::~Engine()
 {

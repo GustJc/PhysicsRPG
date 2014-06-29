@@ -8,6 +8,9 @@
 
 PlayerEntity::PlayerEntity(b2World *world)
 {
+    name = "player";
+    this->HP = this->maxHP = 30;
+    this->def = 5;
     TextureManager::TextureControl.load("arrow", "data/arrow.png");
     TextureManager::TextureControl.load("arrow2", "data/arrow_full.png");
 
@@ -23,7 +26,7 @@ PlayerEntity::PlayerEntity(b2World *world)
 
     m_bodyDef.position.Set((100)/pixelsPerMeter, (500)/pixelsPerMeter);
     m_bodyDef.type = b2_dynamicBody;
-    m_bodyDef.fixedRotation = true;
+    m_bodyDef.fixedRotation = false;
     m_bodyDef.userData = this;
 
     m_body = world->CreateBody(&m_bodyDef);

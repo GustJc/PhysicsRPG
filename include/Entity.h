@@ -9,6 +9,8 @@ class Entity : public SpriteBody
         Entity();
         virtual ~Entity();
 
+        virtual int damage(int attack);
+
         void die();
 
         bool isDead();
@@ -17,7 +19,7 @@ class Entity : public SpriteBody
 
         int HP = 1, maxHP = 1;
         int atk = 1, def = 0;
-        int speed = 10;
+        float speed = 2;
     private:
 };
 

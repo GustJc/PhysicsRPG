@@ -37,25 +37,22 @@ void ContactListenner::EndContact(b2Contact* contact)
 
 void ContactListenner::PreSolve(b2Contact *contact, const b2Manifold *manifold)
 {
-    void * bodyUserData = contact->GetFixtureA()->GetBody()->GetUserData();
+    Body * bodyUserData = (Body*)contact->GetFixtureA()->GetBody()->GetUserData();
     if (bodyUserData != nullptr)
     {
         Body* contactedBody = (Body*)contact->GetFixtureB()->GetBody()->GetUserData();
-       // cout << static_cast<Body*>( bodyUserData )->name << endl;
-        bool response = static_cast<Body*>( bodyUserData )->preSolve(contactedBody, contact, manifold);
-
-        if(!response){
-            contact->SetEnabled(false);
-        }
+        bodyUserData->preSolve(contactedBody, contact, manifold);
+        contactedBody->preSolve(bodyUserData, contact, manifold);
     }
 }
 
 void ContactListenner::PostSolve(b2Contact *contact, const b2ContactImpulse *impulse)
 {
-    void * bodyUserData = contact->GetFixtureA()->GetBody()->GetUserData();
+    Body * bodyUserData = (Body*)contact->GetFixtureA()->GetBody()->GetUserData();
     if (bodyUserData)
     {
         Body* contactedBody = (Body*)contact->GetFixtureB()->GetBody()->GetUserData();
-        static_cast<Body*>( bodyUserData )->postSolve(contactedBody, contact, impulse);
+        bodyUserData->postSolve(contactedBody, contact, impulse);
+        contactedBody->postSolve(bodyUserData, contact, impulse);
     }
 }

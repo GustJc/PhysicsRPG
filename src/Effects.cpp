@@ -10,7 +10,7 @@ SplashAnimation::SplashAnimation(sf::Texture &texture, sf::Vector2i clip, b2Vec2
     this->m_bodyDef.position = pos;
     this->m_fixtureDef.filter.categoryBits = 2;
     this->m_fixtureDef.filter.maskBits = 2;
-    this->createBody(*Engine::world);
+    //this->createBody(*Engine::world);
     this->m_animation.setFrames(0, frames, msTime, onlyOnce);
 
     m_animation.getSprite().setScale(scale );
@@ -25,6 +25,11 @@ SplashAnimation::~SplashAnimation()
 
 void SplashAnimation::update(float dt)
 {
+    if(isCreated == false){
+        isCreated = true;
+        this->createBody(*Engine::world);
+        getBody()->ApplyLinearImpulse(inicialImpulse, getBody()->GetWorldCenter(), true );
+    }
     if(m_animation.isReady()) {
         isDelete = true;
     }
@@ -53,7 +58,7 @@ SplashText::SplashText(string text, b2Vec2 pos, sf::Color color, int size, int m
     this->m_fixtureDef.filter.categoryBits = 2;
     this->m_fixtureDef.filter.maskBits = 2;
 
-    this->createBody(*Engine::world);
+    //this->createBody(*Engine::world);
     this->m_animation.setFrames(0);
 
     Engine::effectslist.push_back(this);
@@ -68,6 +73,11 @@ SplashText::~SplashText()
 // SplashText
 void SplashText::update(float dt)
 {
+    if(isCreated == false){
+        isCreated = true;
+        this->createBody(*Engine::world);
+        getBody()->ApplyLinearImpulse(inicialImpulse, getBody()->GetWorldCenter(), true );
+    }
     SpriteBody::update(dt);
     mText.setPosition( m_body->GetPosition().x*pixelsPerMeter, m_body->GetPosition().y*pixelsPerMeter);
     if(mClock.getElapsedTime().asMilliseconds() > mTimer){
@@ -80,7 +90,7 @@ void SplashText::render(sf::RenderWindow &window)
     window.draw(mText);
 }
 
-bool SplashText::preSolve(Body *, b2Contact *, const b2Manifold *)
+void SplashText::preSolve(Body *, b2Contact *, const b2Manifold *)
 {
-    return false;
+
 }

@@ -30,7 +30,7 @@ class Body
 
         virtual void startContact(Body * body);
         virtual void endContact(Body * body);
-        virtual bool preSolve(Body * body, b2Contact *contact, const b2Manifold *manifold);
+        virtual void preSolve(Body * body, b2Contact *contact, const b2Manifold *manifold);
         virtual void postSolve(Body * body, b2Contact* contact, const b2ContactImpulse* impulse);
         b2PolygonShape m_bodyShape;
         b2CircleShape  m_bodyCircleShape;
