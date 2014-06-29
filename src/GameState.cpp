@@ -36,6 +36,8 @@ void GameState::load(int )
     TextureManager::TextureControl.load("flag", "data/flag.png");
     TextureManager::TextureControl.load("slime", "data/slime.png");
 
+    TextureManager::TextureControl.load("spawn", "data/spawn.png");
+
     TextureManager::TextureControl.load("wood", "data/img/wood-block-lowres-16.png");
     TextureManager::TextureControl.load("wood_large", "data/img/wood-block-large.png");
     TextureManager::TextureControl.load("boulder_8", "data/img/boulder-rad8.png");

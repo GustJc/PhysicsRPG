@@ -9,7 +9,6 @@ Spawner::Spawner(b2World *world, float x, float y)
     this->name = "spawner";
     this->clock.restart();
 
-    TextureManager::TextureControl.load("spawn", "data/spawn.png");
     this->setTexture(TextureManager::TextureControl.get("spawn"));
 
     this->getSprite()->setScale(0.25, 0.25);
