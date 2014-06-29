@@ -37,5 +37,7 @@ Character* Spawner::createSoldier(string type)
     {
         return new Character(this->getBody()->GetWorld(), this->getBodyDef()->position.x - 35.0/pixelsPerMeter, this->getBodyDef()->position.y);
     }
+
+    return nullptr;
 }
 

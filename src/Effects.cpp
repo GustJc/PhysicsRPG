@@ -80,7 +80,7 @@ void SplashText::render(sf::RenderWindow &window)
     window.draw(mText);
 }
 
-bool SplashText::preSolve(Body *body, b2Contact *contact, const b2Manifold *manifold)
+bool SplashText::preSolve(Body *, b2Contact *, const b2Manifold *)
 {
     return false;
 }
