@@ -18,8 +18,8 @@ class Character : public Entity
         void moveRight();
 
         virtual void startContact(Body * body);
-        virtual void postSolve(Body *body, const b2ContactImpulse *impulse);
-        virtual bool preSolve(Body *body, b2Contact *contact);
+        virtual bool preSolve(Body * body, b2Contact *contact, const b2Manifold *manifold);
+        virtual void postSolve(Body * body, b2Contact* contact, const b2ContactImpulse* impulse);
 
     protected:
 

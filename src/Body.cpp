@@ -23,6 +23,7 @@ void Body::createBody(b2World & world, bool isCircle)
 
 void Body::destroyBody(b2World & world)
 {
+    cout << "Body Destroyed" << endl;
     m_body->DestroyFixture(m_body->GetFixtureList());
     world.DestroyBody(m_body);
 }
@@ -57,12 +58,12 @@ void Body::endContact(Body * )
 {
 }
 
-bool Body::preSolve(Body *, b2Contact* )
+bool Body::preSolve(Body *, b2Contact* , const b2Manifold *)
 {
     return true;
 }
 
-void Body::postSolve(Body *, const b2ContactImpulse *)
+void Body::postSolve(Body *, b2Contact *, const b2ContactImpulse *)
 {
 
 }

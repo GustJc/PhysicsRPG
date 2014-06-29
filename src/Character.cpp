@@ -23,7 +23,7 @@ void Character::startContact(Body * )
 
 }
 
-void Character::postSolve(Body *body, const b2ContactImpulse *impulse)
+void Character::postSolve(Body * body, b2Contact* contact, const b2ContactImpulse* impulse)
 {
     if(body == nullptr) return;
 
@@ -41,7 +41,7 @@ void Character::postSolve(Body *body, const b2ContactImpulse *impulse)
     }
 }
 
-bool Character::preSolve(Body *body, b2Contact* contact)
+bool Character::preSolve(Body * body, b2Contact *contact, const b2Manifold *manifold)
 {
     return true;
 }

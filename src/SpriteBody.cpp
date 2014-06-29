@@ -28,12 +28,8 @@ void SpriteBody::update(float dt)
 {
     if(isDelete){
         destroyBody(*Engine::world);
-        for(unsigned int i = 0; i < Engine::bodylist.size(); i++){
-            if(Engine::bodylist[i] == this){
-                delete Engine::bodylist[i];
-                Engine::bodylist.erase(Engine::bodylist.begin()+i);
-            }
-        }
+        removeFromList(Engine::bodylist);
+        removeFromList(Engine::effectslist);
     }
     m_animation.getSprite().setRotation( default_rotation + 180.f*m_body->GetAngle()/(M_PI) );
     m_animation.getSprite().setPosition( m_body->GetPosition().x*pixelsPerMeter, m_body->GetPosition().y*pixelsPerMeter);
