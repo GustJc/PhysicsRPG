@@ -76,6 +76,7 @@ void PlayerEntity::events(sf::Event &event){
 
         //Arrow
         SpriteBody* shot = new SpriteBody();
+        shot->name = "shot";
 
         shot->setTexture(TextureManager::TextureControl.get("boulder_8"));
         shot->getSprite()->setOrigin(4,4);

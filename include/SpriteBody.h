@@ -20,6 +20,8 @@ class SpriteBody : public Body
         sf::Sprite* getSprite();
         void setDefaultRotation(float rotationgraus);
         void setFixedSpritePosition(int posX, int posY);
+
+        void removeFromList(vector<Body*>& list);
 protected:
         float default_rotation = 0.0f;
         Animation m_animation;

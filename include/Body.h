@@ -30,10 +30,15 @@ class Body
 
         virtual void startContact(Body * body);
         virtual void endContact(Body * body);
+        virtual bool preSolve(Body * body, b2Contact *contact);
+        virtual void postSolve(Body * body, const b2ContactImpulse* impulse);
         b2PolygonShape m_bodyShape;
         b2CircleShape  m_bodyCircleShape;
 
         int type = 0;
+        string name = "";
+
+        bool isDelete = false;
     protected:
         b2Body* m_body;
         b2BodyDef m_bodyDef;

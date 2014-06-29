@@ -17,7 +17,9 @@ class Character : public Entity
         void moveLeft();
         void moveRight();
 
-        void startContact(Body * body);
+        virtual void startContact(Body * body);
+        virtual void postSolve(Body *body, const b2ContactImpulse *impulse);
+        virtual bool preSolve(Body *body, b2Contact *contact);
 
     protected:
 

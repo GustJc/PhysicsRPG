@@ -9,14 +9,15 @@ class Entity : public SpriteBody
         Entity();
         virtual ~Entity();
 
-        virtual void startContact(Body * ) {}
-        virtual void endContact(Body * ) {}
-
         void die();
 
         bool isDead();
     protected:
         bool is_dead;
+
+        int HP = 1, maxHP = 1;
+        int atk = 1, def = 0;
+        int speed = 10;
     private:
 };
 

@@ -66,7 +66,7 @@ void EditorState::load(int )
     ((b2PolygonShape*)flag->getBodyShape() )->SetAsBox(14.0f/pixelsPerMeter,23.0f/pixelsPerMeter);
     flag->createBody(*world);
     flag->getBody()->SetUserData(flag);
-    bodylist.push_back(flag);
+    Engine::bodylist.push_back(flag);
 
 
 /**/
@@ -99,12 +99,12 @@ int EditorState::unload()
     if(world != nullptr)
         delete world;
 
-    if(bodylist.empty() == false)
+    if(Engine::bodylist.empty() == false)
     {
-        for(int i = 0; i < (int) bodylist.size(); i++)
-            delete bodylist[i];
+        for(int i = 0; i < (int) Engine::bodylist.size(); i++)
+            delete Engine::bodylist[i];
 
-        bodylist.clear();
+        Engine::bodylist.clear();
     }
 
     return mStack;
@@ -118,9 +118,9 @@ eStateType EditorState::update(float dt)
     float32 angle = body->getBody()->GetAngle();
     printf("%4.2f %4.2f %4.2f\n", position.x, position.y, angle);
 */
-    for(int i = 0; i < (int) bodylist.size(); i++)
+    for(int i = 0; i < (int) Engine::bodylist.size(); i++)
     {
-        bodylist[i]->update(dt);
+        Engine::bodylist[i]->update(dt);
     }
 
     return mStado;
@@ -242,7 +242,7 @@ void EditorState::events(sf::Event& event)
             }
 
 
-            bodylist.push_back(sp_body);
+            Engine::bodylist.push_back(sp_body);
         }
         else if(event.key.code == sf::Keyboard::Num1){
             selectedId = 1;
@@ -292,7 +292,7 @@ void EditorState::events(sf::Event& event)
             sp_body->createBody(*world);
             sp_body->getBody()->SetFixedRotation(false);
 
-            bodylist.push_back(sp_body);
+            Engine::bodylist.push_back(sp_body);
         } else
         if(selectedId >= 2 && selectedId <= 3)
         {
@@ -332,7 +332,7 @@ void EditorState::events(sf::Event& event)
             sp_body->createBody(*world);
             sp_body->getBody()->SetFixedRotation(false);
 
-            bodylist.push_back(sp_body);
+            Engine::bodylist.push_back(sp_body);
         }
         if(selectedId >= 4 && selectedId <= 5)
         {
@@ -367,16 +367,16 @@ void EditorState::events(sf::Event& event)
             sp_body->createBody(*world);
             sp_body->getBody()->SetFixedRotation(false);
 
-            bodylist.push_back(sp_body);
+            Engine::bodylist.push_back(sp_body);
         }
     }
 }
 
 void EditorState::render()
 {
-    for(int i = 0; i < (int) bodylist.size(); i++)
+    for(int i = 0; i < (int) Engine::bodylist.size(); i++)
     {
-        bodylist[i]->render(window);
+        Engine::bodylist[i]->render(window);
     }
 
     sf::Vector2f offset = window.getView().getCenter();
@@ -429,9 +429,9 @@ void EditorState::saveMap(string filename)
     file.open( absFileName.c_str(),ios::out | ios::binary);
 
     //Box2D objects
-    for(unsigned int i = 0; i < bodylist.size(); i++)
+    for(unsigned int i = 0; i < Engine::bodylist.size(); i++)
     {
-        Body* b = bodylist[i];
+        Body* b = Engine::bodylist[i];
         if(b->type == 0) continue;
         file << b->getBody()->GetPosition().x << " " << b->getBody()->GetPosition().y << endl;
         //b2PolygonShape* poly = (b2PolygonShape*) b->getBody()->GetFixtureList()->GetShape();

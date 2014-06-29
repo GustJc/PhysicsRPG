@@ -1,6 +1,6 @@
 #include "SpriteBody.h"
 #include "Globals.h"
-
+#include "Engine.h"
 #include "TextureManager.h"
 SpriteBody::SpriteBody(int id, int px, int py)
 {
@@ -26,6 +26,15 @@ SpriteBody::~SpriteBody()
 }
 void SpriteBody::update(float dt)
 {
+    if(isDelete){
+        destroyBody(*Engine::world);
+        for(unsigned int i = 0; i < Engine::bodylist.size(); i++){
+            if(Engine::bodylist[i] == this){
+                delete Engine::bodylist[i];
+                Engine::bodylist.erase(Engine::bodylist.begin()+i);
+            }
+        }
+    }
     m_animation.getSprite().setRotation( default_rotation + 180.f*m_body->GetAngle()/(M_PI) );
     m_animation.getSprite().setPosition( m_body->GetPosition().x*pixelsPerMeter, m_body->GetPosition().y*pixelsPerMeter);
     m_animation.update(dt);
@@ -56,6 +65,16 @@ void SpriteBody::setTexture(sf::Texture& texture, int sizeW, int sizeH, int fram
 void SpriteBody::setFixedSpritePosition(int posX, int posY)
 {
     m_animation.setFixed(posX, posY);
+}
+
+void SpriteBody::removeFromList(vector<Body *> &list)
+{
+    for(unsigned int i = 0; i < list.size(); i++){
+        if(list[i] == this){
+            delete list[i];
+            list.erase(list.begin()+i);
+        }
+    }
 }
 
 sf::Sprite* SpriteBody::getSprite()

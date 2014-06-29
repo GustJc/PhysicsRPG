@@ -69,7 +69,9 @@ SOURCES       = src/TextureManager.cpp \
 		src/UiButton.cpp \
 		src/EditorState.cpp \
 		src/PlayerEntity.cpp \
-		src/map.cpp 
+		src/Map.cpp \
+		src/Spawner.cpp \
+		src/Effects.cpp 
 OBJECTS       = TextureManager.o \
 		TestState.o \
 		State.o \
@@ -94,7 +96,9 @@ OBJECTS       = TextureManager.o \
 		UiButton.o \
 		EditorState.o \
 		PlayerEntity.o \
-		map.o
+		Map.o \
+		Spawner.o \
+		Effects.o
 DIST          = /opt/Qt5.2.1/5.2.1/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt5.2.1/5.2.1/gcc_64/mkspecs/common/shell-unix.conf \
 		/opt/Qt5.2.1/5.2.1/gcc_64/mkspecs/common/unix.conf \
@@ -481,7 +485,9 @@ State.o: src/State.cpp include/State.h
 SpriteBody.o: src/SpriteBody.cpp include/SpriteBody.h \
 		include/Body.h \
 		include/Animation.h \
-		include/Globals.h
+		include/Globals.h \
+		include/Engine.h \
+		include/TextureManager.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o SpriteBody.o src/SpriteBody.cpp
 
 PolygonBody.o: src/PolygonBody.cpp include/PolygonBody.h
@@ -567,6 +573,7 @@ Character.o: src/Character.cpp include/Character.h \
 		include/SpriteBody.h \
 		include/Body.h \
 		include/Animation.h \
+		include/Engine.h \
 		include/Globals.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Character.o src/Character.cpp
 
@@ -616,8 +623,22 @@ PlayerEntity.o: src/PlayerEntity.cpp include/PlayerEntity.h \
 		include/TextureManager.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PlayerEntity.o src/PlayerEntity.cpp
 
-map.o: src/map.cpp include/map.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o map.o src/map.cpp
+Map.o: src/Map.cpp include/Map.h \
+		include/SpriteBody.h \
+		include/Body.h \
+		include/Animation.h \
+		include/Engine.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Map.o src/Map.cpp
+
+Spawner.o: src/Spawner.cpp include/Spawner.h \
+		include/Entity.h \
+		include/SpriteBody.h \
+		include/Body.h \
+		include/Animation.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Spawner.o src/Spawner.cpp
+
+Effects.o: src/Effects.cpp include/Effects.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Effects.o src/Effects.cpp
 
 ####### Install
 

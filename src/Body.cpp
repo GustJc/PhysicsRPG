@@ -1,7 +1,8 @@
 #include "Body.h"
-
+#include "Globals.h"
 Body::Body()
 {
+    m_bodyDef.userData = this;
 }
 
 Body::~Body()
@@ -10,6 +11,7 @@ Body::~Body()
 
 void Body::createBody(b2World & world, bool isCircle)
 {
+    cout << "Create" << endl;
     m_body = world.CreateBody(&m_bodyDef);
     if(isCircle)
         m_fixtureDef.shape = &m_bodyCircleShape;
@@ -22,7 +24,7 @@ void Body::createBody(b2World & world, bool isCircle)
 void Body::destroyBody(b2World & world)
 {
     m_body->DestroyFixture(m_body->GetFixtureList());
-	world.DestroyBody(m_body);
+    world.DestroyBody(m_body);
 }
 
 b2Body* Body::getBody()
@@ -53,4 +55,14 @@ void Body::startContact(Body * )
 
 void Body::endContact(Body * )
 {
+}
+
+bool Body::preSolve(Body *, b2Contact* )
+{
+    return true;
+}
+
+void Body::postSolve(Body *, const b2ContactImpulse *)
+{
+
 }

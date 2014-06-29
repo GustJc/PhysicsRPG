@@ -36,8 +36,6 @@ protected:
 
     int selectedId = 1;
 
-    vector<Body*> bodylist;
-
     void saveMap(string filename);
 private:
     ContactListenner listenner;

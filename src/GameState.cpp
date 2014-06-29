@@ -5,6 +5,7 @@
 #include "Flag.h"
 #include "Character.h"
 #include "PlayerEntity.h"
+#include "Effects.h"
 #include <cmath>
 
 #include <iostream>
@@ -38,6 +39,8 @@ void GameState::load(int )
     TextureManager::TextureControl.load("wood_large", "data/img/wood-block-large.png");
     TextureManager::TextureControl.load("boulder_8", "data/img/boulder-rad8.png");
     TextureManager::TextureControl.load("boulder_16", "data/img/boulder-rad16.png");
+
+    TextureManager::TextureControl.load("explosion", "data/explosion.png");
 
     b2Vec2 gravity(0.0f, 10.0f);
 
@@ -86,6 +89,7 @@ void GameState::load(int )
     //in FooTest constructor
     world->SetContactListener(&listenner);
 
+
     loadMap("output.map");
 }
 
@@ -104,6 +108,14 @@ int GameState::unload()
         Engine::bodylist.clear();
     }
 
+    if(Engine::effectslist.empty() == false)
+    {
+        for(int i = 0; i < (int) Engine::effectslist.size(); i++)
+            delete Engine::effectslist[i];
+
+        Engine::effectslist.clear();
+    }
+
     return mStack;
 }
 
@@ -114,6 +126,11 @@ eStateType GameState::update(float dt)
     for(int i = 0; i < (int) Engine::bodylist.size(); i++)
     {
         Engine::bodylist[i]->update(dt);
+    }
+
+    for(int i = 0; i < (int) Engine::effectslist.size(); i++)
+    {
+        Engine::effectslist[i]->update(dt);
     }
 
     return mStado;
@@ -135,6 +152,12 @@ void GameState::events(sf::Event& event)
             isGrid = !isGrid;
         }
 //Debug Controls
+
+        if(event.key.code == sf::Keyboard::X)
+        {
+            SplashAnimation* sa = new SplashAnimation(TextureManager::TextureControl.get("explosion"), sf::Vector2i(16,16),
+                                      b2Vec2(300/pixelsPerMeter, (500)/pixelsPerMeter), 5, 100, sf::Vector2f(5.0, 5.0) );
+        }
 
 //Move camera
         else if(event.key.code == sf::Keyboard::D)
@@ -184,6 +207,12 @@ void GameState::events(sf::Event& event)
 
 void GameState::render()
 {
+
+    //Draw floor
+    Engine::EngineControl.drawRectVertex(-400,520,1600,160);
+    for(int x = -300; x < 1600; x+= 100)
+        Engine::EngineControl.drawRectVertex(x,520,2,160,sf::Color(0,100,0));
+
     for(int i = 0; i < (int) Engine::bodylist.size(); i++)
     {
         Engine::bodylist[i]->render(window);
@@ -200,10 +229,12 @@ void GameState::render()
         for(int y = start.y; y < start.y+WINDOW_HEIGHT; y+= 16)
             Engine::EngineControl.drawLine(start.x, y, start.x+WINDOW_WIDTH, y, sf::Color(0,0,0, 50) );
     }
-    //Draw floor
-    Engine::EngineControl.drawRectVertex(-400,520,1600,160);
-    for(int x = -300; x < 1600; x+= 100)
-        Engine::EngineControl.drawRectVertex(x,520,2,160,sf::Color(0,100,0));
+
+    //Effects layer
+    for(int i = 0; i < (int) Engine::effectslist.size(); i++)
+    {
+        Engine::effectslist[i]->render(window);
+    }
 
     //Draw selection area
     sf::Vector2i mouseTemp = sf::Mouse::getPosition(window);
@@ -247,7 +278,8 @@ void GameState::loadMap(string filename)
     int type;
     while(file >> x >> y >> type >> angle)
     {
-
+        cout << "x: " << x << endl;
+        cout << "type: " << type << endl;
         SpriteBody* sp_body = new SpriteBody(type);
         sp_body->createBody(*world);
         sp_body->getBody()->SetFixedRotation(false);

@@ -2,6 +2,7 @@
 #include "Globals.h"
 Engine Engine::EngineControl;
 std::vector<Body*> Engine::bodylist;
+std::vector<Body*> Engine::effectslist;
 b2World* Engine::world;
 
 Engine::Engine() :

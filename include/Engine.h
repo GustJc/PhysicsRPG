@@ -14,6 +14,7 @@ class Engine
 
         static Engine EngineControl;
         static std::vector<Body*> bodylist;
+        static std::vector<Body*> effectslist;
         static b2World* world;
 
         sf::RenderWindow& getWindowReference();

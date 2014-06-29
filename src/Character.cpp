@@ -1,5 +1,5 @@
 #include "Character.h"
-
+#include "Engine.h"
 #include "Globals.h"
 
 Character::Character()
@@ -21,6 +21,29 @@ void Character::startContact(Body * )
         cout << "morreu" << endl;
     }
 
+}
+
+void Character::postSolve(Body *body, const b2ContactImpulse *impulse)
+{
+    if(body == nullptr) return;
+
+    if(name == "shot")
+    {
+        cout << "IMP"<<endl;
+    }
+    else if(body && body->name == "shot")
+    {
+        float vy = -0.8*body->getBody()->GetMass()*body->getBody()->GetLinearVelocity().Length();
+        body->getBody()->ApplyLinearImpulse(b2Vec2(0, vy),body->getBody()->GetWorldCenter(),  true);
+
+        float attack = 10*impulse->normalImpulses[0];
+        cout << "Normal: " << attack << endl;
+    }
+}
+
+bool Character::preSolve(Body *body, b2Contact* contact)
+{
+    return true;
 }
 
 void Character::update(float dt)
