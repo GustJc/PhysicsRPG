@@ -8,6 +8,7 @@ class Character : public Entity
 {
     public:
         Character();
+        Character(b2World *world, float x, float y);
         virtual ~Character();
 
         void update(float dt = 0);

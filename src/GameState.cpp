@@ -6,6 +6,7 @@
 #include "Character.h"
 #include "PlayerEntity.h"
 #include "Effects.h"
+#include "Spawner.h"
 #include <cmath>
 
 #include <iostream>
@@ -68,6 +69,9 @@ void GameState::load(int )
     flag->createBody(*world);
     flag->getBody()->SetUserData(flag);
     Engine::bodylist.push_back(flag);
+
+    //Spawner * spawner = new Spawner(world, 600.0f/pixelsPerMeter, (520.f-35.f)/pixelsPerMeter);
+    //Engine::bodylist.push_back(spawner);
 
         Character* c = new Character();
         c->setTexture(TextureManager::TextureControl.get("slime"), 46, 27,3,200);

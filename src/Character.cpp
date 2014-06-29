@@ -1,10 +1,26 @@
 #include "Character.h"
 #include "Engine.h"
 #include "Globals.h"
+#include "TextureManager.h"
 
 Character::Character()
 {
     //ctor
+}
+
+Character::Character(b2World *world, float x, float y)
+{
+    this->setTexture(TextureManager::TextureControl.get("slime"), 46, 27,3,200);
+
+    this->getSprite()->setOrigin(23,20);
+    ((b2PolygonShape*)this->getBodyShape())->SetAsBox(23.0f/pixelsPerMeter,13.0f/pixelsPerMeter);
+    this->getBodyDef()->position.Set(x, y);
+    this->getBodyDef()->type = b2_dynamicBody;
+    this->getBodyFixture()->density = 0.2f;
+    this->createBody(*world);
+    this->getBody()->SetFixedRotation(true);
+    this->getBody()->SetUserData(this);
+
 }
 
 Character::~Character()

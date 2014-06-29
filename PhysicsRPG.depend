@@ -337,10 +337,11 @@
 	"TextureManager.h"
 	"Globals.h"
 
-1403913264 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/MenuState.cpp
+1404066827 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/MenuState.cpp
 	"MenuState.h"
 	"TextureManager.h"
 	"Globals.h"
+	"Engine.h"
 
 1400091064 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/PolygonBody.cpp
 	"PolygonBody.h"
@@ -369,12 +370,13 @@
 	"Body.h"
 	"Globals.h"
 
-1404066411 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/Character.cpp
+1404071668 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/Character.cpp
 	"Character.h"
 	"Engine.h"
 	"Globals.h"
+	"TextureManager.h"
 
-1404066411 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/Character.h
+1404071420 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/Character.h
 	"Entity.h"
 
 1404066411 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/ContactListenner.cpp
@@ -400,7 +402,7 @@
 	"Engine.h"
 	"Globals.h"
 
-1404066411 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/GameState.cpp
+1404069523 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/GameState.cpp
 	"GameState.h"
 	"Globals.h"
 	"TextureManager.h"
@@ -409,6 +411,7 @@
 	"Character.h"
 	"PlayerEntity.h"
 	"Effects.h"
+	"Spawner.h"
 	<cmath>
 	<iostream>
 	<iostream>
@@ -440,7 +443,7 @@
 	"Effects.h"
 	"Engine.h"
 
-1404066494 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/Map.cpp
+1404066827 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/Map.cpp
 	"Map.h"
 	<SpriteBody.h>
 	<Engine.h>
@@ -451,9 +454,14 @@
 1404066411 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/Map.h
 	<string>
 
-1404066504 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/Spawner.cpp
+1404071643 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/Spawner.cpp
 	"Spawner.h"
+	"TextureManager.h"
+	"Globals.h"
+	"Character.h"
+	"Engine.h"
 
-1404066411 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/Spawner.h
+1404071755 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/Spawner.h
 	"Entity.h"
+	"Character.h"
 
