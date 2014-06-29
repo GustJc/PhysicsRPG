@@ -185,3 +185,275 @@
 	"State.h"
 	<SFML/Graphics.hpp>
 
+1403913264 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/Animation.cpp
+	"Animation.h"
+	<iostream>
+
+1403913264 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/Animation.h
+	<SFML/Graphics.hpp>
+
+1403913264 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/BoxBody.cpp
+	"BoxBody.h"
+	"Globals.h"
+	<math.h>
+
+1400091064 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/BoxBody.h
+	<Box2D/Box2D.h>
+	<SFML/Graphics.hpp>
+
+1403913264 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/Globals.h
+	<iostream>
+
+1403913264 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/DebugRender.cpp
+	"DebugRender.h"
+	"Globals.h"
+
+1403913264 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/DebugRender.h
+	<Box2D/Box2D.h>
+	<SFML/Graphics.hpp>
+
+1403913264 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/Entity.cpp
+	"Entity.h"
+
+1404066411 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/Entity.h
+	"SpriteBody.h"
+
+1404066411 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/SpriteBody.h
+	<Box2D/Box2D.h>
+	<SFML/Graphics.hpp>
+	"Body.h"
+	"Animation.h"
+
+1404066411 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/Body.h
+	<Box2D/Box2D.h>
+	<SFML/Graphics.hpp>
+	<vector>
+
+1403913264 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/Flag.cpp
+	<iostream>
+	"Flag.h"
+	<iostream>
+
+1403913264 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/Flag.h
+	"Entity.h"
+
+1403913264 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/GameManager.cpp
+	"GameManager.h"
+	"TestState.h"
+	"GameState.h"
+	"EditorState.h"
+	"MapState.h"
+	"MenuState.h"
+	"Engine.h"
+
+1403913264 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/GameManager.h
+	"State.h"
+	<SFML/Graphics.hpp>
+
+1403913264 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/State.h
+	<SFML/Graphics.hpp>
+
+1403913264 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/TestState.h
+	"State.h"
+	"DebugRender.h"
+	<Box2D/Box2D.h>
+	"BoxBody.h"
+	"SpriteBody.h"
+	"Animation.h"
+	<SFML/Graphics.hpp>
+
+1403913264 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/GameState.h
+	"State.h"
+	"DebugRender.h"
+	<Box2D/Box2D.h>
+	"BoxBody.h"
+	"SpriteBody.h"
+	"Animation.h"
+	<SFML/Graphics.hpp>
+	<vector>
+	"Body.h"
+	"ContactListenner.h"
+
+1404066411 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/ContactListenner.h
+	<Box2D/Box2D.h>
+
+1404066411 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/EditorState.h
+	"State.h"
+	"DebugRender.h"
+	<Box2D/Box2D.h>
+	"BoxBody.h"
+	"SpriteBody.h"
+	"Animation.h"
+	<SFML/Graphics.hpp>
+	<vector>
+	"Body.h"
+	"ContactListenner.h"
+
+1403913264 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/MapState.h
+	"State.h"
+	<SFML/Graphics.hpp>
+	<vector>
+
+1403913264 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/MenuState.h
+	"State.h"
+	"UiButton.h"
+
+1403913264 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/UiButton.h
+	<SFML/Graphics.hpp>
+
+1404066411 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/Engine.h
+	<SFML/Graphics.hpp>
+	<vector>
+
+1403913264 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/GameObject.cpp
+	"GameObject.h"
+
+1403913264 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/GameObject.h
+
+1403913264 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/Globals.cpp
+	"Globals.h"
+
+1403913264 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/main.cpp
+	<Box2D/Box2D.h>
+	<SFML/Graphics.hpp>
+	<iostream>
+	<stdio.h>
+	"GameManager.h"
+	"BoxBody.h"
+	"Globals.h"
+	"DebugRender.h"
+	"SpriteBody.h"
+	"TextureManager.h"
+	"Animation.h"
+
+1403913264 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/TextureManager.h
+	<SFML/Graphics.hpp>
+	<map>
+	<string>
+	<memory>
+
+1403913264 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/MapState.cpp
+	"MapState.h"
+	"TextureManager.h"
+	"Globals.h"
+
+1403913264 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/MenuState.cpp
+	"MenuState.h"
+	"TextureManager.h"
+	"Globals.h"
+
+1400091064 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/PolygonBody.cpp
+	"PolygonBody.h"
+
+1400091064 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/PolygonBody.h
+	<Box2D/Box2D.h>
+	<SFML/Graphics.hpp>
+
+1403913264 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/State.cpp
+	"State.h"
+
+1403913264 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/TestState.cpp
+	"TestState.h"
+	"Globals.h"
+	"TextureManager.h"
+
+1403913264 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/TextureManager.cpp
+	"TextureManager.h"
+	<stdexcept>
+	<cassert>
+
+1403913264 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/UiButton.cpp
+	"UiButton.h"
+
+1404066411 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/Body.cpp
+	"Body.h"
+	"Globals.h"
+
+1404066411 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/Character.cpp
+	"Character.h"
+	"Engine.h"
+	"Globals.h"
+
+1404066411 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/Character.h
+	"Entity.h"
+
+1404066411 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/ContactListenner.cpp
+	"ContactListenner.h"
+	"Body.h"
+	<iostream>
+
+1404066411 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/EditorState.cpp
+	"EditorState.h"
+	"Globals.h"
+	"TextureManager.h"
+	"Engine.h"
+	"Flag.h"
+	"Character.h"
+	<cmath>
+	<iostream>
+	<iostream>
+	<fstream>
+	<iostream>
+	<sstream>
+
+1404066411 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/Engine.cpp
+	"Engine.h"
+	"Globals.h"
+
+1404066411 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/GameState.cpp
+	"GameState.h"
+	"Globals.h"
+	"TextureManager.h"
+	"Engine.h"
+	"Flag.h"
+	"Character.h"
+	"PlayerEntity.h"
+	"Effects.h"
+	<cmath>
+	<iostream>
+	<iostream>
+	<fstream>
+	<iostream>
+	<sstream>
+
+1403913264 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/PlayerEntity.h
+	"Entity.h"
+
+1404066411 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/Effects.h
+	"SpriteBody.h"
+
+1404066411 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/PlayerEntity.cpp
+	"PlayerEntity.h"
+	"Globals.h"
+	"Engine.h"
+	"SpriteBody.h"
+	"TextureManager.h"
+	<math.h>
+
+1404066411 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/SpriteBody.cpp
+	"SpriteBody.h"
+	"Globals.h"
+	"Engine.h"
+	"TextureManager.h"
+
+1404066411 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/Effects.cpp
+	"Effects.h"
+	"Engine.h"
+
+1404066494 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/Map.cpp
+	"Map.h"
+	<SpriteBody.h>
+	<Engine.h>
+	<fstream>
+	<iostream>
+	<sstream>
+
+1404066411 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/Map.h
+	<string>
+
+1404066504 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/Spawner.cpp
+	"Spawner.h"
+
+1404066411 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/Spawner.h
+	"Entity.h"
+
