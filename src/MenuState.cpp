@@ -1,7 +1,7 @@
 #include "MenuState.h"
 #include "TextureManager.h"
 #include "Globals.h"
-
+#include "Engine.h"
 MenuState::MenuState(sf::RenderWindow &wnd) :
     State(wnd)
 {
@@ -22,6 +22,12 @@ void MenuState::load(int )
 
     exitBtn.setup( sf::Vector2i(160,50), TextureManager::TextureControl.get("menu btn exit") );
     exitBtn.setPosition(302,367);
+
+    sf::View& view = Engine::EngineControl.getViewGame();
+    view.reset(sf::FloatRect(0, 0, 800, 600));
+    view.setCenter(WINDOW_WIDTH/2.f, WINDOW_HEIGHT/2.f);
+
+    window.setView(view);
 }
 
 int MenuState::unload()
