@@ -7,6 +7,7 @@
 #include "PlayerEntity.h"
 #include "Effects.h"
 #include "Spawner.h"
+#include "Map.h"
 #include <cmath>
 
 #include <iostream>
@@ -87,7 +88,7 @@ void GameState::load(int )
     world->SetContactListener(&listenner);
 
 
-    loadMap("output.map");
+    Map::MapControl.loadMap("output.map");
 }
 
 int GameState::unload()

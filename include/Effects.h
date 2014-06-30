@@ -6,7 +6,7 @@
 class SplashAnimation : public SpriteBody
 {
 public:
-    SplashAnimation(sf::Texture& texture, sf::Vector2i clip, b2Vec2 pos, int frames=1, int msTime=0, sf::Vector2f scale = sf::Vector2f(1.0, 1.0), bool onlyOnce = true);
+    SplashAnimation(sf::Texture& texture, sf::Vector2i clip, b2Vec2 pos, int frames=1, int msTime=0, sf::Vector2f scale = sf::Vector2f(1.0, 1.0), bool onlyOnce = true, bool active = false);
     virtual ~SplashAnimation();
 
     virtual void update(float dt = 0);

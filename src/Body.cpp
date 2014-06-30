@@ -50,11 +50,11 @@ b2FixtureDef* Body::getBodyFixture()
     return &m_fixtureDef;
 }
 
-void Body::startContact(Body * )
+void Body::startContact(Body * , b2Contact *)
 {
 }
 
-void Body::endContact(Body * )
+void Body::endContact(Body * , b2Contact *)
 {
 }
 

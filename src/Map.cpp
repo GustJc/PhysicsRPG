@@ -1,5 +1,5 @@
 #include "Map.h"
-
+#include "Wall.h"
 #include <SpriteBody.h>
 #include <Engine.h>
 #include <fstream>
@@ -30,12 +30,8 @@ void Map::loadMap(string filename)
     while(file >> x >> y >> type >> angle)
     {
 
-        SpriteBody* sp_body = new SpriteBody(type);
-        sp_body->createBody(*world);
-        sp_body->getBody()->SetFixedRotation(false);
-        sp_body->getBody()->SetTransform(b2Vec2(x,y), angle);
-
-        Engine::bodylist.push_back(sp_body);
+        Wall* w = new Wall(type, x, y);
+        w->createBody(*world);
 
     }
 
@@ -54,16 +50,13 @@ void Map::saveMap(string filename)
     //Box2D objects
     for(unsigned int i = 0; i < Engine::bodylist.size(); i++)
     {
+        cout << "Body" << endl;
         Body* b = Engine::bodylist[i];
-        if(b->type == 0) continue;
+        if(b->type == 0) continue; //ignore flag
+
         file << b->getBody()->GetPosition().x << " " << b->getBody()->GetPosition().y << endl;
-        //b2PolygonShape* poly = (b2PolygonShape*) b->getBody()->GetFixtureList()->GetShape();
         file << b->type << " " << b->getBody()->GetAngle() << endl;
-//             << " " << poly->GetVertexCount() << endl;
-//        for( int id = 0; id < poly->GetVertexCount(); id++)
-//        {
-//            file << poly->GetVertex(id).x << " " << poly->GetVertex(id).y << endl;
-//        }
+
     }
 
     file.close();

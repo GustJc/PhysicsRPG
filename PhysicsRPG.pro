@@ -30,7 +30,8 @@ SOURCES += \
     src/PlayerEntity.cpp \
     src/Map.cpp \
     src/Spawner.cpp \
-    src/Effects.cpp
+    src/Effects.cpp \
+    src/Wall.cpp
 
 HEADERS += \
     include/Animation.h \
@@ -58,7 +59,8 @@ HEADERS += \
     include/PlayerEntity.h \
     include/Map.h \
     include/Spawner.h \
-    include/Effects.h
+    include/Effects.h \
+    include/Wall.h
 
 #SFML
 QMAKE_CXXFLAGS += -std=c++11

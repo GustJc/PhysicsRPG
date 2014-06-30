@@ -14,14 +14,14 @@ Flag::~Flag()
     //dtor
 }
 
-void Flag::startContact(Body * )
+void Flag::startContact(Body *, b2Contact * )
 {
     die();
 
     m_animation.getSprite().setColor(sf::Color(0,255, 0));
 }
 
-void Flag::endContact(Body * )
+void Flag::endContact(Body * , b2Contact *)
 {
     touching_objs--;
 }

@@ -14,24 +14,25 @@ ContactListenner::~ContactListenner()
 using namespace std;
 void ContactListenner::BeginContact(b2Contact* contact)
 {
-    void * bodyUserData = contact->GetFixtureA()->GetBody()->GetUserData();
-
+    Body* bodyUserData = (Body*)contact->GetFixtureA()->GetBody()->GetUserData();
 
     if (bodyUserData)
     {
         Body* contactedBody = (Body*)contact->GetFixtureB()->GetBody()->GetUserData();
-        static_cast<Body*>( bodyUserData )->startContact(contactedBody);
+        bodyUserData->startContact(contactedBody, contact);
+        contactedBody->startContact(bodyUserData, contact);
     }
 }
 
 void ContactListenner::EndContact(b2Contact* contact)
 {
-    void * bodyUserData = contact->GetFixtureA()->GetBody()->GetUserData();
+    Body* bodyUserData = (Body*)contact->GetFixtureA()->GetBody()->GetUserData();
 
     if (bodyUserData)
     {
         Body* contactedBody = (Body*)contact->GetFixtureB()->GetBody()->GetUserData();
-        static_cast<Body*>( bodyUserData )->endContact(contactedBody);
+        bodyUserData->endContact(contactedBody, contact);
+        contactedBody->endContact(bodyUserData, contact);
     }
 }
 

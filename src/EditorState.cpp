@@ -4,6 +4,8 @@
 #include "Engine.h"
 #include "Flag.h"
 #include "Character.h"
+#include "Map.h"
+#include "Wall.h"
 #include <cmath>
 
 #include <iostream>
@@ -131,7 +133,7 @@ void EditorState::events(sf::Event& event)
     if(event.type == sf::Event::KeyPressed)
     {
         if(event.key.code == sf::Keyboard::P){
-            saveMap("output.map");
+            Map::MapControl.saveMap("output.map");
         }
         if(event.key.code == sf::Keyboard::Escape)
         {
@@ -146,6 +148,10 @@ void EditorState::events(sf::Event& event)
         else if(event.key.code == sf::Keyboard::R){
             unload();
             load();
+        }
+        else if(event.key.code == sf::Keyboard::RControl ||
+                event.key.code == sf::Keyboard::LControl ){
+            isSnap = !isSnap;
         }
 //Move Controls
         else if(event.key.code == sf::Keyboard::D)
@@ -265,110 +271,8 @@ void EditorState::events(sf::Event& event)
     }
     else if(event.type == sf::Event::MouseButtonPressed)
     {
-        if(selectedId == 1)
-        {
-            sf::Vector2i mouse = sf::Mouse::getPosition(window);
-            float mouseX = mouse.x - 8.f;
-            float mouseY = mouse.y - 8.f;
+        createWallObject();
 
-            if(isSnap)
-            {
-                mouseX = floor(mouse.x/16.f)*16;
-                mouseY = floor(mouse.y/16.f)*16;
-            }
-
-            SpriteBody* sp_body = new SpriteBody();
-            sp_body->type = 1;
-
-            sp_body->setTexture(TextureManager::TextureControl.get("tileset"), 16,16);
-            sp_body->setFixedSpritePosition(16*7, 16);
-            sp_body->getSprite()->setOrigin(8,8);
-            ((b2PolygonShape*)sp_body->getBodyShape())->SetAsBox(7.8f/pixelsPerMeter,7.8f/pixelsPerMeter);
-            sp_body->getBodyDef()->position.Set((8+mouseX)/pixelsPerMeter, (8+mouseY)/pixelsPerMeter);
-            sp_body->getBodyDef()->type = b2_dynamicBody;
-            sp_body->getBodyFixture()->friction = 0.5f;
-            sp_body->getBodyFixture()->density = 0.1f;
-
-            sp_body->createBody(*world);
-            sp_body->getBody()->SetFixedRotation(false);
-
-            Engine::bodylist.push_back(sp_body);
-        } else
-        if(selectedId >= 2 && selectedId <= 3)
-        {
-            sf::Vector2i mouse = sf::Mouse::getPosition(window);
-            float mouseX = mouse.x - 8.f;
-            float mouseY = mouse.y - 8.f;
-
-            if(isSnap)
-            {
-                mouseX = floor(mouse.x/16.f)*16;
-                mouseY = floor(mouse.y/16.f)*16;
-            }
-            SpriteBody* sp_body = new SpriteBody();
-
-            //sp_body->setTexture(TextureManager::TextureControl.get("boulder_large"));
-            sp_body->setTexture(TextureManager::TextureControl.get("tileset"), 16*5,16);
-            sp_body->setFixedSpritePosition(0, 0);
-
-            if(selectedId == 2){
-                sp_body->type = 2;
-                sp_body->getSprite()->setOrigin( 16*4/2.f , 16/2.f);
-                ((b2PolygonShape*)sp_body->getBodyShape())->SetAsBox( (16*2.5f-0.2f)/pixelsPerMeter,7.8f/pixelsPerMeter);
-                sp_body->getBodyDef()->position.Set((16*2.5+mouseX)/pixelsPerMeter, (8+mouseY)/pixelsPerMeter);
-            } else
-            {
-                sp_body->type = 3;
-                sp_body->getSprite()->setOrigin( 16/2.f, 16*4/2.f);
-                ((b2PolygonShape*)sp_body->getBodyShape())->SetAsBox(7.8f/pixelsPerMeter,(16*2.5f-0.2f)/pixelsPerMeter);
-                sp_body->getBodyDef()->position.Set((8+mouseX)/pixelsPerMeter, (16*2.5+mouseY)/pixelsPerMeter);
-                sp_body->setDefaultRotation(90);
-            }
-
-            sp_body->getBodyDef()->type = b2_dynamicBody;
-            sp_body->getBodyFixture()->friction = 0.5f;
-            sp_body->getBodyFixture()->density = 0.1f;
-
-            sp_body->createBody(*world);
-            sp_body->getBody()->SetFixedRotation(false);
-
-            Engine::bodylist.push_back(sp_body);
-        }
-        if(selectedId >= 4 && selectedId <= 5)
-        {
-            sf::Vector2i mouse = sf::Mouse::getPosition(window);
-            float mouseX = mouse.x - 8.f;
-            float mouseY = mouse.y - 8.f;
-
-            if(isSnap)
-            {
-                mouseX = floor(mouse.x/16.f)*16;
-                mouseY = floor(mouse.y/16.f)*16;
-            }
-            SpriteBody* sp_body = new SpriteBody();
-
-            sp_body->getSprite()->setOrigin(8,8);
-            ((b2PolygonShape*)sp_body->getBodyShape())->SetAsBox(7.8f/pixelsPerMeter,7.8f/pixelsPerMeter);
-            sp_body->getBodyDef()->position.Set((8+mouseX)/pixelsPerMeter, (8+mouseY)/pixelsPerMeter);
-            sp_body->getBodyDef()->type = b2_dynamicBody;
-
-            if(selectedId == 4){
-                sp_body->type = 4;
-                sp_body->setTexture(TextureManager::TextureControl.get("yellow"));
-                sp_body->getBodyFixture()->friction = 0.9f;
-                sp_body->getBodyFixture()->density = 0.6f;
-            }else if(selectedId == 5){
-                sp_body->type = 5;
-                sp_body->setTexture(TextureManager::TextureControl.get("metal"));
-                sp_body->getBodyFixture()->friction = 1.0f;
-                sp_body->getBodyFixture()->density = 2.0f;
-            }
-
-            sp_body->createBody(*world);
-            sp_body->getBody()->SetFixedRotation(false);
-
-            Engine::bodylist.push_back(sp_body);
-        }
     }
 }
 
@@ -447,4 +351,103 @@ void EditorState::saveMap(string filename)
 
     cout << "Mapa salvo: " << absFileName << endl;
 
+}
+
+void EditorState::createWallObject()
+{
+    sf::Vector2i mouse = sf::Mouse::getPosition(window);
+    float mouseX = mouse.x - 8.f;
+    float mouseY = mouse.y - 8.f;
+
+    if(isSnap)
+    {
+        mouseX = floor(mouse.x/16.f)*16;
+        mouseY = floor(mouse.y/16.f)*16;
+    }
+//Blocks
+    //Normal block
+    if(selectedId == 1)
+    {
+        Wall* w = new Wall(1, (float)(8.f+mouseX)/pixelsPerMeter, (float)(8.f+mouseY)/pixelsPerMeter);
+        w->createBody(*world);
+
+    }else
+    if(selectedId == 1)
+    {
+        SpriteBody* sp_body = new SpriteBody();
+        sp_body->type = 1;
+
+        sp_body->setTexture(TextureManager::TextureControl.get("tileset"), 16,16);
+        sp_body->setFixedSpritePosition(16*7, 16);
+        sp_body->getSprite()->setOrigin(8,8);
+        ((b2PolygonShape*)sp_body->getBodyShape())->SetAsBox(7.8f/pixelsPerMeter,7.8f/pixelsPerMeter);
+        sp_body->getBodyDef()->position.Set((8+mouseX)/pixelsPerMeter, (8+mouseY)/pixelsPerMeter);
+        sp_body->getBodyDef()->type = b2_dynamicBody;
+        sp_body->getBodyFixture()->friction = 0.5f;
+        sp_body->getBodyFixture()->density = 0.1f;
+
+        sp_body->createBody(*world);
+        sp_body->getBody()->SetFixedRotation(false);
+
+        Engine::bodylist.push_back(sp_body);
+    } else
+    if(selectedId >= 2 && selectedId <= 3)
+    {
+
+        SpriteBody* sp_body = new SpriteBody();
+
+        //sp_body->setTexture(TextureManager::TextureControl.get("boulder_large"));
+        sp_body->setTexture(TextureManager::TextureControl.get("tileset"), 16*5,16);
+        sp_body->setFixedSpritePosition(0, 0);
+
+        if(selectedId == 2){
+            sp_body->type = 2;
+            sp_body->getSprite()->setOrigin( 16*4/2.f , 16/2.f);
+            ((b2PolygonShape*)sp_body->getBodyShape())->SetAsBox( (16*2.5f-0.2f)/pixelsPerMeter,7.8f/pixelsPerMeter);
+            sp_body->getBodyDef()->position.Set((16*2.5+mouseX)/pixelsPerMeter, (8+mouseY)/pixelsPerMeter);
+        } else
+        {
+            sp_body->type = 3;
+            sp_body->getSprite()->setOrigin( 16/2.f, 16*4/2.f);
+            ((b2PolygonShape*)sp_body->getBodyShape())->SetAsBox(7.8f/pixelsPerMeter,(16*2.5f-0.2f)/pixelsPerMeter);
+            sp_body->getBodyDef()->position.Set((8+mouseX)/pixelsPerMeter, (16*2.5+mouseY)/pixelsPerMeter);
+            sp_body->setDefaultRotation(90);
+        }
+
+        sp_body->getBodyDef()->type = b2_dynamicBody;
+        sp_body->getBodyFixture()->friction = 0.5f;
+        sp_body->getBodyFixture()->density = 0.1f;
+
+        sp_body->createBody(*world);
+        sp_body->getBody()->SetFixedRotation(false);
+
+        Engine::bodylist.push_back(sp_body);
+    }
+    if(selectedId >= 4 && selectedId <= 5)
+    {
+
+        SpriteBody* sp_body = new SpriteBody();
+
+        sp_body->getSprite()->setOrigin(8,8);
+        ((b2PolygonShape*)sp_body->getBodyShape())->SetAsBox(7.8f/pixelsPerMeter,7.8f/pixelsPerMeter);
+        sp_body->getBodyDef()->position.Set((8+mouseX)/pixelsPerMeter, (8+mouseY)/pixelsPerMeter);
+        sp_body->getBodyDef()->type = b2_dynamicBody;
+
+        if(selectedId == 4){
+            sp_body->type = 4;
+            sp_body->setTexture(TextureManager::TextureControl.get("yellow"));
+            sp_body->getBodyFixture()->friction = 0.9f;
+            sp_body->getBodyFixture()->density = 0.6f;
+        }else if(selectedId == 5){
+            sp_body->type = 5;
+            sp_body->setTexture(TextureManager::TextureControl.get("metal"));
+            sp_body->getBodyFixture()->friction = 1.0f;
+            sp_body->getBodyFixture()->density = 2.0f;
+        }
+
+        sp_body->createBody(*world);
+        sp_body->getBody()->SetFixedRotation(false);
+
+        Engine::bodylist.push_back(sp_body);
+    }
 }

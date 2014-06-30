@@ -71,7 +71,8 @@ SOURCES       = src/TextureManager.cpp \
 		src/PlayerEntity.cpp \
 		src/Map.cpp \
 		src/Spawner.cpp \
-		src/Effects.cpp 
+		src/Effects.cpp \
+		src/Wall.cpp 
 OBJECTS       = TextureManager.o \
 		TestState.o \
 		State.o \
@@ -98,7 +99,8 @@ OBJECTS       = TextureManager.o \
 		PlayerEntity.o \
 		Map.o \
 		Spawner.o \
-		Effects.o
+		Effects.o \
+		Wall.o
 DIST          = /opt/Qt5.2.1/5.2.1/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt5.2.1/5.2.1/gcc_64/mkspecs/common/shell-unix.conf \
 		/opt/Qt5.2.1/5.2.1/gcc_64/mkspecs/common/unix.conf \
@@ -520,7 +522,10 @@ GameState.o: src/GameState.cpp include/GameState.h \
 		include/Flag.h \
 		include/Entity.h \
 		include/Character.h \
-		include/PlayerEntity.h
+		include/PlayerEntity.h \
+		include/Effects.h \
+		include/Spawner.h \
+		include/Map.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o GameState.o src/GameState.cpp
 
 GameObject.o: src/GameObject.cpp include/GameObject.h
@@ -553,7 +558,9 @@ Flag.o: src/Flag.cpp include/Flag.h \
 Entity.o: src/Entity.cpp include/Entity.h \
 		include/SpriteBody.h \
 		include/Body.h \
-		include/Animation.h
+		include/Animation.h \
+		include/Effects.h \
+		include/Globals.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Entity.o src/Entity.cpp
 
 Engine.o: src/Engine.cpp include/Engine.h \
@@ -574,14 +581,18 @@ Character.o: src/Character.cpp include/Character.h \
 		include/Body.h \
 		include/Animation.h \
 		include/Engine.h \
-		include/Globals.h
+		include/Globals.h \
+		include/TextureManager.h \
+		include/PlayerEntity.h \
+		include/Effects.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Character.o src/Character.cpp
 
 BoxBody.o: src/BoxBody.cpp include/BoxBody.h \
 		include/Globals.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o BoxBody.o src/BoxBody.cpp
 
-Body.o: src/Body.cpp include/Body.h
+Body.o: src/Body.cpp include/Body.h \
+		include/Globals.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Body.o src/Body.cpp
 
 Animation.o: src/Animation.cpp include/Animation.h
@@ -591,7 +602,8 @@ MenuState.o: src/MenuState.cpp include/MenuState.h \
 		include/State.h \
 		include/UiButton.h \
 		include/TextureManager.h \
-		include/Globals.h
+		include/Globals.h \
+		include/Engine.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o MenuState.o src/MenuState.cpp
 
 UiButton.o: src/UiButton.cpp include/UiButton.h
@@ -610,7 +622,8 @@ EditorState.o: src/EditorState.cpp include/EditorState.h \
 		include/Engine.h \
 		include/Flag.h \
 		include/Entity.h \
-		include/Character.h
+		include/Character.h \
+		include/Map.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o EditorState.o src/EditorState.cpp
 
 PlayerEntity.o: src/PlayerEntity.cpp include/PlayerEntity.h \
@@ -634,11 +647,27 @@ Spawner.o: src/Spawner.cpp include/Spawner.h \
 		include/Entity.h \
 		include/SpriteBody.h \
 		include/Body.h \
-		include/Animation.h
+		include/Animation.h \
+		include/Character.h \
+		include/TextureManager.h \
+		include/Globals.h \
+		include/Engine.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Spawner.o src/Spawner.cpp
 
-Effects.o: src/Effects.cpp include/Effects.h
+Effects.o: src/Effects.cpp include/Effects.h \
+		include/SpriteBody.h \
+		include/Body.h \
+		include/Animation.h \
+		include/Engine.h \
+		include/Globals.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Effects.o src/Effects.cpp
+
+Wall.o: src/Wall.cpp include/Wall.h \
+		include/Entity.h \
+		include/SpriteBody.h \
+		include/Body.h \
+		include/Animation.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Wall.o src/Wall.cpp
 
 ####### Install
 

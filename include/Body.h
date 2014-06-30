@@ -38,8 +38,8 @@ class Body
         b2Shape* getBodyShape();
         b2FixtureDef* getBodyFixture();
 
-        virtual void startContact(Body * body);
-        virtual void endContact(Body * body);
+        virtual void startContact(Body * body, b2Contact *contact);
+        virtual void endContact(Body * body, b2Contact *contact);
         virtual void preSolve(Body * body, b2Contact *contact, const b2Manifold *manifold);
         virtual void postSolve(Body * body, b2Contact* contact, const b2ContactImpulse* impulse);
         b2PolygonShape m_bodyShape;

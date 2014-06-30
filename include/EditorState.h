@@ -37,6 +37,8 @@ protected:
     int selectedId = 1;
 
     void saveMap(string filename);
+
+    void createWallObject();
 private:
     ContactListenner listenner;
 };

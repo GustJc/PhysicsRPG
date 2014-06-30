@@ -1,16 +1,20 @@
 #include "Effects.h"
 #include "Engine.h"
 #include "Globals.h"
-SplashAnimation::SplashAnimation(sf::Texture &texture, sf::Vector2i clip, b2Vec2 pos, int frames, int msTime, sf::Vector2f scale, bool onlyOnce)
+SplashAnimation::SplashAnimation(sf::Texture &texture, sf::Vector2i clip, b2Vec2 pos, int frames, int msTime, sf::Vector2f scale, bool onlyOnce, bool active)
 {
     this->setTexture(texture, clip.x, clip.y, frames, msTime);
-    this->m_bodyDef.active = false;
+    if(active == false)
+        this->m_bodyDef.active = false;
+    else
+        this->m_bodyDef.active = true;
+
+    this->m_bodyDef.gravityScale = -0.5;
     this->m_bodyDef.type = b2_dynamicBody;
     this->m_bodyShape.SetAsBox(0.8,0.8);
     this->m_bodyDef.position = pos;
     this->m_fixtureDef.filter.categoryBits = 2;
     this->m_fixtureDef.filter.maskBits = 2;
-    //this->createBody(*Engine::world);
     this->m_animation.setFrames(0, frames, msTime, onlyOnce);
 
     m_animation.getSprite().setScale(scale );

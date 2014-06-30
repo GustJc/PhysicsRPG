@@ -8,8 +8,8 @@ class Flag : public Entity
     public:
         Flag();
         virtual ~Flag();
-        void startContact(Body * body);
-        void endContact(Body * body);
+        void startContact(Body * body, b2Contact *contact);
+        void endContact(Body * body, b2Contact *contact);
     protected:
         int HP = 10;
         int touching_objs=0;
