@@ -16,10 +16,11 @@ Character::Character()
 Character::Character(b2World *world, float x, float y)
 {
     name = "enemy";
-    this->setTexture(TextureManager::TextureControl.get("slime"), 46, 27,3,200);
+    this->setTexture(TextureManager::TextureControl.get("weak_orc"), 64, 64, 7, 200);
+    this->m_animation.setFrames(9, 3, 200);
 
     this->getSprite()->setOrigin(23,20);
-    ((b2PolygonShape*)this->getBodyShape())->SetAsBox(23.0f/pixelsPerMeter,13.0f/pixelsPerMeter);
+    ((b2PolygonShape*)this->getBodyShape())->SetAsBox(23.0f/pixelsPerMeter,29.0f/pixelsPerMeter);
     this->getBodyDef()->position.Set(x, y);
     this->getBodyDef()->type = b2_dynamicBody;
     this->getBodyFixture()->density = 0.2f;
@@ -70,11 +71,15 @@ void Character::preSolve(Body *body , b2Contact *, const b2Manifold *)
         if(m_timer_attack.getElapsedTime().asSeconds() > m_attack_period)
         {
             m_timer_attack.restart();
-            m_animation.setFrames(0, 3, 200, true);
+            m_animation.setFrames(13, 6, 150, true);
             m_animation.forceFrame(0);
         }
 
         if(m_animation.isReady()) {
+
+            this->m_animation.setFrames(9, 3, 200);
+            this->m_animation.forceFrame(0);
+
             int dano = player->damage(this->atk);
             b2Vec2 point = player->getBody()->GetWorldCenter();
             point.y -= 0.5;

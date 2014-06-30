@@ -35,7 +35,7 @@ void GameState::load(int )
     TextureManager::TextureControl.load("player", "data/player.png");
     TextureManager::TextureControl.load("flag", "data/flag.png");
     TextureManager::TextureControl.load("slime", "data/slime.png");
-
+    TextureManager::TextureControl.load("weak_orc", "data/weak_orc.png");
     TextureManager::TextureControl.load("spawn", "data/spawn.png");
 
     TextureManager::TextureControl.load("wood", "data/img/wood-block-lowres-16.png");
@@ -74,18 +74,8 @@ void GameState::load(int )
 
     //Spawner * spawner = new Spawner(world, 600.0f/pixelsPerMeter, (520.f-35.f)/pixelsPerMeter);
     //Engine::bodylist.push_back(spawner);
-
-        Character* c = new Character();
-        c->setTexture(TextureManager::TextureControl.get("slime"), 46, 27,3,200);
-        c->getSprite()->setOrigin(23,20);
-        ((b2PolygonShape*)c->getBodyShape())->SetAsBox(23.0f/pixelsPerMeter,13.0f/pixelsPerMeter);
-        c->getBodyDef()->position.Set((300)/pixelsPerMeter, (500)/pixelsPerMeter);
-        c->getBodyDef()->type = b2_dynamicBody;
-        c->getBodyFixture()->density = 0.2f;
-        c->createBody(*world);
-        c->getBody()->SetFixedRotation(true);
-        c->getBody()->SetUserData(c);
-        Engine::bodylist.push_back(c);
+    Character* c = new Character(world, (300)/pixelsPerMeter, (500)/pixelsPerMeter);
+    Engine::bodylist.push_back(c);
 
     player = new PlayerEntity(world);
     player->setTexture(TextureManager::TextureControl.get("player"), 47, 40);
