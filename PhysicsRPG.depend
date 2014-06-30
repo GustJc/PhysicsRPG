@@ -372,7 +372,7 @@
 	"Body.h"
 	"Globals.h"
 
-1404089655 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/Character.cpp
+1404090018 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/Character.cpp
 	"Character.h"
 	"Engine.h"
 	"Globals.h"
@@ -408,7 +408,7 @@
 	"Globals.h"
 	<ctime>
 
-1404089550 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/GameState.cpp
+1404092427 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/GameState.cpp
 	"GameState.h"
 	"Globals.h"
 	"TextureManager.h"
@@ -463,7 +463,7 @@
 1404066411 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/Map.h
 	<string>
 
-1404085932 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/Spawner.cpp
+1404092314 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/Spawner.cpp
 	"Spawner.h"
 	"TextureManager.h"
 	"Globals.h"
