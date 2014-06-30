@@ -4,6 +4,16 @@
 #include <Box2D/Box2D.h>
 #include <SFML/Graphics.hpp>
 #include <vector>
+
+typedef enum eFilterCategory {
+    FilterNormal    = 0x00000001,
+    FilterObjects   = 0x00000002,
+    FilterEffects   = 0x00000004,
+    FilterWalls     = 0x00000008,
+    FilterPlayer    = 0x00000010,
+    FilterShots     = 0x000000020
+} FilterCategory;
+
 using namespace std;
 /////////////////////////////////////////////////////////////////
 /// \brief Classe base para corpos fisicos normais
