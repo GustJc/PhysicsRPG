@@ -44,18 +44,25 @@
 		<Unit filename="include/Character.h" />
 		<Unit filename="include/ContactListenner.h" />
 		<Unit filename="include/DebugRender.h" />
+		<Unit filename="include/EditorState.h" />
+		<Unit filename="include/Effects.h" />
 		<Unit filename="include/Engine.h" />
 		<Unit filename="include/Entity.h" />
 		<Unit filename="include/Flag.h" />
 		<Unit filename="include/GameManager.h">
 			<Option virtualFolder="Estados/" />
 		</Unit>
+		<Unit filename="include/GameObject.h" />
 		<Unit filename="include/GameState.h">
 			<Option virtualFolder="Estados/" />
 		</Unit>
 		<Unit filename="include/Globals.h" />
+		<Unit filename="include/Map.h" />
 		<Unit filename="include/MapState.h" />
+		<Unit filename="include/MenuState.h" />
+		<Unit filename="include/PlayerEntity.h" />
 		<Unit filename="include/PolygonBody.h" />
+		<Unit filename="include/Spawner.h" />
 		<Unit filename="include/SpriteBody.h" />
 		<Unit filename="include/State.h">
 			<Option virtualFolder="Estados/" />
@@ -64,24 +71,33 @@
 			<Option virtualFolder="Estados/" />
 		</Unit>
 		<Unit filename="include/TextureManager.h" />
+		<Unit filename="include/UiButton.h" />
+		<Unit filename="include/map.h" />
 		<Unit filename="src/Animation.cpp" />
 		<Unit filename="src/Body.cpp" />
 		<Unit filename="src/BoxBody.cpp" />
 		<Unit filename="src/Character.cpp" />
 		<Unit filename="src/ContactListenner.cpp" />
 		<Unit filename="src/DebugRender.cpp" />
+		<Unit filename="src/EditorState.cpp" />
+		<Unit filename="src/Effects.cpp" />
 		<Unit filename="src/Engine.cpp" />
 		<Unit filename="src/Entity.cpp" />
 		<Unit filename="src/Flag.cpp" />
 		<Unit filename="src/GameManager.cpp">
 			<Option virtualFolder="Estados/" />
 		</Unit>
+		<Unit filename="src/GameObject.cpp" />
 		<Unit filename="src/GameState.cpp">
 			<Option virtualFolder="Estados/" />
 		</Unit>
 		<Unit filename="src/Globals.cpp" />
+		<Unit filename="src/Map.cpp" />
 		<Unit filename="src/MapState.cpp" />
+		<Unit filename="src/MenuState.cpp" />
+		<Unit filename="src/PlayerEntity.cpp" />
 		<Unit filename="src/PolygonBody.cpp" />
+		<Unit filename="src/Spawner.cpp" />
 		<Unit filename="src/SpriteBody.cpp" />
 		<Unit filename="src/State.cpp">
 			<Option virtualFolder="Estados/" />
@@ -90,6 +106,7 @@
 			<Option virtualFolder="Estados/" />
 		</Unit>
 		<Unit filename="src/TextureManager.cpp" />
+		<Unit filename="src/UiButton.cpp" />
 		<Unit filename="src/main.cpp" />
 		<Extensions>
 			<envvars />

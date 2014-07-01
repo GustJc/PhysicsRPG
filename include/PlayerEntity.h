@@ -12,7 +12,7 @@ class b2World;
 class PlayerEntity : public Entity
 {
 public:
-    PlayerEntity(b2World* world);
+    PlayerEntity(b2World* world, float x, float y);
 
     void events(sf::Event& event);
 

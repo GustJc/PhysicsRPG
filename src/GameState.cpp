@@ -33,7 +33,7 @@ void GameState::load(int )
     TextureManager::TextureControl.load("menu_superior", "data/menu_su.png");
     TextureManager::TextureControl.load("tileset", "data/tileset.png");
 
-    TextureManager::TextureControl.load("player", "data/player.png");
+    TextureManager::TextureControl.load("player_char", "data/player_char.png");
     TextureManager::TextureControl.load("flag", "data/flag.png");
     TextureManager::TextureControl.load("slime", "data/slime.png");
     TextureManager::TextureControl.load("weak_orc", "data/weak_orc.png");
@@ -45,6 +45,9 @@ void GameState::load(int )
     TextureManager::TextureControl.load("boulder_16", "data/img/boulder-rad16.png");
 
     TextureManager::TextureControl.load("explosion", "data/explosion.png");
+
+    TextureManager::TextureControl.load("arrow", "data/arrow.png");
+    TextureManager::TextureControl.load("arrow2", "data/arrow_full.png");
 
     b2Vec2 gravity(0.0f, 10.0f);
 
@@ -79,9 +82,7 @@ void GameState::load(int )
     Character* c = new Character(world, (300)/pixelsPerMeter, (500)/pixelsPerMeter);
     Engine::bodylist.push_back(c);
 
-    player = new PlayerEntity(world);
-    player->setTexture(TextureManager::TextureControl.get("player"), 47, 40);
-    player->getSprite()->setOrigin(23,20);
+    player = new PlayerEntity(world, 23, 20);
     Engine::bodylist.push_back(player);
 
     //in FooTest constructor

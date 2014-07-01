@@ -7,13 +7,16 @@
 #include "Shot.h"
 #include <math.h>
 
-PlayerEntity::PlayerEntity(b2World *world)
+PlayerEntity::PlayerEntity(b2World *world, float x, float y)
 {
     name = "player";
     this->HP = this->maxHP = 30;
     this->def = 5;
-    TextureManager::TextureControl.load("arrow", "data/arrow.png");
-    TextureManager::TextureControl.load("arrow2", "data/arrow_full.png");
+    this->setTexture(TextureManager::TextureControl.get("player_char"), 64, 64, 1, 1);
+    this->getSprite()->setScale(0.9, 0.9);
+    this->m_animation.setFrames(11, 1, 200);
+
+    this->getSprite()->setOrigin(23,20);
 
     arrow.setTexture(TextureManager::TextureControl.get("arrow"));
     arrow.setOrigin(0, arrow.getTextureRect().height/2.f);
@@ -23,7 +26,7 @@ PlayerEntity::PlayerEntity(b2World *world)
     m_bodyCircleShape.m_radius = 4.f/pixelsPerMeter;
 
     //Full sprite is 23, 20
-    m_bodyShape.SetAsBox(23.0f/pixelsPerMeter,16.0f/pixelsPerMeter, b2Vec2(0, double(-2)/pixelsPerMeter), 0);
+    m_bodyShape.SetAsBox(23.0f/pixelsPerMeter,28.0f/pixelsPerMeter, b2Vec2(0, double(-2)/pixelsPerMeter), 0);
 
     m_bodyDef.position.Set((100)/pixelsPerMeter, (500)/pixelsPerMeter);
     m_bodyDef.type = b2_dynamicBody;
@@ -150,19 +153,32 @@ void PlayerEntity::update(float dt)
     {
     case KEY_LEFT:
         if(vel.x > 0) isStop = true;
-        desiredVel = b2Max( vel.x - 0.1f, -2.0f ); break;//desiredVel = -5; break;
+        desiredVel = b2Max( vel.x - 0.1f, -2.0f );
+        this->m_animation.setFrames(9, 6, 70, true);
+        break;//desiredVel = -5; break;
     case KEY_RIGHT:
         if(vel.x < 0) isStop = true;
-        desiredVel = b2Min( vel.x + 0.1f,  2.0f ); break;//desiredVel =  5; break;
+        desiredVel = b2Min( vel.x + 0.1f,  2.0f );
+        this->m_animation.setFrames(11, 6, 70, true);
+        break;//desiredVel =  5; break;
     default:
         isStop = true;
     }
 
-    if(isStop){
+    if(isStop)
+    {
         if(vel.x > 0)
+        {
             desiredVel = b2Max( vel.x - 0.2f, 0.0f );
+            if(this->m_animation.isReady())
+                this->m_animation.setFrames(11, 1);
+        }
         else if(vel.x < 0)
+        {
             desiredVel = b2Min( vel.x + 0.2f,  0.0f );
+            if(this->m_animation.isReady())
+                this->m_animation.setFrames(9, 1);
+        }
     }
 
     float velChange = desiredVel - vel.x;
