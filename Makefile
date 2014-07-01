@@ -72,7 +72,8 @@ SOURCES       = src/TextureManager.cpp \
 		src/Map.cpp \
 		src/Spawner.cpp \
 		src/Effects.cpp \
-		src/Wall.cpp 
+		src/Wall.cpp \
+		src/Shot.cpp 
 OBJECTS       = TextureManager.o \
 		TestState.o \
 		State.o \
@@ -100,7 +101,8 @@ OBJECTS       = TextureManager.o \
 		Map.o \
 		Spawner.o \
 		Effects.o \
-		Wall.o
+		Wall.o \
+		Shot.o
 DIST          = /opt/Qt5.2.1/5.2.1/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt5.2.1/5.2.1/gcc_64/mkspecs/common/shell-unix.conf \
 		/opt/Qt5.2.1/5.2.1/gcc_64/mkspecs/common/unix.conf \
@@ -623,7 +625,8 @@ EditorState.o: src/EditorState.cpp include/EditorState.h \
 		include/Flag.h \
 		include/Entity.h \
 		include/Character.h \
-		include/Map.h
+		include/Map.h \
+		include/Wall.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o EditorState.o src/EditorState.cpp
 
 PlayerEntity.o: src/PlayerEntity.cpp include/PlayerEntity.h \
@@ -633,10 +636,13 @@ PlayerEntity.o: src/PlayerEntity.cpp include/PlayerEntity.h \
 		include/Animation.h \
 		include/Globals.h \
 		include/Engine.h \
-		include/TextureManager.h
+		include/TextureManager.h \
+		include/Shot.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PlayerEntity.o src/PlayerEntity.cpp
 
 Map.o: src/Map.cpp include/Map.h \
+		include/Wall.h \
+		include/Entity.h \
 		include/SpriteBody.h \
 		include/Body.h \
 		include/Animation.h \
@@ -666,8 +672,18 @@ Wall.o: src/Wall.cpp include/Wall.h \
 		include/Entity.h \
 		include/SpriteBody.h \
 		include/Body.h \
-		include/Animation.h
+		include/Animation.h \
+		include/Engine.h \
+		include/TextureManager.h \
+		include/Globals.h \
+		include/Effects.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Wall.o src/Wall.cpp
+
+Shot.o: src/Shot.cpp include/Shot.h \
+		include/SpriteBody.h \
+		include/Body.h \
+		include/Animation.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Shot.o src/Shot.cpp
 
 ####### Install
 

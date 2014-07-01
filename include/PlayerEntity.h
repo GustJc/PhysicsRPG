@@ -32,6 +32,7 @@ private:
     b2Vec2 power;
     sf::Sprite arrow;
     sf::Sprite arrow_full;
+    int selectedShot = 1;
 };
 
 #endif // PLAYERENTITY_H

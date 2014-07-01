@@ -4,6 +4,7 @@
 #include "Engine.h"
 #include "SpriteBody.h"
 #include "TextureManager.h"
+#include "Shot.h"
 #include <math.h>
 
 PlayerEntity::PlayerEntity(b2World *world)
@@ -78,33 +79,18 @@ void PlayerEntity::events(sf::Event &event){
         shotTimer.restart();
 
         //Arrow
-        SpriteBody* shot = new SpriteBody();
-        shot->name = "shot";
-
-        shot->setTexture(TextureManager::TextureControl.get("boulder_8"));
-        shot->getSprite()->setOrigin(4,4);
-        shot->m_bodyCircleShape.m_radius = 4/pixelsPerMeter;
-
-        shot->getBodyDef()->position.Set(
-                    (this->m_animation.getSprite().getPosition().x)/pixelsPerMeter,
-                    (this->m_animation.getSprite().getPosition().y)/pixelsPerMeter
-                    );
-        shot->getBodyDef()->type = b2_dynamicBody;
-        shot->getBodyFixture()->friction = 0.5f;
-        shot->getBodyFixture()->restitution = 0.4f;
-        shot->getBodyFixture()->density = 2.f;
-        shot->getBodyFixture()->filter.groupIndex = -1;
-
-        shot->createBody(*Engine::world, true);
-
-        shot->getBody()->SetFixedRotation(false);
-        shot->getBody()->SetAngularDamping(2.5f);
         float powerX = shot_power*cos(angle*M_PI/180.f);
         float powerY = shot_power*sin(angle*M_PI/180.f);
+
+        Shot* shot = new Shot(selectedShot,
+                              (this->m_animation.getSprite().getPosition().x)/pixelsPerMeter,
+                              (this->m_animation.getSprite().getPosition().y)/pixelsPerMeter,
+                              b2Vec2( shot->getBody()->GetMass()*powerX/pixelsPerMeter,
+                                      shot->getBody()->GetMass()*powerY/pixelsPerMeter) );
+        shot->createBody(*Engine::world, true);
+
         shot->getBody()->ApplyLinearImpulse(b2Vec2( shot->getBody()->GetMass()*powerX/pixelsPerMeter,
                                                     shot->getBody()->GetMass()*powerY/pixelsPerMeter  ),shot->getBody()->GetWorldCenter(),true);
-
-        Engine::bodylist.push_back(shot);
         //End arrow
 
     }
