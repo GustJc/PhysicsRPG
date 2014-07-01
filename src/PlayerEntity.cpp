@@ -85,8 +85,8 @@ void PlayerEntity::events(sf::Event &event){
         Shot* shot = new Shot(selectedShot,
                               (this->m_animation.getSprite().getPosition().x)/pixelsPerMeter,
                               (this->m_animation.getSprite().getPosition().y)/pixelsPerMeter,
-                              b2Vec2( shot->getBody()->GetMass()*powerX/pixelsPerMeter,
-                                      shot->getBody()->GetMass()*powerY/pixelsPerMeter) );
+                              b2Vec2( powerX/pixelsPerMeter,
+                                      powerY/pixelsPerMeter) );
         shot->createBody(*Engine::world, true);
 
         shot->getBody()->ApplyLinearImpulse(b2Vec2( shot->getBody()->GetMass()*powerX/pixelsPerMeter,

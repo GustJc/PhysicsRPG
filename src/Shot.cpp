@@ -52,6 +52,8 @@ Shot::Shot(int id, float px, float py, b2Vec2 force, int limit)
             shot->getBodyFixture()->filter.groupIndex = 1;
             shot->createBody(*Engine::world, true);
 
+            force.x *= m_body->GetMass();
+            force.y *= m_body->GetMass();
             shot->getBody()->ApplyLinearImpulse(force ,shot->getBody()->GetWorldCenter(),true);
         }
 
