@@ -80,25 +80,10 @@ void PlayerEntity::events(sf::Event &event){
 
     if(event.type == sf::Event::MouseButtonPressed && shotTimer.getElapsedTime().asSeconds() > shot_cooldown)
     {
-        this->m_animation.setFrames(19, 13, 70, true);
+        this->m_animation.setFrames(19, 10, 70, true);
 
         shotTimer.restart();
-
-        //Arrow
-        float powerX = shot_power*cos(angle*M_PI/180.f);
-        float powerY = shot_power*sin(angle*M_PI/180.f);
-
-
-        Shot* shot = new Shot(selectedShot,
-                              (this->m_animation.getSprite().getPosition().x)/pixelsPerMeter,
-                              (this->m_animation.getSprite().getPosition().y)/pixelsPerMeter,
-                              b2Vec2( powerX/pixelsPerMeter,
-                                      powerY/pixelsPerMeter) );
-        shot->createBody(*Engine::world, true);
-
-        shot->getBody()->ApplyLinearImpulse(b2Vec2( shot->getBody()->GetMass()*powerX/pixelsPerMeter,
-                                                    shot->getBody()->GetMass()*powerY/pixelsPerMeter  ),shot->getBody()->GetWorldCenter(),true);
-        //End arrow
+        m_state = 1;
     }
 }
 
@@ -178,7 +163,15 @@ void PlayerEntity::update(float dt)
     }
 
     if(this->m_animation.isReady())
-                this->m_animation.setFrames(11, 1);
+    {
+        //Atacando
+        if(this->m_state == 1)
+        {
+            this->atira();
+            m_state = 0;
+        }
+        this->m_animation.setFrames(11, 1);
+    }
 
     float velChange = desiredVel - vel.x;
     float impulse = m_body->GetMass() * velChange;
@@ -211,4 +204,23 @@ void PlayerEntity::update(float dt)
                                 m_animation.getSprite().getPosition().y - WINDOW_HEIGHT/4.f  ) );
     Engine::EngineControl.getWindowReference().setView(view);
 
+}
+
+void PlayerEntity::atira()
+{
+    //Arrow
+    float powerX = shot_power*cos(angle*M_PI/180.f);
+    float powerY = shot_power*sin(angle*M_PI/180.f);
+
+
+    Shot* shot = new Shot(selectedShot,
+                          (this->m_animation.getSprite().getPosition().x)/pixelsPerMeter,
+                          (this->m_animation.getSprite().getPosition().y)/pixelsPerMeter,
+                          b2Vec2( powerX/pixelsPerMeter,
+                                  powerY/pixelsPerMeter) );
+    shot->createBody(*Engine::world, true);
+
+    shot->getBody()->ApplyLinearImpulse(b2Vec2( shot->getBody()->GetMass()*powerX/pixelsPerMeter,
+                                                shot->getBody()->GetMass()*powerY/pixelsPerMeter  ),shot->getBody()->GetWorldCenter(),true);
+    //End arrow
 }

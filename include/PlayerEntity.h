@@ -20,8 +20,13 @@ public:
 
     void update(float dt = 0);
 
+protected:
+    void atira();
+
 private:
     int m_keyState = 0;
+
+    int m_state = 0;
 
     sf::Clock shotTimer;
     float shot_cooldown = 1.f;
