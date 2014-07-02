@@ -72,17 +72,17 @@ void GameState::load(int )
     this->flag = new Flag();
     flag->setTexture(TextureManager::TextureControl.get("flag"), 29, 46, 2, 400);
     flag->getSprite()->setOrigin(15,23);
-    flag->getBodyDef()->position.Set(700.0f/pixelsPerMeter, (520.f-23.f)/pixelsPerMeter);
+    flag->getBodyDef()->position.Set(1100.0f/pixelsPerMeter, (520.f-23.f)/pixelsPerMeter);
     ((b2PolygonShape*)flag->getBodyShape() )->SetAsBox(14.0f/pixelsPerMeter,23.0f/pixelsPerMeter);
     flag->createBody(*world);
     flag->getBody()->SetUserData(flag);
     Engine::bodylist.push_back(flag);
 
-    Spawner * spawner = new Spawner(world, 600.0f/pixelsPerMeter, (520.f-50.f)/pixelsPerMeter);
-    Engine::bodylist.push_back(spawner);
+    //Spawner * spawner = new Spawner(world, 600.0f/pixelsPerMeter, (520.f-50.f)/pixelsPerMeter);
+    //Engine::bodylist.push_back(spawner);
 
-    Character* c = new Character(world, (300)/pixelsPerMeter, (500)/pixelsPerMeter);
-    Engine::bodylist.push_back(c);
+    //Character* c = new Character(world, (300)/pixelsPerMeter, (500)/pixelsPerMeter);
+    //Engine::bodylist.push_back(c);
 
     player = new PlayerEntity(world);
     Engine::bodylist.push_back(player);

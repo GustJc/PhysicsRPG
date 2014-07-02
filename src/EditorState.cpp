@@ -67,7 +67,7 @@ void EditorState::load(int )
     flag->type = 0;
     flag->setTexture(TextureManager::TextureControl.get("flag"), 29, 46, 2, 400);
     flag->getSprite()->setOrigin(15,23);
-    flag->getBodyDef()->position.Set(700.0f/pixelsPerMeter, (520.f-23.f)/pixelsPerMeter);
+    flag->getBodyDef()->position.Set(1100.0f/pixelsPerMeter, (520.f-23.f)/pixelsPerMeter);
     ((b2PolygonShape*)flag->getBodyShape() )->SetAsBox(14.0f/pixelsPerMeter,23.0f/pixelsPerMeter);
     flag->createBody(*world);
     flag->getBody()->SetUserData(flag);
