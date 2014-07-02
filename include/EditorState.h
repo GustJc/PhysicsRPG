@@ -40,6 +40,7 @@ protected:
 
     void createWallObject();
 private:
+    int b_width=16, b_height=16;
     ContactListenner listenner;
 };
 

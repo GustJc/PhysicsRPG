@@ -4,8 +4,9 @@
 #include "Character.h"
 #include "Engine.h"
 
-Spawner::Spawner(b2World *world, float x, float y)
+Spawner::Spawner(b2World *world, float x, float y, bool spawning)
 {
+    this->type = 1;
     this->name = "spawner";
     this->clock.restart();
 
@@ -18,11 +19,15 @@ Spawner::Spawner(b2World *world, float x, float y)
     this->createBody(*world);
     this->getBody()->SetUserData(this);
 
+    this->is_spawning = spawning;
+
 }
 
 void Spawner::update(float dt)
 {
     Entity::update(dt);
+
+    if(is_spawning == false) return;
 
     if(this->clock.getElapsedTime().asSeconds() > this->creationPeriod)
     {
@@ -35,6 +40,16 @@ void Spawner::update(float dt)
         this->m_animation.setFrames(0, 1, 200);
     }
 
+}
+
+void Spawner::setSpawning(bool spawning)
+{
+    is_spawning = spawning;
+}
+
+bool Spawner::isSpawning()
+{
+    return is_spawning;
 }
 
 Character* Spawner::createSoldier(string type)

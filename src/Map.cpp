@@ -1,5 +1,7 @@
 #include "Map.h"
 #include "Wall.h"
+#include "Spawner.h"
+#include "Character.h"
 #include <SpriteBody.h>
 #include <Engine.h>
 #include <fstream>
@@ -48,8 +50,8 @@ void Map::loadMap(string filename)
             Wall* w = new Wall(type, x, y);
             w->createBody(*world);
         }else if(objtype == OBJ_SPAWN){
-
-
+            Spawner* s = new Spawner(Engine::world,x,y);
+            Engine::bodylist.push_back(s);
         }else if(objtype == OBJ_FLAG){
 
 
@@ -82,7 +84,7 @@ void Map::saveMap(string filename)
 
         if(b->name == "wall")
             file << OBJ_WALL << " ";
-        else if(b->name == "spawn")
+        else if(b->name == "spawner")
             file << OBJ_SPAWN << " ";
         else if(b->name == "enemy")
             file << OBJ_ENEMY << " ";
