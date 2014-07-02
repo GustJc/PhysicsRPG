@@ -6,6 +6,7 @@
 #include "MapState.h"
 #include "MenuState.h"
 #include "Engine.h"
+#include "WinState.h"
 
 GameManager::GameManager()
 {
@@ -87,6 +88,14 @@ int GameManager::run(int , char*[])
                 stack = mEstadoAtual->unload();
                 delete mEstadoAtual;
                 mEstadoAtual = new MapState(window);
+                mEstadoAtual->load(stack);
+                break;
+            }
+            case GST_WIN:
+            {
+                stack = mEstadoAtual->unload();
+                delete mEstadoAtual;
+                mEstadoAtual = new WinState(window);
                 mEstadoAtual->load(stack);
                 break;
             }

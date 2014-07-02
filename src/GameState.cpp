@@ -67,7 +67,7 @@ void GameState::load(int )
     groundBox.SetAsBox(800.f/pixelsPerMeter, 80.f/pixelsPerMeter);
     m_ground->CreateFixture(&groundBox, 0.0f);
 
-    Flag * flag = new Flag();
+    this->flag = new Flag();
     flag->setTexture(TextureManager::TextureControl.get("flag"), 29, 46, 2, 400);
     flag->getSprite()->setOrigin(15,23);
     flag->getBodyDef()->position.Set(700.0f/pixelsPerMeter, (520.f-23.f)/pixelsPerMeter);
@@ -115,6 +115,12 @@ int GameState::unload()
         Engine::effectslist.clear();
     }
 
+    sf::View& view = Engine::EngineControl.getViewGame();
+    view.reset(sf::FloatRect(0, 0, 800, 600));
+    view.setCenter(WINDOW_WIDTH/2.f, WINDOW_HEIGHT/2.f);
+
+    window.setView(view);
+
     return mStack;
 }
 
@@ -138,6 +144,10 @@ eStateType GameState::update(float dt)
 void GameState::events(sf::Event& event)
 {
     player->events(event);
+
+    if(this->flag->isDead())
+        this->mStado = GST_WIN;
+
     if(event.type == sf::Event::KeyPressed)
     {
         if(event.key.code == sf::Keyboard::Escape)

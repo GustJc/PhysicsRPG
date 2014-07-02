@@ -9,6 +9,7 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include "Body.h"
+#include "Flag.h"
 #include "ContactListenner.h"
 
 class PlayerEntity;
@@ -38,6 +39,7 @@ class GameState : public State
         int selectedId = 1;
 
         PlayerEntity* player;
+        Flag* flag;
 
         void loadMap(string filename);
 

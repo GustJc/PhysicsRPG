@@ -9,6 +9,7 @@ typedef enum eStateType {
     GST_TESTE,
     GST_MAP,
     GST_EDITOR,
+    GST_WIN,
     GST_EXIT
 } StateType;
 
