@@ -337,7 +337,8 @@ void EditorState::saveMap(string filename)
 
 void EditorState::createWallObject()
 {
-    sf::Vector2i mouse = sf::Mouse::getPosition(window);
+    sf::Vector2i mouseTemp = sf::Mouse::getPosition(window);
+    sf::Vector2f mouse = window.mapPixelToCoords(mouseTemp);
     float mouseX = mouse.x - 8.f;
     float mouseY = mouse.y - 8.f;
 
