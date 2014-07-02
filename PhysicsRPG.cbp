@@ -62,6 +62,7 @@
 		<Unit filename="include/MenuState.h" />
 		<Unit filename="include/PlayerEntity.h" />
 		<Unit filename="include/PolygonBody.h" />
+		<Unit filename="include/Shot.h" />
 		<Unit filename="include/Spawner.h" />
 		<Unit filename="include/SpriteBody.h" />
 		<Unit filename="include/State.h">
@@ -72,6 +73,7 @@
 		</Unit>
 		<Unit filename="include/TextureManager.h" />
 		<Unit filename="include/UiButton.h" />
+		<Unit filename="include/Wall.h" />
 		<Unit filename="include/map.h" />
 		<Unit filename="src/Animation.cpp" />
 		<Unit filename="src/Body.cpp" />
@@ -97,6 +99,7 @@
 		<Unit filename="src/MenuState.cpp" />
 		<Unit filename="src/PlayerEntity.cpp" />
 		<Unit filename="src/PolygonBody.cpp" />
+		<Unit filename="src/Shot.cpp" />
 		<Unit filename="src/Spawner.cpp" />
 		<Unit filename="src/SpriteBody.cpp" />
 		<Unit filename="src/State.cpp">
@@ -107,6 +110,7 @@
 		</Unit>
 		<Unit filename="src/TextureManager.cpp" />
 		<Unit filename="src/UiButton.cpp" />
+		<Unit filename="src/Wall.cpp" />
 		<Unit filename="src/main.cpp" />
 		<Extensions>
 			<envvars />

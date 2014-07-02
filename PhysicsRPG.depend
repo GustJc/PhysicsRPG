@@ -410,7 +410,7 @@
 	"Globals.h"
 	<ctime>
 
-1404257507 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/GameState.cpp
+1404259090 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/GameState.cpp
 	"GameState.h"
 	"Globals.h"
 	"TextureManager.h"
@@ -428,14 +428,14 @@
 	<iostream>
 	<sstream>
 
-1404257311 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/PlayerEntity.h
+1404260436 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/PlayerEntity.h
 	"Entity.h"
 
 1404256552 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/Effects.h
 	"SpriteBody.h"
 	"Box2D/Box2D.h"
 
-1404258761 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/PlayerEntity.cpp
+1404259090 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/PlayerEntity.cpp
 	"PlayerEntity.h"
 	"Globals.h"
 	"Engine.h"
@@ -485,7 +485,7 @@
 1404256552 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/Shot.h
 	"SpriteBody.h"
 
-1404256552 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/Shot.cpp
+1404259090 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/Shot.cpp
 	"Shot.h"
 	"TextureManager.h"
 	"Globals.h"

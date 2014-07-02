@@ -79,11 +79,14 @@ void PlayerEntity::events(sf::Event &event){
 
     if(event.type == sf::Event::MouseButtonPressed && shotTimer.getElapsedTime().asSeconds() > shot_cooldown)
     {
+        this->m_animation.setFrames(19, 13, 70, true);
+
         shotTimer.restart();
 
         //Arrow
         float powerX = shot_power*cos(angle*M_PI/180.f);
         float powerY = shot_power*sin(angle*M_PI/180.f);
+
 
         Shot* shot = new Shot(selectedShot,
                               (this->m_animation.getSprite().getPosition().x)/pixelsPerMeter,
@@ -95,7 +98,6 @@ void PlayerEntity::events(sf::Event &event){
         shot->getBody()->ApplyLinearImpulse(b2Vec2( shot->getBody()->GetMass()*powerX/pixelsPerMeter,
                                                     shot->getBody()->GetMass()*powerY/pixelsPerMeter  ),shot->getBody()->GetWorldCenter(),true);
         //End arrow
-
     }
 }
 
@@ -170,16 +172,15 @@ void PlayerEntity::update(float dt)
         if(vel.x > 0)
         {
             desiredVel = b2Max( vel.x - 0.2f, 0.0f );
-            if(this->m_animation.isReady())
-                this->m_animation.setFrames(11, 1);
         }
         else if(vel.x < 0)
         {
             desiredVel = b2Min( vel.x + 0.2f,  0.0f );
-            if(this->m_animation.isReady())
-                this->m_animation.setFrames(9, 1);
         }
     }
+
+    if(this->m_animation.isReady())
+                this->m_animation.setFrames(11, 1);
 
     float velChange = desiredVel - vel.x;
     float impulse = m_body->GetMass() * velChange;
