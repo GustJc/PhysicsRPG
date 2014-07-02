@@ -22,7 +22,7 @@ Character::Character(b2World *world, float x, float y)
     this->m_animation.setFrames(9, 9, 200);
 
     this->getSprite()->setOrigin(23,20);
-    ((b2PolygonShape*)this->getBodyShape())->SetAsBox(12.0f/pixelsPerMeter,20.0f/pixelsPerMeter, b2Vec2(0, 9.0f/pixelsPerMeter), 0.0);
+    ((b2PolygonShape*)this->getBodyShape())->SetAsBox(12.0f/pixelsPerMeter,18.0f/pixelsPerMeter, b2Vec2(0, 9.0f/pixelsPerMeter), 0.0);
     this->getBodyDef()->position.Set(x, y);
     this->getBodyDef()->type = b2_dynamicBody;
     this->getBodyFixture()->density = 0.2f;
@@ -39,26 +39,31 @@ Character::~Character()
     //dtor
 }
 
-
-
 void Character::startContact(Body *body, b2Contact *)
 {
     firstImpulse = true;
     if(body->name == "shot")
     {
+        if(is_dead) return;
+
         float vy = -0.8*body->getBody()->GetMass()*body->getBody()->GetLinearVelocity().Length();
         body->getBody()->ApplyLinearImpulse(b2Vec2(0, vy),body->getBody()->GetWorldCenter(),  true);
 
         Shot* shot= (Shot*)body;
         float attack_multiplier = 0.5 + lastImpulse;
-        cout << "Atk multipler: " << attack_multiplier << endl;
+        //cout << "Atk multipler: " << attack_multiplier << endl;
         if(attack_multiplier < 0) attack_multiplier = 0;
         if(attack_multiplier > 2) attack_multiplier = 2;
 
         int dano = shot->getAtk() * (attack_multiplier);
         this->damage(dano);
 
-        this->m_animation.setFrames(20, 6, 70, true);
+        if(this->is_dead){
+            //cout << "Dead" << endl;
+            this->m_animation.setFrames(20, 5, 550, true);
+            SplashText* text = new SplashText("Oh No! x.x", this->getBody()->GetPosition()+b2Vec2(0, -1), sf::Color::Red, 12, 1000);
+            text->inicialImpulse = b2Vec2(-1,1.5);
+        }
 
         stringstream ss; ss << "-" << dano;
         SplashText* text = new SplashText(ss.str(), this->getBody()->GetPosition()+b2Vec2(0, -1), sf::Color::Red, 25, 1000);
@@ -118,9 +123,13 @@ void Character::preSolve(Body *body , b2Contact *, const b2Manifold *)
 
     }
 }
-
+#include <unistd.h>
 void Character::update(float dt)
 {
+    m_animation.getSprite().setRotation( default_rotation + 180.f*m_body->GetAngle()/(M_PI) );
+    m_animation.getSprite().setPosition( m_body->GetPosition().x*pixelsPerMeter, m_body->GetPosition().y*pixelsPerMeter);
+    m_animation.update(dt);
+
     if(isDelete)
     {
         if(this->m_animation.isReady())
@@ -135,9 +144,11 @@ void Character::update(float dt)
     {
         this->m_animation.setFrames(9, 9, 200);
     }
-    m_animation.getSprite().setRotation( default_rotation + 180.f*m_body->GetAngle()/(M_PI) );
-    m_animation.getSprite().setPosition( m_body->GetPosition().x*pixelsPerMeter, m_body->GetPosition().y*pixelsPerMeter);
-    m_animation.update(dt);
+
+    if(this->is_dead)
+    {
+        m_body->SetActive(false);
+    }
 
     if(isDead() == false)
         onAI();
@@ -146,25 +157,6 @@ void Character::update(float dt)
 void Character::onAI()
 {
     moveLeft();
-//    if( m_timer_attack.getElapsedTime().asSeconds() > 5.f )
-//    {
-//        m_animation.setFrames(0, 3, 200);
-//        moveLeft();
-//    }
-//    else
-//    if( m_timer.getElapsedTime().asSeconds() > 2.f )
-//    {
-//        m_animation.setFrames(1, 3, 200);
-//        moveRight();
-//        if(m_timer.getElapsedTime().asSeconds() > 2.f*2){
-//            m_animation.setFrames(0, 3, 200);
-//            m_timer.restart();
-//        }
-//    }else
-//    if( m_timer.getElapsedTime().asSeconds() < 2.f )
-//    {
-//        moveLeft();
-//    }
 }
 
 void Character::moveLeft()
@@ -173,10 +165,7 @@ void Character::moveLeft()
     float desiredVel = b2Min( vel.x - float(speed*0.5f), -float(speed) );
     float velChange = desiredVel - vel.x;
     float impulse = m_body->GetMass() * velChange;
-
-    //this->m_body->ApplyForceToCenter( b2Vec2(-0.3/pixelsPerMeter, 0 ), true );
     this->m_body->ApplyLinearImpulse(b2Vec2(impulse/pixelsPerMeter, 0 ), m_body->GetWorldCenter(), true );
-    //this->m_body->SetLinearVelocity( b2Vec2(-50/pixelsPerMeter, this->m_body->GetLinearVelocity().y ) );
 }
 
 void Character::moveRight()
@@ -186,6 +175,4 @@ void Character::moveRight()
     float velChange = desiredVel - vel.x;
     float impulse = m_body->GetMass() * velChange;
     this->m_body->ApplyLinearImpulse(b2Vec2(impulse/pixelsPerMeter, 0 ), m_body->GetWorldCenter(), true );
-    //this->m_body->ApplyForceToCenter( b2Vec2(0.3/pixelsPerMeter, 0 ), true );
-    //this->m_body->SetLinearVelocity( b2Vec2(50/pixelsPerMeter, this->m_body->GetLinearVelocity().y ) );
 }

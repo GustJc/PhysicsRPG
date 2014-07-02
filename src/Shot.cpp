@@ -48,12 +48,12 @@ Shot::Shot(int id, float px, float py, b2Vec2 force, int limit)
         this->m_bodyDef.angularDamping = 2.5f;
 
         if(limit < 8){
-            Shot* shot = new Shot(2, px+0.1f, py, force, limit+1);
+            Shot* shot = new Shot(2, px, py, force, limit+1);
             shot->getBodyFixture()->filter.groupIndex = 1;
             shot->createBody(*Engine::world, true);
 
-            force.x *= m_body->GetMass();
-            force.y *= m_body->GetMass();
+            force.x *= shot->getBody()->GetMass();
+            force.y *= shot->getBody()->GetMass();
             shot->getBody()->ApplyLinearImpulse(force ,shot->getBody()->GetWorldCenter(),true);
         }
 

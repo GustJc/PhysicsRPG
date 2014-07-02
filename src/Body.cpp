@@ -11,7 +11,7 @@ Body::~Body()
 
 void Body::createBody(b2World & world, bool isCircle)
 {
-    cout << "Create" << endl;
+    //cout << "Create" << endl;
     m_body = world.CreateBody(&m_bodyDef);
     if(isCircle)
         m_fixtureDef.shape = &m_bodyCircleShape;
@@ -23,7 +23,7 @@ void Body::createBody(b2World & world, bool isCircle)
 
 void Body::destroyBody(b2World & world)
 {
-    cout << "Body Destroyed" << endl;
+    //cout << "Body Destroyed" << endl;
     m_body->DestroyFixture(m_body->GetFixtureList());
     world.DestroyBody(m_body);
 }

@@ -35,6 +35,8 @@ void Animation::setFrames(unsigned int clipY, unsigned int n_frame, unsigned int
         this->change_time = uDelay*0.001f;
     max_frames = n_frame;
     stop_last = onlyOnce;
+    if(onlyOnce)
+        forceFrame(0);
     is_ready = false;
 }
 

@@ -27,7 +27,7 @@ PlayerEntity::PlayerEntity(b2World *world, float px, float py)
     m_bodyCircleShape.m_radius = 4.f/pixelsPerMeter;
 
     //Full sprite is 23, 20
-    m_bodyShape.SetAsBox(23.0f/pixelsPerMeter,28.0f/pixelsPerMeter, b2Vec2(0, double(-2)/pixelsPerMeter), 0);
+    m_bodyShape.SetAsBox(23.0f/pixelsPerMeter,26.0f/pixelsPerMeter, b2Vec2(0, double(-2)/pixelsPerMeter), 0);
 
     m_bodyDef.position.Set((px)/pixelsPerMeter, (py)/pixelsPerMeter);
     m_bodyDef.type = b2_dynamicBody;
@@ -143,12 +143,12 @@ void PlayerEntity::update(float dt)
     case KEY_LEFT:
         if(vel.x > 0) isStop = true;
         desiredVel = b2Max( vel.x - 0.1f, -2.0f );
-        this->m_animation.setFrames(9, 6, 70, true);
+        this->m_animation.setFrames(9, 6, 70);
         break;//desiredVel = -5; break;
     case KEY_RIGHT:
         if(vel.x < 0) isStop = true;
         desiredVel = b2Min( vel.x + 0.1f,  2.0f );
-        this->m_animation.setFrames(11, 6, 70, true);
+        this->m_animation.setFrames(11, 6, 70);
         break;//desiredVel =  5; break;
     default:
         isStop = true;
