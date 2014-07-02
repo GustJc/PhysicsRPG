@@ -7,6 +7,7 @@
 #include "MenuState.h"
 #include "Engine.h"
 #include "WinState.h"
+#include "LoseState.h"
 
 GameManager::GameManager()
 {
@@ -96,6 +97,14 @@ int GameManager::run(int , char*[])
                 stack = mEstadoAtual->unload();
                 delete mEstadoAtual;
                 mEstadoAtual = new WinState(window);
+                mEstadoAtual->load(stack);
+                break;
+            }
+            case GST_LOSE:
+            {
+                stack = mEstadoAtual->unload();
+                delete mEstadoAtual;
+                mEstadoAtual = new LoseState(window);
                 mEstadoAtual->load(stack);
                 break;
             }

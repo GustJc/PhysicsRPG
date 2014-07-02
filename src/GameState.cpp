@@ -138,15 +138,18 @@ eStateType GameState::update(float dt)
         Engine::effectslist[i]->update(dt);
     }
 
+    if(this->flag->isDead())
+        this->mStado = GST_WIN;
+
+    if(this->player->isDead())
+        this->mStado = GST_LOSE;
+
     return mStado;
 }
 
 void GameState::events(sf::Event& event)
 {
     player->events(event);
-
-    if(this->flag->isDead())
-        this->mStado = GST_WIN;
 
     if(event.type == sf::Event::KeyPressed)
     {

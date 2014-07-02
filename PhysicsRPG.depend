@@ -239,7 +239,7 @@
 1404256552 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/Flag.h
 	"Entity.h"
 
-1404334721 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/GameManager.cpp
+1404336579 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/GameManager.cpp
 	"GameManager.h"
 	"TestState.h"
 	"GameState.h"
@@ -248,12 +248,13 @@
 	"MenuState.h"
 	"Engine.h"
 	"WinState.h"
+	"LoseState.h"
 
 1403913264 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/GameManager.h
 	"State.h"
 	<SFML/Graphics.hpp>
 
-1404335571 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/State.h
+1404336069 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/State.h
 	<SFML/Graphics.hpp>
 
 1403913264 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/TestState.h
@@ -414,7 +415,7 @@
 	"Globals.h"
 	<ctime>
 
-1404335858 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/GameState.cpp
+1404336620 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/GameState.cpp
 	"GameState.h"
 	"Globals.h"
 	"TextureManager.h"
@@ -511,8 +512,17 @@
 	<SFML/Graphics.hpp>
 	<vector>
 
-1404335522 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/WinState.cpp
+1404335981 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/WinState.cpp
 	"WinState.h"
+	"State.h"
+	"Effects.h"
+	"Engine.h"
+
+1404336806 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/LoseState.h
+	"State.h"
+
+1404336688 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/LoseState.cpp
+	"LoseState.h"
 	"State.h"
 	"Effects.h"
 	"Engine.h"
