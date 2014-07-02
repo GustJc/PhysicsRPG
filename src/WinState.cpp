@@ -14,7 +14,7 @@ WinState::~WinState()
     //dtor
 }
 
-void WinState::events(sf::Event& event)
+void WinState::events(sf::Event& )
 {
 
 }
@@ -30,7 +30,7 @@ int WinState::unload()
 }
 
 
-eStateType WinState::update(float dt)
+eStateType WinState::update(float )
 {
     if(this->m_timer.getElapsedTime().asSeconds() > 5)
         this->mStado = GST_MENU;

@@ -73,7 +73,9 @@ SOURCES       = src/TextureManager.cpp \
 		src/Spawner.cpp \
 		src/Effects.cpp \
 		src/Wall.cpp \
-		src/Shot.cpp 
+		src/Shot.cpp \
+		src/WinState.cpp \
+		src/LoseState.cpp 
 OBJECTS       = TextureManager.o \
 		TestState.o \
 		State.o \
@@ -102,7 +104,9 @@ OBJECTS       = TextureManager.o \
 		Spawner.o \
 		Effects.o \
 		Wall.o \
-		Shot.o
+		Shot.o \
+		WinState.o \
+		LoseState.o
 DIST          = /opt/Qt5.2.1/5.2.1/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt5.2.1/5.2.1/gcc_64/mkspecs/common/shell-unix.conf \
 		/opt/Qt5.2.1/5.2.1/gcc_64/mkspecs/common/unix.conf \
@@ -517,12 +521,12 @@ GameState.o: src/GameState.cpp include/GameState.h \
 		include/SpriteBody.h \
 		include/Body.h \
 		include/Animation.h \
+		include/Flag.h \
+		include/Entity.h \
 		include/ContactListenner.h \
 		include/Globals.h \
 		include/TextureManager.h \
 		include/Engine.h \
-		include/Flag.h \
-		include/Entity.h \
 		include/Character.h \
 		include/PlayerEntity.h \
 		include/Effects.h \
@@ -542,12 +546,16 @@ GameManager.o: src/GameManager.cpp include/GameManager.h \
 		include/Body.h \
 		include/Animation.h \
 		include/GameState.h \
+		include/Flag.h \
+		include/Entity.h \
 		include/ContactListenner.h \
 		include/EditorState.h \
 		include/MapState.h \
 		include/MenuState.h \
 		include/UiButton.h \
-		include/Engine.h
+		include/Engine.h \
+		include/WinState.h \
+		include/LoseState.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o GameManager.o src/GameManager.cpp
 
 Flag.o: src/Flag.cpp include/Flag.h \
@@ -586,7 +594,8 @@ Character.o: src/Character.cpp include/Character.h \
 		include/Globals.h \
 		include/TextureManager.h \
 		include/PlayerEntity.h \
-		include/Effects.h
+		include/Effects.h \
+		include/Shot.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Character.o src/Character.cpp
 
 BoxBody.o: src/BoxBody.cpp include/BoxBody.h \
@@ -626,7 +635,8 @@ EditorState.o: src/EditorState.cpp include/EditorState.h \
 		include/Entity.h \
 		include/Character.h \
 		include/Map.h \
-		include/Wall.h
+		include/Wall.h \
+		include/Spawner.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o EditorState.o src/EditorState.cpp
 
 PlayerEntity.o: src/PlayerEntity.cpp include/PlayerEntity.h \
@@ -646,6 +656,8 @@ Map.o: src/Map.cpp include/Map.h \
 		include/SpriteBody.h \
 		include/Body.h \
 		include/Animation.h \
+		include/Spawner.h \
+		include/Character.h \
 		include/Engine.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Map.o src/Map.cpp
 
@@ -676,14 +688,36 @@ Wall.o: src/Wall.cpp include/Wall.h \
 		include/Engine.h \
 		include/TextureManager.h \
 		include/Globals.h \
-		include/Effects.h
+		include/Effects.h \
+		include/Shot.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Wall.o src/Wall.cpp
 
 Shot.o: src/Shot.cpp include/Shot.h \
 		include/SpriteBody.h \
 		include/Body.h \
-		include/Animation.h
+		include/Animation.h \
+		include/TextureManager.h \
+		include/Globals.h \
+		include/Engine.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Shot.o src/Shot.cpp
+
+WinState.o: src/WinState.cpp include/WinState.h \
+		include/State.h \
+		include/Effects.h \
+		include/SpriteBody.h \
+		include/Body.h \
+		include/Animation.h \
+		include/Engine.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o WinState.o src/WinState.cpp
+
+LoseState.o: src/LoseState.cpp include/LoseState.h \
+		include/State.h \
+		include/Effects.h \
+		include/SpriteBody.h \
+		include/Body.h \
+		include/Animation.h \
+		include/Engine.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o LoseState.o src/LoseState.cpp
 
 ####### Install
 

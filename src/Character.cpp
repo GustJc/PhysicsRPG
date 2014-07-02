@@ -31,7 +31,6 @@ Character::Character(b2World *world, float x, float y)
     this->getBody()->SetUserData(this);
 
     this->atk = 10;
-
 }
 
 Character::~Character()
@@ -66,7 +65,7 @@ void Character::startContact(Body *body, b2Contact *)
         }
 
         stringstream ss; ss << "-" << dano;
-        SplashText* text = new SplashText(ss.str(), this->getBody()->GetPosition()+b2Vec2(0, -1), sf::Color::Red, 25, 1000);
+        SplashText* text = new SplashText(ss.str(), this->getBody()->GetPosition()+b2Vec2(0, -1), sf::Color::Red, 20, 1000);
         text->inicialImpulse = b2Vec2(1,1);
     }
 }
@@ -91,13 +90,18 @@ void Character::preSolve(Body *body , b2Contact *, const b2Manifold *)
             m_timer_attack.restart();
             m_animation.setFrames(13, 6, 150, true);
             m_animation.forceFrame(0);
+            cout << "Attack dectected "<< endl;
         }
 
+        cout << "Pre" << endl;
+
         if(m_animation.isReady()) {
+            cout << "Ready" << endl;
 
             this->m_animation.setFrames(9, 3, 200);
             this->m_animation.forceFrame(0);
             player->m_animation.setFrames(20, 6, 110, true);
+            player->m_animation.forceFrame(0);
 
             int dano = player->damage(this->atk);
             b2Vec2 point = player->getBody()->GetWorldCenter();
@@ -120,10 +124,9 @@ void Character::preSolve(Body *body , b2Contact *, const b2Manifold *)
             SplashText* text = new SplashText(ss.str(), player->getBody()->GetPosition()+b2Vec2(0, -1), sf::Color::Red, 25, 1000);
             text->inicialImpulse = b2Vec2(1,1);
         }
-
     }
 }
-#include <unistd.h>
+
 void Character::update(float dt)
 {
     m_animation.getSprite().setRotation( default_rotation + 180.f*m_body->GetAngle()/(M_PI) );
@@ -138,11 +141,6 @@ void Character::update(float dt)
             removeFromList(Engine::bodylist);
             removeFromList(Engine::effectslist);
         }
-    }
-    else
-    if(this->m_animation.isReady())
-    {
-        this->m_animation.setFrames(9, 9, 200);
     }
 
     if(this->is_dead)

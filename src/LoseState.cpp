@@ -14,7 +14,7 @@ LoseState::~LoseState()
     //dtor
 }
 
-void LoseState::events(sf::Event& event)
+void LoseState::events(sf::Event& )
 {
 
 }
@@ -30,7 +30,7 @@ int LoseState::unload()
 }
 
 
-eStateType LoseState::update(float dt)
+eStateType LoseState::update(float )
 {
     if(this->m_timer.getElapsedTime().asSeconds() > 5)
         this->mStado = GST_MENU;

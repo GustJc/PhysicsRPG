@@ -32,7 +32,9 @@ SOURCES += \
     src/Spawner.cpp \
     src/Effects.cpp \
     src/Wall.cpp \
-    src/Shot.cpp
+    src/Shot.cpp \
+    src/WinState.cpp \
+    src/LoseState.cpp
 
 HEADERS += \
     include/Animation.h \
@@ -62,7 +64,9 @@ HEADERS += \
     include/Spawner.h \
     include/Effects.h \
     include/Wall.h \
-    include/Shot.h
+    include/Shot.h \
+    include/WinState.h \
+    include/LoseState.h
 
 #SFML
 QMAKE_CXXFLAGS += -std=c++11
