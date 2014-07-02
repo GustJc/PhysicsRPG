@@ -20,7 +20,7 @@ Character::Character(b2World *world, float x, float y)
     this->m_animation.setFrames(9, 3, 200);
 
     this->getSprite()->setOrigin(23,20);
-    ((b2PolygonShape*)this->getBodyShape())->SetAsBox(23.0f/pixelsPerMeter,29.0f/pixelsPerMeter);
+    ((b2PolygonShape*)this->getBodyShape())->SetAsBox(12.0f/pixelsPerMeter,20.0f/pixelsPerMeter, b2Vec2(0, 9.0f/pixelsPerMeter), 0.0);
     this->getBodyDef()->position.Set(x, y);
     this->getBodyDef()->type = b2_dynamicBody;
     this->getBodyFixture()->density = 0.2f;
