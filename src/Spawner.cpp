@@ -14,7 +14,7 @@ Spawner::Spawner(b2World *world, float x, float y, bool spawning)
 
     this->getSprite()->setScale(4, 4);
     this->getBodyDef()->position.Set(x, y);
-    ((b2PolygonShape*)this->getBodyShape() )->SetAsBox(35.0f/pixelsPerMeter,32.0f/pixelsPerMeter);
+    ((b2PolygonShape*)this->getBodyShape() )->SetAsBox(55.0f/pixelsPerMeter,55.0f/pixelsPerMeter);
 
     this->createBody(*world);
     this->getBody()->SetUserData(this);
