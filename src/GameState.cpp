@@ -30,6 +30,8 @@ void GameState::load(int )
     m_debug_render = new DebugRender(&window);
     m_debug_render->SetFlags( b2Draw::e_shapeBit | b2Draw::e_jointBit | b2Draw::e_aabbBit | b2Draw::e_pairBit | b2Draw::e_centerOfMassBit);
 
+    TextureManager::TextureControl.load("background", "data/temp_background.png");
+
     TextureManager::TextureControl.load("menu_superior", "data/menu_su.png");
     TextureManager::TextureControl.load("tileset", "data/tileset.png");
 
@@ -227,6 +229,10 @@ void GameState::events(sf::Event& event)
 
 void GameState::render()
 {
+    sf::Sprite background;
+    background.setTexture(TextureManager::TextureControl.get("background"));
+    background.setPosition( window.mapPixelToCoords(sf::Vector2i(-this->window.getView().getCenter().x*0.15 - 100,0) ) );
+    window.draw(background);
 
     //Draw floor
     Engine::EngineControl.drawRectVertex(-400,520,1600,160);
@@ -265,7 +271,6 @@ void GameState::render()
     if(selectedId == 2) width = 16 * 4;
     if(selectedId == 3) height = 16 * 4;
     Engine::EngineControl.drawRectVertex( floor(mouse.x/16.f)*16, floor(mouse.y/16.f)*16, width, height, sf::Color(100,50,100,50) );
-
 
     sf::Sprite menu;
     menu.setTexture(TextureManager::TextureControl.get("menu_superior"));
