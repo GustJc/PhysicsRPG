@@ -1,0 +1,1 @@
+player_char: http://gaurav.munjal.us/Universal-LPC-Spritesheet-Character-Generator/#?sex=male&eyes=green&legs=none&clothes=none&formal-shirt=0&mail=chain&armor=chest_leather&jacket=none&hair=plain_brunette&arms=none&shoulders=leather&greaves=metal&gloves=none&hat=cap_leather&shoes=boots_metal&belt=none&weapon=bow&ammo=arrow&shield=none&quiver=on
