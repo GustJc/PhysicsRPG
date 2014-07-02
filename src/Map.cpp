@@ -6,6 +6,21 @@
 #include <iostream>
 #include <sstream>
 
+enum
+{
+    OBJ_WALL=1,
+    OBJ_SPAWN,
+    OBJ_FLAG,
+    OBJ_ENEMY
+};
+
+enum
+{
+    WALL_BLOCK=1,
+    WALL_LONG_VERTICAL,
+    WALL_LONG_HORIZONTAL
+};
+
 Map Map::MapControl;
 
 Map::Map()
@@ -26,12 +41,23 @@ void Map::loadMap(string filename)
 
 
     float x, y, angle;
-    int type;
-    while(file >> x >> y >> type >> angle)
+    int objtype, type;
+    while(file >> objtype >> x >> y >> type >> angle)
     {
+        if(objtype == OBJ_WALL){
+            Wall* w = new Wall(type, x, y);
+            w->createBody(*world);
+        }else if(objtype == OBJ_SPAWN){
 
-        Wall* w = new Wall(type, x, y);
-        w->createBody(*world);
+
+        }else if(objtype == OBJ_FLAG){
+
+
+        }else if(objtype == OBJ_ENEMY){
+
+
+        }
+
 
     }
 
@@ -53,6 +79,15 @@ void Map::saveMap(string filename)
         cout << "Body" << endl;
         Body* b = Engine::bodylist[i];
         if(b->type == 0) continue; //ignore flag
+
+        if(b->name == "wall")
+            file << OBJ_WALL << " ";
+        else if(b->name == "spawn")
+            file << OBJ_SPAWN << " ";
+        else if(b->name == "enemy")
+            file << OBJ_ENEMY << " ";
+        else if(b->name == "flag")
+            file << OBJ_FLAG << " ";
 
         file << b->getBody()->GetPosition().x << " " << b->getBody()->GetPosition().y << endl;
         file << b->type << " " << b->getBody()->GetAngle() << endl;

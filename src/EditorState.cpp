@@ -71,27 +71,6 @@ void EditorState::load(int )
     Engine::bodylist.push_back(flag);
 
 
-/**/
-//    Character* c = new Character();
-
-//    c->setTexture(TextureManager::TextureControl.get("yellow"));
-//    c->getSprite()->setOrigin(8,8);
-
-//    ((b2PolygonShape*)c->getBodyShape())->SetAsBox(8.0f/pixelsPerMeter,8.0f/pixelsPerMeter);
-
-//    c->getBodyDef()->position.Set((500)/pixelsPerMeter, (560)/pixelsPerMeter);
-//    c->getBodyDef()->type = b2_dynamicBody;
-
-//    c->getBodyFixture()->density = 0.01f;
-
-//    c->createBody(*world);
-//    c->getBody()->SetFixedRotation(true);
-//    c->getBody()->SetUserData(c);
-
-
-//    bodylist.push_back(c);
-
-
 }
 
 int EditorState::unload()
@@ -372,25 +351,16 @@ void EditorState::createWallObject()
         w->createBody(*world);
 
     }else
-    if(selectedId == 1)
+    if(selectedId == 2)
     {
-        SpriteBody* sp_body = new SpriteBody();
-        sp_body->type = 1;
-
-        sp_body->setTexture(TextureManager::TextureControl.get("tileset"), 16,16);
-        sp_body->setFixedSpritePosition(16*7, 16);
-        sp_body->getSprite()->setOrigin(8,8);
-        ((b2PolygonShape*)sp_body->getBodyShape())->SetAsBox(7.8f/pixelsPerMeter,7.8f/pixelsPerMeter);
-        sp_body->getBodyDef()->position.Set((8+mouseX)/pixelsPerMeter, (8+mouseY)/pixelsPerMeter);
-        sp_body->getBodyDef()->type = b2_dynamicBody;
-        sp_body->getBodyFixture()->friction = 0.5f;
-        sp_body->getBodyFixture()->density = 0.1f;
-
-        sp_body->createBody(*world);
-        sp_body->getBody()->SetFixedRotation(false);
-
-        Engine::bodylist.push_back(sp_body);
+        Wall* w = new Wall(2, (float)(16*2.5+mouseX)/pixelsPerMeter, (float)(8+mouseY)/pixelsPerMeter);
+        w->createBody(*world);
     } else
+    if(selectedId == 3)
+    {
+        Wall* w = new Wall(3, (float)(8+mouseX)/pixelsPerMeter, (float)(16*2.5+mouseY)/pixelsPerMeter);
+        w->createBody(*world);
+    }else
     if(selectedId >= 2 && selectedId <= 3)
     {
 

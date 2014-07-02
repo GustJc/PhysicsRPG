@@ -23,6 +23,33 @@ Wall::Wall(int id, float px, float py)
         m_fixtureDef.density = 0.5f;
         this->HP = 10;
     }
+    else
+    if(id == 2)
+    {
+        setTexture(TextureManager::TextureControl.get("tileset"), 16*5,16);
+        setFixedSpritePosition(0, 0);
+        getSprite()->setOrigin( 16*4/2.f , 16/2.f);
+        m_bodyShape.SetAsBox( (16*2.5f-0.2f)/pixelsPerMeter,7.8f/pixelsPerMeter);
+        m_bodyDef.position.Set(px, py);
+        m_bodyDef.type = b2_dynamicBody;
+        m_fixtureDef.friction = 0.5f;
+        m_fixtureDef.density = 0.5f;
+        this->HP = 10;
+    }
+    else
+    if(id == 3)
+    {
+        setTexture(TextureManager::TextureControl.get("tileset"), 16*5,16);
+        setFixedSpritePosition(0, 0);
+        getSprite()->setOrigin( 16/2.f, 16*4/2.f);
+        m_bodyShape.SetAsBox(7.8f/pixelsPerMeter,(16*2.5f-0.2f)/pixelsPerMeter);
+        m_bodyDef.position.Set(px, py);
+        m_bodyDef.type = b2_dynamicBody;
+        m_fixtureDef.friction = 0.5f;
+        m_fixtureDef.density = 0.5f;
+        setDefaultRotation(90);
+        this->HP = 10;
+    }
 
     Engine::bodylist.push_back(this);
 }
