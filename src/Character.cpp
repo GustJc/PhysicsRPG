@@ -70,6 +70,15 @@ void Character::startContact(Body *body, b2Contact *)
     }
 }
 
+void Character::endContact(Body *body, b2Contact *)
+{
+    if(body->name == "player")
+    {
+        this->m_animation.setFrames(9, 3, 200);
+        this->m_animation.forceFrame(0);
+    }
+}
+
 void Character::postSolve(Body * , b2Contact* , const b2ContactImpulse* impulse)
 {    
     if(firstImpulse) {
@@ -92,8 +101,6 @@ void Character::preSolve(Body *body , b2Contact *, const b2Manifold *)
             m_animation.forceFrame(0);
             cout << "Attack dectected "<< endl;
         }
-
-        cout << "Pre" << endl;
 
         if(m_animation.isReady()) {
             cout << "Ready" << endl;

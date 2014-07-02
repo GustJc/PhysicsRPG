@@ -20,6 +20,7 @@ class Character : public Entity
 
 
         virtual void startContact(Body * body, b2Contact * contact);
+        virtual void endContact(Body * body, b2Contact * contact);
         virtual void preSolve(Body * body, b2Contact *contact, const b2Manifold *manifold);
         virtual void postSolve(Body * body, b2Contact* contact, const b2ContactImpulse* impulse);
 
