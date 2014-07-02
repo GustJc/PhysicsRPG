@@ -30,7 +30,7 @@ PlayerEntity::PlayerEntity(b2World *world, float x, float y)
 
     m_bodyDef.position.Set((100)/pixelsPerMeter, (500)/pixelsPerMeter);
     m_bodyDef.type = b2_dynamicBody;
-    m_bodyDef.fixedRotation = false;
+    m_bodyDef.fixedRotation = true;
     m_bodyDef.userData = this;
 
     m_body = world->CreateBody(&m_bodyDef);
@@ -151,6 +151,7 @@ void PlayerEntity::update(float dt)
     float desiredVel = 0;
     b2Vec2 vel = m_body->GetLinearVelocity();
     bool isStop = false;
+
     switch ( move )
     {
     case KEY_LEFT:
@@ -170,13 +171,9 @@ void PlayerEntity::update(float dt)
     if(isStop)
     {
         if(vel.x > 0)
-        {
             desiredVel = b2Max( vel.x - 0.2f, 0.0f );
-        }
         else if(vel.x < 0)
-        {
             desiredVel = b2Min( vel.x + 0.2f,  0.0f );
-        }
     }
 
     if(this->m_animation.isReady())

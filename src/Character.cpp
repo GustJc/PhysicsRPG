@@ -79,6 +79,7 @@ void Character::preSolve(Body *body , b2Contact *, const b2Manifold *)
 
             this->m_animation.setFrames(9, 3, 200);
             this->m_animation.forceFrame(0);
+            player->m_animation.setFrames(20, 6, 110, true);
 
             int dano = player->damage(this->atk);
             b2Vec2 point = player->getBody()->GetWorldCenter();
@@ -93,8 +94,8 @@ void Character::preSolve(Body *body , b2Contact *, const b2Manifold *)
             int backForce = dano;
             if(backForce > 15) backForce = 15;
 
-            player->getBody()->ApplyLinearImpulse(b2Vec2(-backForce*player->getBody()->GetMass(), 0),
-                                                  player->getBody()->GetWorldCenter(), true );
+            player->getBody()->ApplyLinearImpulse(b2Vec2(-backForce*player->getBody()->GetMass(), forceY),
+                                                  player->getBody()->GetWorldCenter(), true);
 
             stringstream ss; ss << "-" << dano;
 

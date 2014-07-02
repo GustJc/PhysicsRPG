@@ -22,9 +22,10 @@ class SpriteBody : public Body
         void setFixedSpritePosition(int posX, int posY);
 
         void removeFromList(vector<Body*>& list);
+
+        Animation m_animation;
 protected:
         float default_rotation = 0.0f;
-        Animation m_animation;
     private:
 };
 

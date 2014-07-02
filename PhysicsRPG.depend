@@ -220,7 +220,7 @@
 1404085932 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/Entity.h
 	"SpriteBody.h"
 
-1404066411 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/SpriteBody.h
+1404264149 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/SpriteBody.h
 	<Box2D/Box2D.h>
 	<SFML/Graphics.hpp>
 	"Body.h"
@@ -372,7 +372,7 @@
 	"Body.h"
 	"Globals.h"
 
-1404257934 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/Character.cpp
+1404264119 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/Character.cpp
 	"Character.h"
 	"Engine.h"
 	"Globals.h"
@@ -428,14 +428,14 @@
 	<iostream>
 	<sstream>
 
-1404260436 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/PlayerEntity.h
+1404260876 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/PlayerEntity.h
 	"Entity.h"
 
 1404256552 /home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/include/Effects.h
 	"SpriteBody.h"
 	"Box2D/Box2D.h"
 
-1404259090 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/PlayerEntity.cpp
+1404263707 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/PlayerEntity.cpp
 	"PlayerEntity.h"
 	"Globals.h"
 	"Engine.h"
