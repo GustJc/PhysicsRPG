@@ -55,6 +55,9 @@ void Character::postSolve(Body * body, b2Contact* , const b2ContactImpulse* impu
 
         int dano = 2;
         this->damage(2);
+
+        this->m_animation.setFrames(20, 6, 70, true);
+
         stringstream ss; ss << "-" << dano;
         SplashText* text = new SplashText(ss.str(), this->getBody()->GetPosition()+b2Vec2(0, -1), sf::Color::Red, 25, 1000);
         text->inicialImpulse = b2Vec2(1,1);
@@ -108,7 +111,18 @@ void Character::preSolve(Body *body , b2Contact *, const b2Manifold *)
 
 void Character::update(float dt)
 {
-    Entity::update(dt);
+    if(isDelete)
+    {
+        if(this->m_animation.isReady())
+        {
+            destroyBody(*Engine::world);
+            removeFromList(Engine::bodylist);
+            removeFromList(Engine::effectslist);
+        }
+    }
+    m_animation.getSprite().setRotation( default_rotation + 180.f*m_body->GetAngle()/(M_PI) );
+    m_animation.getSprite().setPosition( m_body->GetPosition().x*pixelsPerMeter, m_body->GetPosition().y*pixelsPerMeter);
+    m_animation.update(dt);
 
     if(isDead() == false)
         onAI();

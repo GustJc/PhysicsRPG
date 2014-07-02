@@ -212,7 +212,7 @@
 	<Box2D/Box2D.h>
 	<SFML/Graphics.hpp>
 
-1404085932 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/Entity.cpp
+1404268848 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/Entity.cpp
 	"Entity.h"
 	"Effects.h"
 	"Globals.h"
@@ -372,7 +372,7 @@
 	"Body.h"
 	"Globals.h"
 
-1404265894 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/Character.cpp
+1404269135 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/Character.cpp
 	"Character.h"
 	"Engine.h"
 	"Globals.h"
@@ -389,7 +389,7 @@
 	"Body.h"
 	<iostream>
 
-1404256552 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/EditorState.cpp
+1404266247 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/EditorState.cpp
 	"EditorState.h"
 	"Globals.h"
 	"TextureManager.h"
@@ -444,7 +444,7 @@
 	"Shot.h"
 	<math.h>
 
-1404072369 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/SpriteBody.cpp
+1404268785 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/SpriteBody.cpp
 	"SpriteBody.h"
 	"Globals.h"
 	"Engine.h"
@@ -456,7 +456,7 @@
 	"Globals.h"
 	"Globals.h"
 
-1404256552 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/Map.cpp
+1404266247 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/Map.cpp
 	"Map.h"
 	"Wall.h"
 	<SpriteBody.h>
@@ -491,7 +491,7 @@
 	"Globals.h"
 	"Engine.h"
 
-1404256552 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/Wall.cpp
+1404266247 source:/home/arthurmde/Documentos/Workspace/Games/PhysicsRPG/src/Wall.cpp
 	"Wall.h"
 	"Engine.h"
 	"TextureManager.h"
