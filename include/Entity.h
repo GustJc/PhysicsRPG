@@ -14,6 +14,7 @@ class Entity : public SpriteBody
         void die();
 
         bool isDead();
+
     protected:
         bool is_dead;
 

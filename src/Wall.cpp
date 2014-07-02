@@ -4,6 +4,7 @@
 #include "TextureManager.h"
 #include "Globals.h"
 #include "Effects.h"
+#include "Shot.h"
 
 #include <sstream>
 
@@ -58,7 +59,8 @@ void Wall::startContact(Body *body, b2Contact *)
 {
     if(body->name == "shot")
     {
-        int dano = 1;
+        Shot* shot = (Shot*)body;
+        int dano = shot->getAtk();
         stringstream ss; ss << "-" << dano;
 
         this->damage(dano);

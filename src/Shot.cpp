@@ -69,3 +69,8 @@ void Shot::update(float dt)
 
     SpriteBody::update(dt);
 }
+
+int Shot::getAtk()
+{
+    return this->atk;
+}

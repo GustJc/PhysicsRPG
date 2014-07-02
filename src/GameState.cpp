@@ -82,7 +82,7 @@ void GameState::load(int )
     Character* c = new Character(world, (300)/pixelsPerMeter, (500)/pixelsPerMeter);
     Engine::bodylist.push_back(c);
 
-    player = new PlayerEntity(world, 23, 20);
+    player = new PlayerEntity(world);
     Engine::bodylist.push_back(player);
 
     //in FooTest constructor

@@ -18,6 +18,8 @@ class Character : public Entity
         void moveLeft();
         void moveRight();
 
+
+        virtual void startContact(Body * body, b2Contact * contact);
         virtual void preSolve(Body * body, b2Contact *contact, const b2Manifold *manifold);
         virtual void postSolve(Body * body, b2Contact* contact, const b2ContactImpulse* impulse);
 
@@ -26,6 +28,8 @@ class Character : public Entity
         sf::Clock m_timer;
         sf::Clock m_timer_attack;
     private:
+        float lastImpulse;
+        bool firstImpulse = true;
 };
 
 #endif // CHARACTER_H

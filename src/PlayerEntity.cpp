@@ -7,11 +7,12 @@
 #include "Shot.h"
 #include <math.h>
 
-PlayerEntity::PlayerEntity(b2World *world, float x, float y)
+PlayerEntity::PlayerEntity(b2World *world, float px, float py)
 {
     name = "player";
     this->HP = this->maxHP = 30;
     this->def = 5;
+    this->atk = 5;
     this->setTexture(TextureManager::TextureControl.get("player_char"), 64, 64, 1, 1);
     this->getSprite()->setScale(0.9, 0.9);
     this->m_animation.setFrames(11, 1, 200);
@@ -28,7 +29,7 @@ PlayerEntity::PlayerEntity(b2World *world, float x, float y)
     //Full sprite is 23, 20
     m_bodyShape.SetAsBox(23.0f/pixelsPerMeter,28.0f/pixelsPerMeter, b2Vec2(0, double(-2)/pixelsPerMeter), 0);
 
-    m_bodyDef.position.Set((100)/pixelsPerMeter, (500)/pixelsPerMeter);
+    m_bodyDef.position.Set((px)/pixelsPerMeter, (py)/pixelsPerMeter);
     m_bodyDef.type = b2_dynamicBody;
     m_bodyDef.fixedRotation = true;
     m_bodyDef.userData = this;
