@@ -51,6 +51,7 @@ void GameState::load(int )
 
     TextureManager::TextureControl.load("arrow", "data/arrow.png");
     TextureManager::TextureControl.load("arrow2", "data/arrow_full.png");
+    TextureManager::TextureControl.load("ui", "data/selection_ui.png");
 
     b2Vec2 gravity(0.0f, 10.0f);
 
@@ -273,17 +274,7 @@ void GameState::render()
     if(selectedId == 3) height = 16 * 4;
     Engine::EngineControl.drawRectVertex( floor(mouse.x/16.f)*16, floor(mouse.y/16.f)*16, width, height, sf::Color(100,50,100,50) );
 
-    sf::Sprite menu;
-    menu.setTexture(TextureManager::TextureControl.get("menu_superior"));
-    menu.setPosition( window.mapPixelToCoords(sf::Vector2i(0,0) ) );
-    window.draw(menu);
-
-    stringstream ss;
-    ss << this->player->gold;
-    sf::Text gold(ss.str(), Engine::EngineControl.getFont());
-    gold.setColor(sf::Color::Yellow);
-    gold.setPosition( window.mapPixelToCoords(sf::Vector2i(400 - gold.getGlobalBounds().width/2.f, 80) ) );
-    window.draw(gold);
+    renderUI();
 
 
     //Draw debug data
@@ -325,6 +316,55 @@ void GameState::loadMap(string filename)
     file.close();
 
     cout << "Map loaded: " << absFileName << endl;
+
+}
+
+void GameState::renderUI()
+{
+    sf::Sprite menu;
+    menu.setTexture(TextureManager::TextureControl.get("menu_superior"));
+    menu.setPosition( window.mapPixelToCoords(sf::Vector2i(0,0) ) );
+    window.draw(menu);
+
+    stringstream ss;
+    ss << this->player->gold;
+    sf::Text gold(ss.str(), Engine::EngineControl.getFont());
+    gold.setColor(sf::Color::Yellow);
+    gold.setPosition( window.mapPixelToCoords(sf::Vector2i(400 - gold.getGlobalBounds().width/2.f, 80) ) );
+    window.draw(gold);
+
+    sf::Sprite ui;
+    if(player->shotTimer.getElapsedTime().asSeconds() > player->shot_cooldown)
+    {
+        ui.setTexture(TextureManager::TextureControl.get("ui"));
+        ui.setTextureRect(sf::IntRect(0,0, 80, 80) );
+        ui.setPosition( window.mapPixelToCoords(sf::Vector2i(50,500) ) );
+        window.draw(ui);
+    }
+    else
+    {
+        ui.setTexture(TextureManager::TextureControl.get("ui"));
+        ui.setTextureRect(sf::IntRect(80,0, 80, 80) );
+        ui.setPosition( window.mapPixelToCoords(sf::Vector2i(50,500) ) );
+        window.draw(ui);
+    }
+
+    if(player->shotTimer.getElapsedTime().asSeconds() > player->shot_cooldown
+            && (player->selectedShot == 2 || player->gold >= player->goldCost)
+            )
+    {
+        ui.setTexture(TextureManager::TextureControl.get("ui"));
+        ui.setTextureRect(sf::IntRect(0,80, 80, 80) );
+        ui.setPosition( window.mapPixelToCoords(sf::Vector2i(150,500) ) );
+        window.draw(ui);
+    }
+    else
+    {
+        ui.setTexture(TextureManager::TextureControl.get("ui"));
+        ui.setTextureRect(sf::IntRect(80,80, 80, 80) );
+        ui.setPosition( window.mapPixelToCoords(sf::Vector2i(150,500) ) );
+        window.draw(ui);
+    }
 
 }
 

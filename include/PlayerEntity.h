@@ -20,9 +20,14 @@ public:
 
     void update(float dt = 0);
 
-    int gold = 0;
-
     static PlayerEntity* PlayerControl;
+
+    int selectedShot = 1;
+
+    sf::Clock shotTimer;
+    float shot_cooldown = 1.f;
+    int goldCost = 10;
+    int gold = 0;
 
 protected:
     void atira();
@@ -33,9 +38,6 @@ private:
     int m_keyState = 0;
 
     int m_state = 0;
-
-    sf::Clock shotTimer;
-    float shot_cooldown = 1.f;
     float shot_max_power = 300.f;
     float angle = 45;
     float shot_power = 50.f;
@@ -43,7 +45,6 @@ private:
     b2Vec2 power;
     sf::Sprite arrow;
     sf::Sprite arrow_full;
-    int selectedShot = 1;
 };
 
 #endif // PLAYERENTITY_H

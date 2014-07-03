@@ -70,6 +70,17 @@ void PlayerEntity::events(sf::Event &event){
         else
         if(event.key.code == sf::Keyboard::Up)
             m_keyState |= KEY_UP;
+        else
+        if(event.key.code == sf::Keyboard::Space &&
+                this->gold >= this->goldCost &&
+                shotTimer.getElapsedTime().asSeconds() > shot_cooldown)
+        {
+            this->gold -= this->goldCost;
+            this->m_animation.setFrames(19, 10, 70, true);
+            shotTimer.restart();
+            selectedShot = 2;
+            m_state = 2;
+        }
     }
     else
     if(event.type == sf::Event::KeyReleased)
@@ -177,6 +188,12 @@ void PlayerEntity::update(float dt)
         {
             this->atira();
             m_state = 0;
+        }
+        if(this->m_state == 2)
+        {
+            this->atira();
+            m_state = 0;
+            selectedShot = 1;
         }
         this->m_animation.setFrames(11, 1);
     }

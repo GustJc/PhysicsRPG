@@ -43,6 +43,8 @@ class GameState : public State
 
         void loadMap(string filename);
 
+        void renderUI();
+
     private:
         ContactListenner listenner;
 };
