@@ -13,7 +13,7 @@ Shot::Shot(int id, float px, float py, b2Vec2 force, int limit)
     name = "shot";
     type = id;
 
-    this->getBodyFixture()->filter.maskBits = FilterShots | FilterWalls | FilterNormal | FilterEnemy;
+    this->getBodyFixture()->filter.maskBits = FilterShots | FilterWalls | FilterNormal | FilterEnemy | FilterObjects;
     this->getBodyFixture()->filter.categoryBits= FilterShots;
 
     if(id == 1)

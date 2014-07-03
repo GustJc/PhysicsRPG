@@ -11,7 +11,7 @@ Spawner::Spawner(b2World *world, float x, float y, bool spawning)
     this->HP = this->maxHP = 50;
     this->clock.restart();
 
-    this->getBodyFixture()->filter.maskBits = FilterShots | FilterWalls | FilterNormal;
+    this->getBodyFixture()->filter.maskBits = FilterShots | FilterWalls | FilterNormal | FilterPlayer;
     this->getBodyFixture()->filter.categoryBits = FilterObjects;
 
     this->setTexture(TextureManager::TextureControl.get("spawn"), 32, 32, 1, 200);
@@ -60,7 +60,7 @@ Character* Spawner::createSoldier(string type)
 {
     if(type == "weak_orc")
     {
-        return new Character(this->getBody()->GetWorld(), this->getBodyDef()->position.x - 35.0/pixelsPerMeter, this->getBodyDef()->position.y);
+        return new Character(this->getBody()->GetWorld(), this->getBodyDef()->position.x, this->getBodyDef()->position.y);
     }
 
     return nullptr;
