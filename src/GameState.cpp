@@ -99,6 +99,7 @@ void GameState::load(int )
     } else
     {
         music.play();
+        music.setLoop(true);
     }
 }
 

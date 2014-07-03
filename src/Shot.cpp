@@ -87,6 +87,8 @@ void Shot::startContact(Body *body, b2Contact *)
 
         SplashText* text = new SplashText(ss.str(), s->getBody()->GetPosition()+b2Vec2(0, -1), sf::Color::Red, 25, 1000);
         text->inicialImpulse = b2Vec2(1,1);
+
+        Engine::EngineControl.playSfx("data/music/sfx/explosion.wav");
     }
 }
 

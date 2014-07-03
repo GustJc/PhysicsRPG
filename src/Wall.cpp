@@ -74,5 +74,7 @@ void Wall::startContact(Body *body, b2Contact *)
         SplashAnimation* sa = new SplashAnimation(TextureManager::TextureControl.get("explosion"), sf::Vector2i(16,16),
                                   this->getBody()->GetPosition(), 5, 100, sf::Vector2f(2.0, 2.0));
         sa->inicialImpulse = b2Vec2(0, 0); // To remove waning unused
+
+        Engine::EngineControl.playSfx("data/music/sfx/explosion.wav");
     }
 }

@@ -70,6 +70,11 @@ void Character::startContact(Body *body, b2Contact *)
         stringstream ss; ss << "-" << dano;
         SplashText* text = new SplashText(ss.str(), this->getBody()->GetPosition()+b2Vec2(0, -1), sf::Color::Red, 20, 1000);
         text->inicialImpulse = b2Vec2(1,1);
+
+        if(body->type ==2)
+            Engine::EngineControl.playSfx("data/music/sfx/explosion.wav");
+        else
+            Engine::EngineControl.playSfx("data/music/sfx/damage.wav");
     }
 }
 
@@ -130,6 +135,8 @@ void Character::preSolve(Body *body , b2Contact *, const b2Manifold *)
 
             SplashText* text = new SplashText(ss.str(), player->getBody()->GetPosition()+b2Vec2(0, -1), sf::Color::Red, 25, 1000);
             text->inicialImpulse = b2Vec2(1,1);
+
+            Engine::EngineControl.playSfx("data/music/sfx/eat.wav");
         }
     }
 }
@@ -153,6 +160,10 @@ void Character::update(float dt)
             destroyBody(*Engine::world);
             removeFromList(Engine::bodylist);
             removeFromList(Engine::effectslist);
+
+            Engine::EngineControl.playSfx("data/music/sfx/hammer.wav");
+
+            return;
         }
     }
 

@@ -143,6 +143,7 @@ void MapState::load(int stack )
     } else
     {
         music.play();
+        music.setLoop(true);
     }
 
 }

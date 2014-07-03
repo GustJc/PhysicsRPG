@@ -78,6 +78,7 @@ void EditorState::load(int )
     } else
     {
         music.play();
+        music.setLoop(true);
     }
 
 
@@ -121,6 +122,9 @@ void EditorState::events(sf::Event& event)
 {
     if(event.type == sf::Event::KeyPressed)
     {
+        if(event.key.code == sf::Keyboard::C){
+            Engine::EngineControl.playSfx("data/music/sfx/jump.wav");
+        }
         if(event.key.code == sf::Keyboard::P){
             Map::MapControl.saveMap("output.map");
         }

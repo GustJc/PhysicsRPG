@@ -77,3 +77,14 @@ void Engine::drawLine(int x, int y, int x2, int y2, sf::Color color)
 
     mWindow.draw(line);
 }
+
+void Engine::playSfx(string name)
+{
+    buffer = sf::SoundBuffer();
+    if (!buffer.loadFromFile(name))
+        cout << "[Erro] Erro ao abrir sfx" << endl;
+    else{
+        sound.setBuffer(buffer);
+        sound.play();
+    }
+}

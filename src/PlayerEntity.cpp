@@ -207,6 +207,8 @@ void PlayerEntity::update(float dt)
     {
         if(this->isNotFalling())
         {
+            Engine::EngineControl.playSfx("data/music/sfx/jump.wav");
+
             this->m_animation.setFrames(3, 7, 100, true);
             m_body->ApplyForce( b2Vec2(0,-300*m_body->GetMass() ), m_body->GetWorldCenter(), true );
         }
@@ -252,6 +254,10 @@ void PlayerEntity::atira()
     shot->getBody()->ApplyLinearImpulse(b2Vec2( shot->getBody()->GetMass()*powerX/pixelsPerMeter,
                                                 shot->getBody()->GetMass()*powerY/pixelsPerMeter  ),shot->getBody()->GetWorldCenter(),true);
     //End arrow
+    if(selectedShot == 2)
+        Engine::EngineControl.playSfx("data/music/sfx/shot1.wav");
+    else
+        Engine::EngineControl.playSfx("data/music/sfx/shot3.wav");
 }
 
 bool PlayerEntity::isNotFalling()

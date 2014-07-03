@@ -31,6 +31,8 @@ class State
         int mStack;
         eStateType mStado;
         sf::Music music;
+        sf::Sound sound;
+        sf::SoundBuffer buffer;
 };
 
 

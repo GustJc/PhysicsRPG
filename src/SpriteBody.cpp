@@ -30,6 +30,8 @@ void SpriteBody::update(float dt)
         destroyBody(*Engine::world);
         removeFromList(Engine::bodylist);
         removeFromList(Engine::effectslist);
+
+        return;
     }
     m_animation.getSprite().setRotation( default_rotation + 180.f*m_body->GetAngle()/(M_PI) );
     m_animation.getSprite().setPosition( m_body->GetPosition().x*pixelsPerMeter, m_body->GetPosition().y*pixelsPerMeter);
