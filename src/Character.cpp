@@ -100,7 +100,7 @@ void Character::preSolve(Body *body , b2Contact *, const b2Manifold *)
         if(m_timer_attack.getElapsedTime().asSeconds() > m_attack_period)
         {
             m_timer_attack.restart();
-            m_animation.setFrames(13, 6, 150, true);
+            m_animation.setFrames(13, 6, 50, true);
             m_animation.forceFrame(0);
             cout << "Attack dectected "<< endl;
         }
