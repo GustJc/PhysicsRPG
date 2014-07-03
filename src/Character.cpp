@@ -102,12 +102,9 @@ void Character::preSolve(Body *body , b2Contact *, const b2Manifold *)
             m_timer_attack.restart();
             m_animation.setFrames(13, 6, 50, true);
             m_animation.forceFrame(0);
-            cout << "Attack dectected "<< endl;
         }
 
         if(m_animation.isReady()) {
-            cout << "Ready" << endl;
-
             this->m_animation.setFrames(9, 3, 200);
             this->m_animation.forceFrame(0);
             player->m_animation.setFrames(20, 6, 110, true);

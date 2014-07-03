@@ -21,7 +21,7 @@ void WinState::events(sf::Event& )
 
 void WinState::load(int )
 {
-
+    mStack = 1;
 }
 
 int WinState::unload()
@@ -33,7 +33,7 @@ int WinState::unload()
 eStateType WinState::update(float )
 {
     if(this->m_timer.getElapsedTime().asSeconds() > 5)
-        this->mStado = GST_MENU;
+        this->mStado = GST_MAP;
 
     return mStado;
 }

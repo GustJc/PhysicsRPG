@@ -93,7 +93,7 @@ void GameState::load(int )
     world->SetContactListener(&listenner);
 
 
-    Map::MapControl.loadMap("output.map");
+    Map::MapControl.loadMap(Map::MapControl.map_name);
 }
 
 int GameState::unload()

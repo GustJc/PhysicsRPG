@@ -4,6 +4,8 @@
 #include "State.h"
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include <map>
+#include <string>
 using namespace std;
 class NodeData;
 class MapState : public State
@@ -23,6 +25,7 @@ protected:
         sf::Sprite sp_map;
         sf::Sprite sp_dot;
     private:
+        map<int, string> fases;
 };
 
 #endif // MAPSTATE_H

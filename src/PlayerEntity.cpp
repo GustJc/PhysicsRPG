@@ -32,7 +32,7 @@ PlayerEntity::PlayerEntity(b2World *world, float px, float py)
     arrow_full.setOrigin(0, arrow_full.getTextureRect().height/2.f);
 
     //Full sprite is 23, 20
-    m_bodyShape.SetAsBox(20.0f/pixelsPerMeter,18.0f/pixelsPerMeter, b2Vec2(0, double(-2)/pixelsPerMeter), 0);
+    m_bodyShape.SetAsBox(10.0f/pixelsPerMeter,18.0f/pixelsPerMeter, b2Vec2(0, double(-2)/pixelsPerMeter), 0);
 
     m_bodyDef.position.Set((px)/pixelsPerMeter, (py)/pixelsPerMeter);
     m_bodyDef.type = b2_dynamicBody;

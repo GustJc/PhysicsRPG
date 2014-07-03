@@ -1,6 +1,7 @@
 #include "MapState.h"
 #include "TextureManager.h"
 #include "Globals.h"
+#include "Map.h"
 
 ostream& operator << (ostream& os, const sf::Vector2i& s)
 {
@@ -44,7 +45,7 @@ MapState::~MapState()
     }
 }
 
-void MapState::load(int )
+void MapState::load(int stack )
 {
     cout << "[Estado] Carregando estado MapState. " << endl;
     TextureManager::TextureControl.load("map", "data/map.png");
@@ -83,6 +84,46 @@ void MapState::load(int )
     nodes.push_back( node12 );
     nodes.push_back( node13 );
 
+    //Fases
+    fases[0] = "output.map";
+    fases[1] = "map3.map";
+    fases[2] = "map4.map";
+
+    fases[3] = "output.map";
+    fases[4] = "map3.map";
+    fases[5] = "map4.map";
+    fases[6] = "output.map";
+    fases[7] = "map3.map";
+    fases[8] = "map4.map";
+    fases[9] = "output.map";
+    fases[10] = "map3.map";
+    fases[11] = "map4.map";
+
+    Map::MapControl.map_name = fases[0];
+
+    //Completou ultimo mapa
+    if(stack == 1)
+    {
+        for( map<int, string>::iterator it = fases.begin();
+             it != fases.end(); it++)
+        {
+            if(it->second == Map::MapControl.map_name)
+            { //Mesmo nome, então chave
+                Map::MapControl.fases.push_back(it->first);
+                cout << "Novo completo " << it->first << endl;
+                break;
+            }
+        }
+
+    }
+
+    for(int i = 0; i < (int)Map::MapControl.fases.size(); i++)
+    {
+        int index = Map::MapControl.fases[i];
+        nodes[index]->complete = true;
+        nodes[index]->visible = true;
+    }
+
 }
 int MapState::unload()
 {
@@ -96,13 +137,14 @@ int MapState::unload()
 
 eStateType MapState::update(float )
 {
-    for(NodeData* item : nodes){
-        item->updateSelection(sf::Mouse::getPosition(window) );
-    }
-
-    if(nodes[0]->selected)
+    for(int i = 0; i < (int)nodes.size(); i++)
     {
-        mStado = GST_EDITOR;
+        nodes[i]->updateSelection(sf::Mouse::getPosition(window) );
+        if(nodes[i]->selected)
+        {
+            mStado = GST_GAME;
+            Map::MapControl.map_name = fases[i];
+        }
     }
 
     return mStado;
@@ -204,7 +246,7 @@ NodeData::NodeData(float x, float y, NodeData *parent)
     pos.y =y;
     if(parent != nullptr){
         parent->adjacent.push_back(this);
-        cout << this->pos.x << endl;
+        //cout << this->pos.x << endl;
     }
 }
 

@@ -37,7 +37,7 @@ void EditorState::load(int )
     TextureManager::TextureControl.load("player", "data/player.png");
     TextureManager::TextureControl.load("flag", "data/flag.png");
 
-    TextureManager::TextureControl.load("tileset", "data/tileset.png");
+    TextureManager::TextureControl.load("tileset", "data/tileset2.png");
 
     TextureManager::TextureControl.load("boulder_8", "data/img/boulder-rad8.png");
     TextureManager::TextureControl.load("boulder_16", "data/img/boulder-rad16.png");

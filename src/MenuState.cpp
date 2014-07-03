@@ -75,7 +75,7 @@ void MenuState::events(sf::Event &event)
             if(startBtn.isOver( mouse ) )
                 mStado = GST_MAP;
             if(optionsBtn.isOver( mouse ) )
-                mStado = GST_GAME;
+                mStado = GST_EDITOR;
             if(exitBtn.isOver( mouse ) )
                 mStado = GST_EXIT;
 
