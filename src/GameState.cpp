@@ -333,19 +333,22 @@ void GameState::renderUI()
     gold.setPosition( window.mapPixelToCoords(sf::Vector2i(400 - gold.getGlobalBounds().width/2.f, 80) ) );
     window.draw(gold);
 
+    int startpX = 310;
+    int startpY = 0;
+
     sf::Sprite ui;
     if(player->shotTimer.getElapsedTime().asSeconds() > player->shot_cooldown)
     {
         ui.setTexture(TextureManager::TextureControl.get("ui"));
         ui.setTextureRect(sf::IntRect(0,0, 80, 80) );
-        ui.setPosition( window.mapPixelToCoords(sf::Vector2i(50,500) ) );
+        ui.setPosition( window.mapPixelToCoords(sf::Vector2i(startpX,startpY) ) );
         window.draw(ui);
     }
     else
     {
         ui.setTexture(TextureManager::TextureControl.get("ui"));
         ui.setTextureRect(sf::IntRect(80,0, 80, 80) );
-        ui.setPosition( window.mapPixelToCoords(sf::Vector2i(50,500) ) );
+        ui.setPosition( window.mapPixelToCoords(sf::Vector2i(startpX,startpY) ) );
         window.draw(ui);
     }
 
@@ -355,14 +358,14 @@ void GameState::renderUI()
     {
         ui.setTexture(TextureManager::TextureControl.get("ui"));
         ui.setTextureRect(sf::IntRect(0,80, 80, 80) );
-        ui.setPosition( window.mapPixelToCoords(sf::Vector2i(150,500) ) );
+        ui.setPosition( window.mapPixelToCoords(sf::Vector2i(startpX+100,startpY) ) );
         window.draw(ui);
     }
     else
     {
         ui.setTexture(TextureManager::TextureControl.get("ui"));
         ui.setTextureRect(sf::IntRect(80,80, 80, 80) );
-        ui.setPosition( window.mapPixelToCoords(sf::Vector2i(150,500) ) );
+        ui.setPosition( window.mapPixelToCoords(sf::Vector2i(startpX+100,startpY) ) );
         window.draw(ui);
     }
 
