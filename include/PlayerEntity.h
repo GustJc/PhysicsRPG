@@ -24,6 +24,8 @@ protected:
     void atira();
 
 private:
+    bool isNotFalling();
+
     int m_keyState = 0;
 
     int m_state = 0;

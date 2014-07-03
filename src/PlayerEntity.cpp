@@ -143,12 +143,14 @@ void PlayerEntity::update(float dt)
     case KEY_LEFT:
         if(vel.x > 0) isStop = true;
         desiredVel = b2Max( vel.x - 0.1f, -2.0f );
-        this->m_animation.setFrames(9, 6, 70);
+        if(this->isNotFalling())
+            this->m_animation.setFrames(9, 6, 70);
         break;//desiredVel = -5; break;
     case KEY_RIGHT:
         if(vel.x < 0) isStop = true;
         desiredVel = b2Min( vel.x + 0.1f,  2.0f );
-        this->m_animation.setFrames(11, 6, 70);
+        if(this->isNotFalling())
+            this->m_animation.setFrames(11, 6, 70);
         break;//desiredVel =  5; break;
     default:
         isStop = true;
@@ -180,7 +182,11 @@ void PlayerEntity::update(float dt)
 
     if(m_keyState & (KEY_UP))
     {
-        m_body->ApplyLinearImpulse(b2Vec2(0,-0.001f), m_body->GetWorldCenter(), true);
+        if(this->isNotFalling())
+        {
+            this->m_animation.setFrames(3, 7, 100, true);
+            m_body->ApplyForce( b2Vec2(0,-50/pixelsPerMeter), m_body->GetWorldCenter(), true );
+        }
     }
 
     //Update throw force
@@ -223,4 +229,9 @@ void PlayerEntity::atira()
     shot->getBody()->ApplyLinearImpulse(b2Vec2( shot->getBody()->GetMass()*powerX/pixelsPerMeter,
                                                 shot->getBody()->GetMass()*powerY/pixelsPerMeter  ),shot->getBody()->GetWorldCenter(),true);
     //End arrow
+}
+
+bool PlayerEntity::isNotFalling()
+{
+    return this->m_body->GetLinearVelocity().y <= 0.00001 && this->m_body->GetLinearVelocity().y >= -0.00001;
 }

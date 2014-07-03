@@ -57,6 +57,7 @@
 			<Option virtualFolder="Estados/" />
 		</Unit>
 		<Unit filename="include/Globals.h" />
+		<Unit filename="include/LoseState.h" />
 		<Unit filename="include/Map.h" />
 		<Unit filename="include/MapState.h" />
 		<Unit filename="include/MenuState.h" />
@@ -74,6 +75,7 @@
 		<Unit filename="include/TextureManager.h" />
 		<Unit filename="include/UiButton.h" />
 		<Unit filename="include/Wall.h" />
+		<Unit filename="include/WinState.h" />
 		<Unit filename="include/map.h" />
 		<Unit filename="src/Animation.cpp" />
 		<Unit filename="src/Body.cpp" />
@@ -94,6 +96,7 @@
 			<Option virtualFolder="Estados/" />
 		</Unit>
 		<Unit filename="src/Globals.cpp" />
+		<Unit filename="src/LoseState.cpp" />
 		<Unit filename="src/Map.cpp" />
 		<Unit filename="src/MapState.cpp" />
 		<Unit filename="src/MenuState.cpp" />
@@ -111,6 +114,7 @@
 		<Unit filename="src/TextureManager.cpp" />
 		<Unit filename="src/UiButton.cpp" />
 		<Unit filename="src/Wall.cpp" />
+		<Unit filename="src/WinState.cpp" />
 		<Unit filename="src/main.cpp" />
 		<Extensions>
 			<envvars />
