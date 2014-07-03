@@ -94,6 +94,12 @@ void GameState::load(int )
 
 
     Map::MapControl.loadMap(Map::MapControl.map_name);
+    if (!music.openFromFile(Map::MapControl.music_name) ){
+        cout << "[Erro] Erro ao carregar musica" << endl;
+    } else
+    {
+        music.play();
+    }
 }
 
 int GameState::unload()

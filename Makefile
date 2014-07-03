@@ -18,7 +18,7 @@ CXXFLAGS      = -pipe -std=c++11 -g -Wall -W -fPIE $(DEFINES)
 INCPATH       = -I/opt/Qt5.2.1/5.2.1/gcc_64/mkspecs/linux-g++ -I. -Iinclude
 LINK          = g++
 LFLAGS        = -Wl,-rpath,/opt/Qt5.2.1/5.2.1/gcc_64
-LIBS          = $(SUBLIBS) -lsfml-system -lsfml-graphics -lsfml-window -lBox2D 
+LIBS          = $(SUBLIBS) -lsfml-audio -lsfml-system -lsfml-graphics -lsfml-window -lBox2D 
 AR            = ar cqs
 RANLIB        = 
 QMAKE         = /opt/Qt5.2.1/5.2.1/gcc_64/bin/qmake
@@ -504,7 +504,8 @@ PolygonBody.o: src/PolygonBody.cpp include/PolygonBody.h
 MapState.o: src/MapState.cpp include/MapState.h \
 		include/State.h \
 		include/TextureManager.h \
-		include/Globals.h
+		include/Globals.h \
+		include/Map.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o MapState.o src/MapState.cpp
 
 main.o: src/main.cpp include/GameManager.h \
@@ -570,6 +571,7 @@ Entity.o: src/Entity.cpp include/Entity.h \
 		include/Body.h \
 		include/Animation.h \
 		include/Effects.h \
+		include/Engine.h \
 		include/Globals.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Entity.o src/Entity.cpp
 
@@ -698,7 +700,11 @@ Shot.o: src/Shot.cpp include/Shot.h \
 		include/Animation.h \
 		include/TextureManager.h \
 		include/Globals.h \
-		include/Engine.h
+		include/Engine.h \
+		include/Spawner.h \
+		include/Entity.h \
+		include/Character.h \
+		include/Effects.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Shot.o src/Shot.cpp
 
 WinState.o: src/WinState.cpp include/WinState.h \

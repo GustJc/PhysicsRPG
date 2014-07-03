@@ -70,7 +70,7 @@ HEADERS += \
 
 #SFML
 QMAKE_CXXFLAGS += -std=c++11
-unix: LIBS += -lsfml-system -lsfml-graphics -lsfml-window
+unix: LIBS += -lsfml-system -lsfml-graphics -lsfml-window -lsfml-audio
 win32: LIBS += -LC:\Library\SFML\SFML-2.1\lib -lsfml-main -lsfml-system -lsfml-graphics -lsfml-window -lsfml-audio
 
 #Others

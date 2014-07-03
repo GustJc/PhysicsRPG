@@ -2,6 +2,7 @@
 #define STATE_H
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 typedef enum eStateType {
     GST_NONE,
     GST_GAME,
@@ -29,6 +30,7 @@ class State
         sf::RenderWindow& window;
         int mStack;
         eStateType mStado;
+        sf::Music music;
 };
 
 

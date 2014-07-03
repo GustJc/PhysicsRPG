@@ -18,6 +18,7 @@ public:
     void createMap(int width);
 
     string map_name = "output.map";
+    string music_name = "data/music/Oriental_Style.ogg";
 
     vector<int> fases;
 };

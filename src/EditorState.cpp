@@ -73,6 +73,13 @@ void EditorState::load(int )
     flag->getBody()->SetUserData(flag);
     Engine::bodylist.push_back(flag);
 
+    if (!music.openFromFile("data/music/Tribal.ogg") ){
+        cout << "[Erro] Erro ao carregar musica" << endl;
+    } else
+    {
+        music.play();
+    }
+
 
 }
 

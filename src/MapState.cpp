@@ -99,6 +99,20 @@ void MapState::load(int stack )
     fases[10] = "map3.map";
     fases[11] = "map4.map";
 
+    fases_music[0] = "data/music/Oriental_Style.ogg";
+    fases_music[1] = "data/music/First_try_magix.ogg";
+    fases_music[2] = "data/music/Oriental_Style.ogg";
+
+    fases_music[3] = "data/music/Oriental_Style.ogg";
+    fases_music[4] = "data/music/Oriental_Style.ogg";
+    fases_music[5] = "data/music/Oriental_Style.ogg";
+    fases_music[6] = "data/music/Oriental_Style.ogg";
+    fases_music[7] = "data/music/Oriental_Style.ogg";
+    fases_music[8] = "data/music/Oriental_Style.ogg";
+    fases_music[9] = "data/music/Oriental_Style.ogg";
+    fases_music[10] = "data/music/Oriental_Style.ogg";
+    fases_music[11] = "data/music/Oriental_Style.ogg";
+
     Map::MapControl.map_name = fases[0];
 
     //Completou ultimo mapa
@@ -122,6 +136,13 @@ void MapState::load(int stack )
         int index = Map::MapControl.fases[i];
         nodes[index]->complete = true;
         nodes[index]->visible = true;
+    }
+
+    if (!music.openFromFile("data/music/New_day.ogg") ){
+        cout << "[Erro] Erro ao carregar musica" << endl;
+    } else
+    {
+        music.play();
     }
 
 }

@@ -26,6 +26,7 @@ protected:
         sf::Sprite sp_dot;
     private:
         map<int, string> fases;
+        map<int, string> fases_music;
 };
 
 #endif // MAPSTATE_H

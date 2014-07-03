@@ -36,6 +36,7 @@
 		</Compiler>
 		<Linker>
 			<Add option="-lsfml-system -lsfml-graphics -lsfml-window" />
+			<Add option="-lsfml-audio" />
 			<Add option="-lBox2D" />
 		</Linker>
 		<Unit filename="include/Animation.h" />

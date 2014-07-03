@@ -28,6 +28,14 @@ void MenuState::load(int )
     view.setCenter(WINDOW_WIDTH/2.f, WINDOW_HEIGHT/2.f);
 
     window.setView(view);
+
+    if (!music.openFromFile("data/music/First_lmms.wav") ){
+        cout << "[Erro] Erro ao carregar musica" << endl;
+    } else
+    {
+        music.play();
+    }
+
 }
 
 int MenuState::unload()
