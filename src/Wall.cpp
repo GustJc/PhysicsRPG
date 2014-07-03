@@ -12,6 +12,9 @@ Wall::Wall(int id, float px, float py)
 {
     name = "wall";
     type = id;
+
+    this->getBodyFixture()->filter.maskBits = FilterShots | FilterWalls | FilterNormal | FilterPlayer | FilterEnemy;
+    this->getBodyFixture()->filter.categoryBits= FilterWalls;
     if(id == 1)
     {
         setTexture(TextureManager::TextureControl.get("tileset"), 16,16);

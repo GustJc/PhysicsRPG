@@ -11,7 +11,9 @@ typedef enum eFilterCategory {
     FilterEffects   = 0x00000004,
     FilterWalls     = 0x00000008,
     FilterPlayer    = 0x00000010,
-    FilterShots     = 0x000000020
+    FilterShots     = 0x000000020,
+    FilterEnemy     = 0x000000040,
+    FilterFlag     = 0x000000080
 } FilterCategory;
 
 using namespace std;

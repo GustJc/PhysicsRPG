@@ -13,6 +13,10 @@ PlayerEntity::PlayerEntity(b2World *world, float px, float py)
     this->HP = this->maxHP = 30;
     this->def = 5;
     this->atk = 5;
+
+    this->getBodyFixture()->filter.maskBits = FilterWalls | FilterWalls | FilterNormal | FilterEnemy | FilterObjects;
+    this->getBodyFixture()->filter.categoryBits= FilterPlayer;
+
     this->setTexture(TextureManager::TextureControl.get("player_char"), 64, 64, 1, 1);
     this->getSprite()->setScale(0.9, 0.9);
     this->m_animation.setFrames(11, 1, 200);
@@ -36,7 +40,6 @@ PlayerEntity::PlayerEntity(b2World *world, float px, float py)
 
     m_body = world->CreateBody(&m_bodyDef);
 
-    m_fixtureDef.filter.groupIndex = -1;
     m_fixtureDef.shape = &m_bodyShape;
     m_fixtureDef.density = 0.002;
 

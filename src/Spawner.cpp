@@ -22,6 +22,9 @@ Spawner::Spawner(b2World *world, float x, float y, bool spawning)
 
     this->is_spawning = spawning;
 
+    this->getBodyFixture()->filter.maskBits = FilterShots | FilterWalls | FilterNormal;
+    this->getBodyFixture()->filter.categoryBits= FilterObjects;
+
 }
 
 void Spawner::update(float dt)

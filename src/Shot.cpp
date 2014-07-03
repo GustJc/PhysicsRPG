@@ -13,6 +13,9 @@ Shot::Shot(int id, float px, float py, b2Vec2 force, int limit)
     name = "shot";
     type = id;
 
+    this->getBodyFixture()->filter.maskBits = FilterShots | FilterWalls | FilterNormal | FilterEnemy;
+    this->getBodyFixture()->filter.categoryBits= FilterShots;
+
     if(id == 1)
     {
         this->setTexture(TextureManager::TextureControl.get("boulder_8"));
@@ -27,7 +30,7 @@ Shot::Shot(int id, float px, float py, b2Vec2 force, int limit)
         this->getBodyFixture()->friction = 0.5f;
         this->getBodyFixture()->restitution = 0.4f;
         this->getBodyFixture()->density = 2.f;
-        this->getBodyFixture()->filter.groupIndex = -1;
+
         this->m_bodyDef.fixedRotation = false;
         this->m_bodyDef.angularDamping = 2.5f;
 
@@ -47,7 +50,6 @@ Shot::Shot(int id, float px, float py, b2Vec2 force, int limit)
         this->getBodyFixture()->friction = 0.5f;
         this->getBodyFixture()->restitution = 0.4f;
         this->getBodyFixture()->density = 2.f;
-        this->getBodyFixture()->filter.groupIndex = -1;
         this->m_bodyDef.fixedRotation = false;
         this->m_bodyDef.angularDamping = 2.5f;
 

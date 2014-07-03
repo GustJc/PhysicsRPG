@@ -13,6 +13,9 @@ Character::Character()
     name = "enemy";
     this->atk = 10;
     this->HP = this->maxHP = 20;
+
+    this->getBodyFixture()->filter.maskBits = FilterShots | FilterWalls | FilterNormal | FilterEnemy | FilterPlayer;
+    this->getBodyFixture()->filter.categoryBits= FilterEnemy;
 }
 
 Character::Character(b2World *world, float x, float y)
