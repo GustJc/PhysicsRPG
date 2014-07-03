@@ -12,7 +12,7 @@ Character::Character()
     //ctor
     name = "enemy";
     this->atk = 10;
-    this->HP = 20;
+    this->HP = this->maxHP = 20;
 }
 
 Character::Character(b2World *world, float x, float y)

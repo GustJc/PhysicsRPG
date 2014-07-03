@@ -22,7 +22,7 @@ Wall::Wall(int id, float px, float py)
         m_bodyDef.type = b2_dynamicBody;
         m_fixtureDef.friction = 0.5f;
         m_fixtureDef.density = 0.5f;
-        this->HP = 10;
+        this->HP = this->maxHP = 10;
     }
     else
     if(id == 2)
@@ -35,7 +35,7 @@ Wall::Wall(int id, float px, float py)
         m_bodyDef.type = b2_dynamicBody;
         m_fixtureDef.friction = 0.5f;
         m_fixtureDef.density = 0.5f;
-        this->HP = 10;
+        this->HP = this->maxHP = 10;
     }
     else
     if(id == 3)
@@ -49,7 +49,7 @@ Wall::Wall(int id, float px, float py)
         m_fixtureDef.friction = 0.5f;
         m_fixtureDef.density = 0.5f;
         setDefaultRotation(90);
-        this->HP = 10;
+        this->HP = this->maxHP = 10;
     }
 
     Engine::bodylist.push_back(this);

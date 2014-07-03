@@ -8,7 +8,7 @@ Spawner::Spawner(b2World *world, float x, float y, bool spawning)
 {
     this->type = 1;
     this->name = "spawner";
-    this->HP = 50;
+    this->HP = this->maxHP = 50;
     this->clock.restart();
 
     this->setTexture(TextureManager::TextureControl.get("spawn"), 32, 32, 1, 200);
