@@ -7,8 +7,11 @@
 #include "Shot.h"
 #include <math.h>
 
+PlayerEntity* PlayerEntity::PlayerControl = nullptr;
+
 PlayerEntity::PlayerEntity(b2World *world, float px, float py)
 {
+    PlayerControl = this;
     name = "player";
     this->HP = this->maxHP = 30;
     this->def = 5;
@@ -28,10 +31,8 @@ PlayerEntity::PlayerEntity(b2World *world, float px, float py)
     arrow_full.setTexture(TextureManager::TextureControl.get("arrow2"));
     arrow_full.setOrigin(0, arrow_full.getTextureRect().height/2.f);
 
-    m_bodyCircleShape.m_radius = 4.f/pixelsPerMeter;
-
     //Full sprite is 23, 20
-    m_bodyShape.SetAsBox(23.0f/pixelsPerMeter,26.0f/pixelsPerMeter, b2Vec2(0, double(-2)/pixelsPerMeter), 0);
+    m_bodyShape.SetAsBox(20.0f/pixelsPerMeter,18.0f/pixelsPerMeter, b2Vec2(0, double(-2)/pixelsPerMeter), 0);
 
     m_bodyDef.position.Set((px)/pixelsPerMeter, (py)/pixelsPerMeter);
     m_bodyDef.type = b2_dynamicBody;
@@ -47,13 +48,15 @@ PlayerEntity::PlayerEntity(b2World *world, float px, float py)
 
     m_fixtureDef.shape = &m_bodyCircleShape;
     m_fixtureDef.density = 0.001;
-    m_fixtureDef.friction = 0;
+    m_fixtureDef.friction = 0.1;
 
-    m_bodyCircleShape.m_p.Set( double(6-23)/pixelsPerMeter,double(20-4)/pixelsPerMeter);
+    m_bodyCircleShape.m_radius = 8.f/pixelsPerMeter;
+    m_bodyCircleShape.m_p.Set( double(0)/pixelsPerMeter,double(20-4)/pixelsPerMeter);
+
     m_body->CreateFixture(&m_fixtureDef);
 
-    m_bodyCircleShape.m_p.Set( double(23-10)/pixelsPerMeter,double(20-4)/pixelsPerMeter);
-    m_body->CreateFixture(&m_fixtureDef);
+//    m_bodyCircleShape.m_p.Set( double(23-10)/pixelsPerMeter,double(20-4)/pixelsPerMeter);
+//    m_body->CreateFixture(&m_fixtureDef);
 }
 
 void PlayerEntity::events(sf::Event &event){
@@ -188,7 +191,7 @@ void PlayerEntity::update(float dt)
         if(this->isNotFalling())
         {
             this->m_animation.setFrames(3, 7, 100, true);
-            m_body->ApplyForce( b2Vec2(0,-50/pixelsPerMeter), m_body->GetWorldCenter(), true );
+            m_body->ApplyForce( b2Vec2(0,-300*m_body->GetMass() ), m_body->GetWorldCenter(), true );
         }
     }
 

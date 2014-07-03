@@ -147,6 +147,12 @@ void Character::update(float dt)
     {
         if(this->m_animation.isReady())
         {
+            int gold = 1;
+            PlayerEntity::PlayerControl->gold += gold;
+            stringstream ss; ss << "+" << gold;
+            SplashText* text = new SplashText(ss.str(), this->getBody()->GetPosition()+b2Vec2(0, -1), sf::Color::Yellow, 22, 800);
+            text->inicialImpulse = b2Vec2(-0.5, 1.5);
+
             destroyBody(*Engine::world);
             removeFromList(Engine::bodylist);
             removeFromList(Engine::effectslist);

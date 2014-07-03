@@ -11,6 +11,7 @@
 #include <cmath>
 
 #include <iostream>
+#include <sstream>
 using namespace std;
 GameState::GameState(sf::RenderWindow& wnd) :
 State(wnd)
@@ -276,6 +277,13 @@ void GameState::render()
     menu.setTexture(TextureManager::TextureControl.get("menu_superior"));
     menu.setPosition( window.mapPixelToCoords(sf::Vector2i(0,0) ) );
     window.draw(menu);
+
+    stringstream ss;
+    ss << this->player->gold;
+    sf::Text gold(ss.str(), Engine::EngineControl.getFont());
+    gold.setColor(sf::Color::Yellow);
+    gold.setPosition( window.mapPixelToCoords(sf::Vector2i(400 - gold.getGlobalBounds().width/2.f, 80) ) );
+    window.draw(gold);
 
 
     //Draw debug data

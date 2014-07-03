@@ -20,6 +20,10 @@ public:
 
     void update(float dt = 0);
 
+    int gold = 0;
+
+    static PlayerEntity* PlayerControl;
+
 protected:
     void atira();
 
