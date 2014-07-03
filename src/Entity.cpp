@@ -22,8 +22,6 @@ int Entity::damage(int attack)
 
     dano -= random;
 
-    cout << "Dano: " << dano << endl;
-
     if(dano > 0){
         hpTimer.restart();
         HP -= dano;
@@ -42,7 +40,7 @@ void Entity::render(sf::RenderWindow &window)
 {
     SpriteBody::render(window);
 
-    //if(showHP && hpTimer.getElapsedTime().asSeconds() < hpDelay)
+    if(showHP && hpTimer.getElapsedTime().asSeconds() < hpDelay)
     {
         renderHP();
     }
@@ -66,7 +64,7 @@ void Entity::renderHP()
     int width  = m_animation.getSprite().getTextureRect().width;
     int height = 4;
 
-    float percent = this->HP / this->maxHP;
+    float percent = (float)this->HP / (float)this->maxHP;
 
     Engine::EngineControl.drawRectVertex(startX, startY,
                            width*percent, height, sf::Color(255,0,0,100) );

@@ -27,7 +27,7 @@ class Entity : public SpriteBody
         float speed = 2;
 
         bool showHP = true;
-        float hpDelay = 3;
+        float hpDelay = 1;
         sf::Clock hpTimer;
 
     private:
