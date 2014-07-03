@@ -33,7 +33,7 @@ void GameState::load(int )
     TextureManager::TextureControl.load("background", "data/temp_background.png");
 
     TextureManager::TextureControl.load("menu_superior", "data/menu_su.png");
-    TextureManager::TextureControl.load("tileset", "data/tileset.png");
+    TextureManager::TextureControl.load("tileset", "data/tileset2.png");
 
     TextureManager::TextureControl.load("player_char", "data/player_char.png");
     TextureManager::TextureControl.load("flag", "data/flag.png");

@@ -18,8 +18,6 @@ class Spawner : public Entity
     protected:
         sf::Clock clock;
         float creationPeriod = 10.0;
-        int HP = 10, maxHP = 10;
-        int atk = 0, def = 1;
         int touching_objs=0;
         bool is_spawning = true;
 };

@@ -10,6 +10,8 @@ public:
 
     void update(float dt = 0);
 
+    virtual void startContact(Body* body, b2Contact * contact);
+
     int getAtk();
 protected:
     int atk = 5;

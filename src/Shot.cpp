@@ -3,6 +3,10 @@
 #include "TextureManager.h"
 #include "Globals.h"
 #include "Engine.h"
+#include "Spawner.h"
+#include "Effects.h"
+
+#include <sstream>
 
 Shot::Shot(int id, float px, float py, b2Vec2 force, int limit)
 {
@@ -68,6 +72,20 @@ void Shot::update(float dt)
     }
 
     SpriteBody::update(dt);
+}
+
+void Shot::startContact(Body *body, b2Contact *)
+{
+    if(body->name == "spawner")
+    {
+        int dano = atk;
+        Spawner* s = (Spawner*) body;
+        s->damage(dano);
+        stringstream ss; ss << "-" << dano;
+
+        SplashText* text = new SplashText(ss.str(), s->getBody()->GetPosition()+b2Vec2(0, -1), sf::Color::Red, 25, 1000);
+        text->inicialImpulse = b2Vec2(1,1);
+    }
 }
 
 int Shot::getAtk()
