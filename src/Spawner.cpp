@@ -11,6 +11,9 @@ Spawner::Spawner(b2World *world, float x, float y, bool spawning)
     this->HP = this->maxHP = 50;
     this->clock.restart();
 
+    this->getBodyFixture()->filter.maskBits = FilterShots | FilterWalls | FilterNormal;
+    this->getBodyFixture()->filter.categoryBits = FilterObjects;
+
     this->setTexture(TextureManager::TextureControl.get("spawn"), 32, 32, 1, 200);
 
     this->getSprite()->setScale(4, 4);
@@ -21,9 +24,6 @@ Spawner::Spawner(b2World *world, float x, float y, bool spawning)
     this->getBody()->SetUserData(this);
 
     this->is_spawning = spawning;
-
-    this->getBodyFixture()->filter.maskBits = FilterShots | FilterWalls | FilterNormal;
-    this->getBodyFixture()->filter.categoryBits= FilterObjects;
 
 }
 
