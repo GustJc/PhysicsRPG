@@ -84,8 +84,8 @@ void GameState::load(int )
     //Character* c = new Character(world, (300)/pixelsPerMeter, (500)/pixelsPerMeter);
     //Engine::bodylist.push_back(c);
 
-    player = new PlayerEntity(world);
-    Engine::bodylist.push_back(player);
+    this->player = new PlayerEntity(world, -300, 500);
+    Engine::bodylist.push_back(this->player);
 
     //in FooTest constructor
     world->SetContactListener(&listenner);
