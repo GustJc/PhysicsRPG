@@ -14,11 +14,13 @@ Flag::~Flag()
     //dtor
 }
 
-void Flag::startContact(Body *, b2Contact * )
+void Flag::startContact(Body *body, b2Contact * )
 {
-    die();
-
-    m_animation.getSprite().setColor(sf::Color(0,255, 0));
+    if(body->name == "shot")
+    {
+        die();
+        m_animation.getSprite().setColor(sf::Color(0,255, 0));
+    }
 }
 
 void Flag::endContact(Body * , b2Contact *)
