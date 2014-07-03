@@ -57,7 +57,7 @@ void EditorState::load(int )
 
     b2Body* m_ground = world->CreateBody(&ground_def);
     b2PolygonShape groundBox;
-    groundBox.SetAsBox(800.f/pixelsPerMeter, 80.f/pixelsPerMeter);
+    groundBox.SetAsBox(1000.f/pixelsPerMeter, 80.f/pixelsPerMeter);
     m_ground->CreateFixture(&groundBox, 0.0f);
 
     //in FooTest constructor
@@ -136,25 +136,25 @@ void EditorState::events(sf::Event& event)
             isSnap = !isSnap;
         }
 //Move Controls
-        else if(event.key.code == sf::Keyboard::D)
+        else if(event.key.code == sf::Keyboard::Right)
         {
             sf::View& view = Engine::EngineControl.getViewGame();
             view.move(sf::Vector2f(20,0));
             window.setView(view);
         }
-        else if(event.key.code == sf::Keyboard::A)
+        else if(event.key.code == sf::Keyboard::Left)
         {
             sf::View& view = Engine::EngineControl.getViewGame();
             view.move(sf::Vector2f(-20,0));
             window.setView(view);
         }
-        else if(event.key.code == sf::Keyboard::W)
+        else if(event.key.code == sf::Keyboard::Up)
         {
             sf::View& view = Engine::EngineControl.getViewGame();
             view.move(sf::Vector2f(0,-20));
             window.setView(view);
         }
-        else if(event.key.code == sf::Keyboard::S)
+        else if(event.key.code == sf::Keyboard::Down)
         {
             sf::View& view = Engine::EngineControl.getViewGame();
             view.move(sf::Vector2f(0,20));
@@ -281,8 +281,8 @@ void EditorState::render()
             Engine::EngineControl.drawLine(start.x, y, start.x+WINDOW_WIDTH, y, sf::Color(0,0,0, 50) );
     }
     //Draw floor
-    Engine::EngineControl.drawRectVertex(-400,520,1600,160);
-    for(int x = -300; x < 1600; x+= 100)
+    Engine::EngineControl.drawRectVertex(-600,520,2000,160);
+    for(int x = -500; x < 2000; x+= 100)
         Engine::EngineControl.drawRectVertex(x,520,2,160,sf::Color(0,100,0));
 
     //Draw selection area

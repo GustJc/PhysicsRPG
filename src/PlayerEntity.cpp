@@ -62,13 +62,13 @@ PlayerEntity::PlayerEntity(b2World *world, float px, float py)
 void PlayerEntity::events(sf::Event &event){
     if(event.type == sf::Event::KeyPressed)
     {
-        if(event.key.code == sf::Keyboard::Left)
+        if(event.key.code == sf::Keyboard::A)
             m_keyState |= KEY_LEFT;
         else
-        if(event.key.code == sf::Keyboard::Right)
+        if(event.key.code == sf::Keyboard::D)
             m_keyState |= KEY_RIGHT;
         else
-        if(event.key.code == sf::Keyboard::Up)
+        if(event.key.code == sf::Keyboard::W)
             m_keyState |= KEY_UP;
         else
         if(event.key.code == sf::Keyboard::Space &&
@@ -85,13 +85,13 @@ void PlayerEntity::events(sf::Event &event){
     else
     if(event.type == sf::Event::KeyReleased)
     {
-        if(event.key.code == sf::Keyboard::Left)
+        if(event.key.code == sf::Keyboard::A)
             m_keyState &= ~KEY_LEFT;
         else
-        if(event.key.code == sf::Keyboard::Right)
+        if(event.key.code == sf::Keyboard::D)
             m_keyState &= ~KEY_RIGHT;
         else
-        if(event.key.code == sf::Keyboard::Up)
+        if(event.key.code == sf::Keyboard::W)
             m_keyState &= ~KEY_UP;
     }
 

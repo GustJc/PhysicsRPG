@@ -68,7 +68,7 @@ void GameState::load(int )
 
     b2Body* m_ground = world->CreateBody(&ground_def);
     b2PolygonShape groundBox;
-    groundBox.SetAsBox(800.f/pixelsPerMeter, 80.f/pixelsPerMeter);
+    groundBox.SetAsBox(1000.f/pixelsPerMeter, 80.f/pixelsPerMeter);
     m_ground->CreateFixture(&groundBox, 0.0f);
 
     this->flag = new Flag();
@@ -237,8 +237,8 @@ void GameState::render()
     window.draw(background);
 
     //Draw floor
-    Engine::EngineControl.drawRectVertex(-400,520,1600,160);
-    for(int x = -300; x < 1600; x+= 100)
+    Engine::EngineControl.drawRectVertex(-600,520,2000,160);
+    for(int x = -500; x < 2000; x+= 100)
         Engine::EngineControl.drawRectVertex(x,520,2,160,sf::Color(0,100,0));
 
     for(int i = 0; i < (int) Engine::bodylist.size(); i++)
