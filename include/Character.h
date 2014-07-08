@@ -11,24 +11,24 @@ class Character : public Entity
         Character(b2World *world, float x, float y);
         virtual ~Character();
 
-        void update(float dt = 0);
+        void update(float dt = 0) = 0;
 
-        void onAI();
+        virtual void onAI() = 0;
 
-        void moveLeft();
-        void moveRight();
+        virtual void moveLeft() = 0;
+        virtual void moveRight() = 0;
 
 
-        virtual void startContact(Body * body, b2Contact * contact);
-        virtual void endContact(Body * body, b2Contact * contact);
-        virtual void preSolve(Body * body, b2Contact *contact, const b2Manifold *manifold);
-        virtual void postSolve(Body * body, b2Contact* contact, const b2ContactImpulse* impulse);
+        virtual void startContact(Body * body, b2Contact * contact) = 0;
+        virtual void endContact(Body * body, b2Contact * contact) = 0;
+        virtual void preSolve(Body * body, b2Contact *contact, const b2Manifold *manifold) = 0;
+        virtual void postSolve(Body * body, b2Contact* contact, const b2ContactImpulse* impulse) = 0;
 
     protected:
         float m_attack_period = 1;
         sf::Clock m_timer;
         sf::Clock m_timer_attack;
-    private:
+
         float lastImpulse;
         bool firstImpulse = true;
 };

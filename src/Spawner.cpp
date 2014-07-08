@@ -2,6 +2,7 @@
 #include "TextureManager.h"
 #include "Globals.h"
 #include "Character.h"
+#include "WeakOrc.h"
 #include "Engine.h"
 
 Spawner::Spawner(b2World *world, float x, float y, bool spawning)
@@ -60,7 +61,7 @@ Character* Spawner::createSoldier(string type)
 {
     if(type == "weak_orc")
     {
-        return new Character(this->getBody()->GetWorld(), this->getBodyDef()->position.x, this->getBodyDef()->position.y);
+        return new WeakOrc(this->getBody()->GetWorld(), this->getBodyDef()->position.x, this->getBodyDef()->position.y);
     }
 
     return nullptr;

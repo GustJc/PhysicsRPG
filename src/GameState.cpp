@@ -80,12 +80,6 @@ void GameState::load(int )
     flag->getBody()->SetUserData(flag);
     Engine::bodylist.push_back(flag);
 
-    //Spawner * spawner = new Spawner(world, 600.0f/pixelsPerMeter, (520.f-50.f)/pixelsPerMeter);
-    //Engine::bodylist.push_back(spawner);
-
-    //Character* c = new Character(world, (300)/pixelsPerMeter, (500)/pixelsPerMeter);
-    //Engine::bodylist.push_back(c);
-
     this->player = new PlayerEntity(world, -300, 500);
     Engine::bodylist.push_back(this->player);
 
