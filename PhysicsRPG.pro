@@ -34,7 +34,9 @@ SOURCES += \
     src/Wall.cpp \
     src/Shot.cpp \
     src/WinState.cpp \
-    src/LoseState.cpp
+    src/LoseState.cpp \
+    src/WeakOrc.cpp \
+    src/ShotArrow.cpp
 
 HEADERS += \
     include/Animation.h \
@@ -66,7 +68,10 @@ HEADERS += \
     include/Wall.h \
     include/Shot.h \
     include/WinState.h \
-    include/LoseState.h
+    include/LoseState.h \
+    include/map.h \
+    include/WeakOrc.h \
+    include/ShotArrow.h
 
 #SFML
 QMAKE_CXXFLAGS += -std=c++11

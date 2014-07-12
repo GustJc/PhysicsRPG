@@ -6,6 +6,7 @@
 #include "TextureManager.h"
 #include "Shot.h"
 #include <math.h>
+#include "ShotArrow.h"
 
 PlayerEntity* PlayerEntity::PlayerControl = nullptr;
 
@@ -244,16 +245,31 @@ void PlayerEntity::atira()
     float powerY = shot_power*sin(angle*M_PI/180.f);
 
 
-    Shot* shot = new Shot(selectedShot,
-                          (this->m_animation.getSprite().getPosition().x)/pixelsPerMeter,
-                          (this->m_animation.getSprite().getPosition().y)/pixelsPerMeter,
-                          b2Vec2( powerX/pixelsPerMeter,
-                                  powerY/pixelsPerMeter) );
-    shot->createBody(*Engine::world, true);
+    if(selectedShot <= 2) {
+        Shot* shot = new Shot(selectedShot,
+                              (this->m_animation.getSprite().getPosition().x)/pixelsPerMeter,
+                              (this->m_animation.getSprite().getPosition().y)/pixelsPerMeter,
+                              b2Vec2( powerX/pixelsPerMeter,
+                                      powerY/pixelsPerMeter) );
+        shot->createBody(*Engine::world, true);
 
-    shot->getBody()->ApplyLinearImpulse(b2Vec2( shot->getBody()->GetMass()*powerX/pixelsPerMeter,
-                                                shot->getBody()->GetMass()*powerY/pixelsPerMeter  ),shot->getBody()->GetWorldCenter(),true);
-    //End arrow
+        shot->getBody()->ApplyLinearImpulse(b2Vec2( shot->getBody()->GetMass()*powerX/pixelsPerMeter,
+                                                    shot->getBody()->GetMass()*powerY/pixelsPerMeter  ),shot->getBody()->GetWorldCenter(),true);
+
+    }else
+    {
+        ShotArrow* shot = new ShotArrow(selectedShot,
+                              (this->m_animation.getSprite().getPosition().x)/pixelsPerMeter,
+                              (this->m_animation.getSprite().getPosition().y)/pixelsPerMeter,
+                              b2Vec2( powerX/pixelsPerMeter,
+                                      powerY/pixelsPerMeter) );
+        shot->createBody(*Engine::world);
+        shot->getBody()->SetAngularDamping( 3 );
+
+        shot->getBody()->ApplyLinearImpulse(b2Vec2( shot->getBody()->GetMass()*powerX/pixelsPerMeter,
+                                                    shot->getBody()->GetMass()*powerY/pixelsPerMeter  ),shot->getBody()->GetWorldCenter(),true);
+    }
+    //Sfx
     if(selectedShot == 2)
         Engine::EngineControl.playSfx("data/music/sfx/shot1.wav");
     else

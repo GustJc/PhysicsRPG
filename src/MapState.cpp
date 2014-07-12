@@ -113,8 +113,6 @@ void MapState::load(int stack )
     fases_music[10] = "data/music/Oriental_Style.ogg";
     fases_music[11] = "data/music/Oriental_Style.ogg";
 
-    Map::MapControl.map_name = fases[0];
-
     //Completou ultimo mapa
     if(stack == 1)
     {
@@ -125,6 +123,7 @@ void MapState::load(int stack )
             { //Mesmo nome, então chave
                 Map::MapControl.fases.push_back(it->first);
                 cout << "Novo completo " << it->first << endl;
+                cout << it->second << endl;
                 break;
             }
         }
@@ -136,6 +135,7 @@ void MapState::load(int stack )
         int index = Map::MapControl.fases[i];
         nodes[index]->complete = true;
         nodes[index]->visible = true;
+        cout << "Fase completa: " << index << endl;
     }
 
     if (!music.openFromFile("data/music/New_day.ogg") ){

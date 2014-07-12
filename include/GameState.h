@@ -45,6 +45,8 @@ class GameState : public State
 
         void renderUI();
 
+        Body* mock;
+
     private:
         ContactListenner listenner;
 };

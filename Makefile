@@ -75,7 +75,9 @@ SOURCES       = src/TextureManager.cpp \
 		src/Wall.cpp \
 		src/Shot.cpp \
 		src/WinState.cpp \
-		src/LoseState.cpp 
+		src/LoseState.cpp \
+		src/WeakOrc.cpp \
+		src/ShotArrow.cpp 
 OBJECTS       = TextureManager.o \
 		TestState.o \
 		State.o \
@@ -106,7 +108,9 @@ OBJECTS       = TextureManager.o \
 		Wall.o \
 		Shot.o \
 		WinState.o \
-		LoseState.o
+		LoseState.o \
+		WeakOrc.o \
+		ShotArrow.o
 DIST          = /opt/Qt5.2.1/5.2.1/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt5.2.1/5.2.1/gcc_64/mkspecs/common/shell-unix.conf \
 		/opt/Qt5.2.1/5.2.1/gcc_64/mkspecs/common/unix.conf \
@@ -649,7 +653,8 @@ PlayerEntity.o: src/PlayerEntity.cpp include/PlayerEntity.h \
 		include/Globals.h \
 		include/Engine.h \
 		include/TextureManager.h \
-		include/Shot.h
+		include/Shot.h \
+		include/ShotArrow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PlayerEntity.o src/PlayerEntity.cpp
 
 Map.o: src/Map.cpp include/Map.h \
@@ -671,6 +676,7 @@ Spawner.o: src/Spawner.cpp include/Spawner.h \
 		include/Character.h \
 		include/TextureManager.h \
 		include/Globals.h \
+		include/WeakOrc.h \
 		include/Engine.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Spawner.o src/Spawner.cpp
 
@@ -724,6 +730,27 @@ LoseState.o: src/LoseState.cpp include/LoseState.h \
 		include/Animation.h \
 		include/Engine.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o LoseState.o src/LoseState.cpp
+
+WeakOrc.o: src/WeakOrc.cpp include/WeakOrc.h \
+		include/Character.h \
+		include/Entity.h \
+		include/SpriteBody.h \
+		include/Body.h \
+		include/Animation.h \
+		include/Engine.h \
+		include/Globals.h \
+		include/TextureManager.h \
+		include/PlayerEntity.h \
+		include/Effects.h \
+		include/Shot.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o WeakOrc.o src/WeakOrc.cpp
+
+ShotArrow.o: src/ShotArrow.cpp include/ShotArrow.h \
+		include/Shot.h \
+		include/SpriteBody.h \
+		include/Body.h \
+		include/Animation.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ShotArrow.o src/ShotArrow.cpp
 
 ####### Install
 

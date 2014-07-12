@@ -9,7 +9,7 @@
 #include "Spawner.h"
 #include "Map.h"
 #include <cmath>
-
+#include "SpriteBody.h"
 #include <iostream>
 #include <sstream>
 using namespace std;
@@ -51,6 +51,7 @@ void GameState::load(int )
 
     TextureManager::TextureControl.load("arrow", "data/arrow.png");
     TextureManager::TextureControl.load("arrow2", "data/arrow_full.png");
+    TextureManager::TextureControl.load("arrow_shot", "data/arrow_shot.png");
     TextureManager::TextureControl.load("ui", "data/selection_ui.png");
 
     b2Vec2 gravity(0.0f, 10.0f);
@@ -67,6 +68,8 @@ void GameState::load(int )
     ground_def.position.Set(400.0f/pixelsPerMeter, 600.0/pixelsPerMeter);
 
     b2Body* m_ground = world->CreateBody(&ground_def);
+    mock = new SpriteBody();
+    m_ground->SetUserData(mock);
     b2PolygonShape groundBox;
     groundBox.SetAsBox(1000.f/pixelsPerMeter, 80.f/pixelsPerMeter);
     m_ground->CreateFixture(&groundBox, 0.0f);
@@ -99,6 +102,7 @@ void GameState::load(int )
 
 int GameState::unload()
 {
+    delete mock;
     if(m_debug_render != nullptr)
         delete m_debug_render;
     if(world != nullptr)
@@ -167,6 +171,9 @@ void GameState::events(sf::Event& event)
         }
         else if(event.key.code == sf::Keyboard::E){
             isGrid = !isGrid;
+        }
+        else if(event.key.code == sf::Keyboard::K){
+            mStado = GST_WIN;
         }
 //Debug Controls
 

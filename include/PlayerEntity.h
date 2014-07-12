@@ -22,7 +22,7 @@ public:
 
     static PlayerEntity* PlayerControl;
 
-    int selectedShot = 1;
+    int selectedShot = 3;
 
     sf::Clock shotTimer;
     float shot_cooldown = 1.f;
@@ -38,7 +38,7 @@ private:
     int m_keyState = 0;
 
     int m_state = 0;
-    float shot_max_power = 300.f;
+    float shot_max_power = 1000.f;
     float angle = 45;
     float shot_power = 50.f;
 
