@@ -3,6 +3,8 @@
 
 #include "SpriteBody.h"
 
+class Entity;
+
 class Shot : public SpriteBody
 {
 public:
@@ -11,6 +13,8 @@ public:
     virtual void update(float dt = 0);
 
     virtual void startContact(Body* body, b2Contact * contact);
+
+    void proccessHitDamage(Entity *entity);
 
     int getAtk();
 protected:

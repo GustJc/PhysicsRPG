@@ -62,20 +62,6 @@ void Wall::startContact(Body *body, b2Contact *)
 {
     if(body->name == "shot")
     {
-        cout << "Wall hit " << endl;
-        Shot* shot = (Shot*)body;
-        int dano = shot->getAtk();
-        stringstream ss; ss << "-" << dano;
 
-        this->damage(dano);
-
-        SplashText* text = new SplashText(ss.str(), this->getBody()->GetPosition()+b2Vec2(0, -1), sf::Color::Red, 15, 1000);
-        text->inicialImpulse = b2Vec2(1,1);
-
-        SplashAnimation* sa = new SplashAnimation(TextureManager::TextureControl.get("explosion"), sf::Vector2i(16,16),
-                                  this->getBody()->GetPosition(), 5, 100, sf::Vector2f(2.0, 2.0));
-        sa->inicialImpulse = b2Vec2(0, 0); // To remove waning unused
-
-        Engine::EngineControl.playSfx("data/music/sfx/explosion.wav");
     }
 }

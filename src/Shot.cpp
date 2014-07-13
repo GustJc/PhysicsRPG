@@ -5,7 +5,7 @@
 #include "Engine.h"
 #include "Spawner.h"
 #include "Effects.h"
-
+#include "Entity.h"
 #include <sstream>
 
 Shot::Shot(int id, float px, float py, b2Vec2 force, int limit)
@@ -78,18 +78,39 @@ void Shot::update(float dt)
 
 void Shot::startContact(Body *body, b2Contact *)
 {
+    if(!isActive)
+        return;
+
     if(body->name == "spawner")
     {
-        int dano = atk;
-        Spawner* s = (Spawner*) body;
-        s->damage(dano);
-        stringstream ss; ss << "-" << dano;
-
-        SplashText* text = new SplashText(ss.str(), s->getBody()->GetPosition()+b2Vec2(0, -1), sf::Color::Red, 25, 1000);
-        text->inicialImpulse = b2Vec2(1,1);
-
+        Entity* ent = (Entity*) body;
+        proccessHitDamage(ent);
         Engine::EngineControl.playSfx("data/music/sfx/explosion.wav");
     }
+    else
+    if(body->name == "wall")
+    {
+        Entity* ent = (Entity*) body;
+        proccessHitDamage(ent);
+        Engine::EngineControl.playSfx("data/music/sfx/explosion.wav");
+    }
+}
+
+void Shot::proccessHitDamage(Entity *entity)
+{
+    if(!isActive)
+        return;
+
+    int dano = atk;
+    entity->damage(dano);
+    stringstream ss; ss << "-" << dano;
+
+    SplashText* text = new SplashText(ss.str(), entity->getBody()->GetPosition()+b2Vec2(0, -1), sf::Color::Red, 25, 1000);
+    text->inicialImpulse = b2Vec2(1,1);
+
+    SplashAnimation* sa = new SplashAnimation(TextureManager::TextureControl.get("explosion"), sf::Vector2i(16,16),
+                              this->getBody()->GetPosition(), 5, 100, sf::Vector2f(2.0, 2.0));
+    sa->inicialImpulse = b2Vec2(0, 0); // To remove waning unused
 }
 
 int Shot::getAtk()

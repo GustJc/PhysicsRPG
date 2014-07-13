@@ -15,8 +15,8 @@ ShotArrow::ShotArrow(int id, float px, float py, b2Vec2 force)
     this->getBodyFixture()->filter.maskBits = FilterShots | FilterWalls | FilterNormal | FilterEnemy | FilterObjects;
     this->getBodyFixture()->filter.categoryBits= FilterShots;
 
-    this->setTexture(TextureManager::TextureControl.get("arrow_shot"));
-    this->getSprite()->setOrigin(16,16);
+    this->setTexture(TextureManager::TextureControl.get("arrow_shot"), 32, 16);
+    this->getSprite()->setOrigin(16,8);
     this->m_bodyShape.SetAsBox(0.4f, 0.1f);
 
     this->getBodyDef()->position.Set(
@@ -40,19 +40,43 @@ void ShotArrow::update(float dt)
 {
     if(m_body->IsAwake() == false){
         Body* b = (Body*)m_collisionToMakeSticky.targetBody->GetUserData();
-        if(b->name == "sprite")
-            isDelete = true;
+        if(b->name == "sprite" || m_body->GetJointList() == nullptr){
+            if(isDelete == false){
+                isDelete = true;
+                m_animation.setFrames(1, 4, 70, true);
+                m_animation.forceFrame(0);
+                isActive = glued = false;
+            }
+        }
     }
 
     if(glued){
         Body* b = (Body*)m_collisionToMakeSticky.targetBody->GetUserData();
-        if(m_body->GetJointList() == nullptr) {
-            isDelete = true;
-        }else
-        if(b->isDelete) {
-            isDelete = true;
+        if(m_body->GetJointList() == nullptr || b->isDelete) {
+            if(isActive)
+            {
+                b2Filter filter;
+                filter.maskBits = FilterWalls | FilterNormal | FilterObjects;
+                filter.categoryBits= FilterShots;
+                m_body->GetFixtureList()->SetFilterData(filter);
+                m_body->GetFixtureList()->SetDensity(0.5);
+                m_body->ResetMassData();
+                isActive = false;
+            }
         }
         SpriteBody::update(dt);
+        return;
+    }
+
+    //Animação de morte
+    if(isDelete)
+    {
+        m_animation.getSprite().setRotation( default_rotation + 180.f*m_body->GetAngle()/(M_PI) );
+        m_animation.getSprite().setPosition( m_body->GetPosition().x*pixelsPerMeter, m_body->GetPosition().y*pixelsPerMeter);
+        m_animation.update(dt);
+        if(m_animation.isReady()){
+            SpriteBody::update(dt);
+        }
         return;
     }
 
@@ -62,7 +86,11 @@ void ShotArrow::update(float dt)
         glued = true;
         Body* b = (Body*) m_collisionToMakeSticky.targetBody->GetUserData();
         if(b->isDelete){ // Evita criar juntas em corpos destroidos
-            isDelete = true;
+//            isDelete = true;
+//            m_animation.setFrames(1, 4, 70, true);
+//            m_animation.forceFrame(0);
+            isActive = false;
+//            glued = false;
             return;
         }
         b2Vec2 worldCoordsAnchorPoint = m_collisionToMakeSticky.arrowBody->GetWorldPoint( b2Vec2(0.6f, 0) );
@@ -90,45 +118,33 @@ void ShotArrow::update(float dt)
     {
         m_body->SetTransform(m_body->GetPosition(), atan2(flightDirection.y, flightDirection.x) );
     }
-    else
-    {
-        float flightSpeed = flightDirection.Normalize();
-        b2Vec2 pointingDirection = m_body->GetWorldVector( b2Vec2( -1, 0 ) );
-        float dot = b2Dot( flightDirection, pointingDirection );
+//    else
+//    {
+//        float flightSpeed = flightDirection.Normalize();
+//        b2Vec2 pointingDirection = m_body->GetWorldVector( b2Vec2( -1, 0 ) );
+//        float dot = b2Dot( flightDirection, pointingDirection );
 
-        float dragConstant = 0.5f;
-        float dragForceMag = (1 - fabs(dot) ) * flightSpeed * flightSpeed * dragConstant * m_body->GetMass();
+//        float dragConstant = 0.5f;
+//        float dragForceMag = (1 - fabs(dot) ) * flightSpeed * flightSpeed * dragConstant * m_body->GetMass();
 
-        b2Vec2 arrowTailPosition = m_body->GetWorldPoint( b2Vec2( -0.4f, 0 ) );
-        m_body->ApplyForce( dragForceMag * -flightDirection, arrowTailPosition, true );
-     }
+//        b2Vec2 arrowTailPosition = m_body->GetWorldPoint( b2Vec2( -0.4f, 0 ) );
+//        m_body->ApplyForce( dragForceMag * -flightDirection, arrowTailPosition, true );
+//     }
 
     SpriteBody::update(dt);
 }
 
-void ShotArrow::startContact(Body *, b2Contact *)
+void ShotArrow::startContact(Body *body, b2Contact *contact)
 {
+    Shot::startContact(body, contact);
     hasCollided = true;
 }
 
 void ShotArrow::postSolve(Body *body, b2Contact *, const b2ContactImpulse *)
 {
-    if(glued) return;
+    if(glued || !isActive) return;
 
     m_collisionToMakeSticky.arrowBody = this->m_body;
     m_collisionToMakeSticky.targetBody = body->getBody();
     m_collisionToMakeSticky.active = true;
-
-    if(body->name == "spawner")
-    {
-        int dano = atk;
-        Spawner* s = (Spawner*) body;
-        s->damage(dano);
-        stringstream ss; ss << "-" << dano;
-
-        SplashText* text = new SplashText(ss.str(), s->getBody()->GetPosition()+b2Vec2(0, -1), sf::Color::Red, 25, 1000);
-        text->inicialImpulse = b2Vec2(1,1);
-
-        Engine::EngineControl.playSfx("data/music/sfx/explosion.wav");
-    }
 }

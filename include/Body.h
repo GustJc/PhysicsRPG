@@ -51,6 +51,7 @@ class Body
         string name = "";
 
         bool isDelete = false;
+        bool isActive = true;
     protected:
         b2Body* m_body;
         b2BodyDef m_bodyDef;
