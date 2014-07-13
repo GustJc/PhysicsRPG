@@ -4,6 +4,7 @@
 #include "TextureManager.h"
 SpriteBody::SpriteBody(int id, int px, int py)
 {
+    name = "sprite";
     type = id;
 
     if(id == 1)

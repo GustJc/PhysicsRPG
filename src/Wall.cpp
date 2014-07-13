@@ -62,6 +62,7 @@ void Wall::startContact(Body *body, b2Contact *)
 {
     if(body->name == "shot")
     {
+        cout << "Wall hit " << endl;
         Shot* shot = (Shot*)body;
         int dano = shot->getAtk();
         stringstream ss; ss << "-" << dano;

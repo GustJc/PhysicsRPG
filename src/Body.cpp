@@ -23,7 +23,17 @@ void Body::createBody(b2World & world, bool isCircle)
 
 void Body::destroyBody(b2World & world)
 {
-    //cout << "Body Destroyed" << endl;
+//    b2JointEdge* je = m_body->GetJointList();
+//    vector<b2Joint*> jl;
+//    while(je){
+//        jl.push_back(je->joint);
+//        je = je->next;
+//    }
+
+//    for (b2Joint* joint : jl) {
+//       world.DestroyJoint( joint );
+//    }
+
     m_body->DestroyFixture(m_body->GetFixtureList());
     world.DestroyBody(m_body);
 }
@@ -41,7 +51,7 @@ b2BodyDef* Body::getBodyDef()
 {
     return &m_bodyDef;
 }
-b2Shape* Body::getBodyShape()
+b2PolygonShape* Body::getBodyShape()
 {
     return &m_bodyShape;
 }

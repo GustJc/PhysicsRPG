@@ -37,7 +37,7 @@ class Body
         b2Body* getBody();
         b2Fixture *getFixture();
         b2BodyDef* getBodyDef();
-        b2Shape* getBodyShape();
+        b2PolygonShape *getBodyShape();
         b2FixtureDef* getBodyFixture();
 
         virtual void startContact(Body * body, b2Contact *contact);

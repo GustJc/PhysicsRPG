@@ -4,6 +4,9 @@
 #include "Engine.h"
 #include "Globals.h"
 #include "math.h"
+#include "Spawner.h"
+#include "Effects.h"
+#include <sstream>
 ShotArrow::ShotArrow(int id, float px, float py, b2Vec2 force)
 {
     name = "shot";
@@ -36,7 +39,48 @@ ShotArrow::ShotArrow(int id, float px, float py, b2Vec2 force)
 void ShotArrow::update(float dt)
 {
     if(m_body->IsAwake() == false){
-        isDelete = true;
+        Body* b = (Body*)m_collisionToMakeSticky.targetBody->GetUserData();
+        if(b->name == "sprite")
+            isDelete = true;
+    }
+
+    if(glued){
+        Body* b = (Body*)m_collisionToMakeSticky.targetBody->GetUserData();
+        if(m_body->GetJointList() == nullptr) {
+            isDelete = true;
+        }else
+        if(b->isDelete) {
+            isDelete = true;
+        }
+        SpriteBody::update(dt);
+        return;
+    }
+
+    //Junta corpos
+    if(m_collisionToMakeSticky.active)
+    {
+        glued = true;
+        Body* b = (Body*) m_collisionToMakeSticky.targetBody->GetUserData();
+        if(b->isDelete){ // Evita criar juntas em corpos destroidos
+            isDelete = true;
+            return;
+        }
+        b2Vec2 worldCoordsAnchorPoint = m_collisionToMakeSticky.arrowBody->GetWorldPoint( b2Vec2(0.6f, 0) );
+
+        b2WeldJointDef weldJointDef;
+        weldJointDef.bodyA = m_collisionToMakeSticky.targetBody;
+        weldJointDef.bodyB = m_collisionToMakeSticky.arrowBody;
+        weldJointDef.localAnchorA = weldJointDef.bodyA->GetLocalPoint( worldCoordsAnchorPoint );
+        weldJointDef.localAnchorB = weldJointDef.bodyB->GetLocalPoint( worldCoordsAnchorPoint );
+        weldJointDef.referenceAngle = weldJointDef.bodyB->GetAngle() - weldJointDef.bodyA->GetAngle();
+        m_collisionToMakeSticky.joint = m_body->GetWorld()->CreateJoint( &weldJointDef );
+
+        m_body->GetFixtureList()->SetDensity(0.001);
+        m_body->ResetMassData();
+
+        b2Filter noCol; noCol.categoryBits = 0; noCol.maskBits = 0;
+        this->m_body->GetFixtureList()->SetFilterData(noCol);
+        return;
     }
 
 
@@ -65,4 +109,26 @@ void ShotArrow::update(float dt)
 void ShotArrow::startContact(Body *, b2Contact *)
 {
     hasCollided = true;
+}
+
+void ShotArrow::postSolve(Body *body, b2Contact *, const b2ContactImpulse *)
+{
+    if(glued) return;
+
+    m_collisionToMakeSticky.arrowBody = this->m_body;
+    m_collisionToMakeSticky.targetBody = body->getBody();
+    m_collisionToMakeSticky.active = true;
+
+    if(body->name == "spawner")
+    {
+        int dano = atk;
+        Spawner* s = (Spawner*) body;
+        s->damage(dano);
+        stringstream ss; ss << "-" << dano;
+
+        SplashText* text = new SplashText(ss.str(), s->getBody()->GetPosition()+b2Vec2(0, -1), sf::Color::Red, 25, 1000);
+        text->inicialImpulse = b2Vec2(1,1);
+
+        Engine::EngineControl.playSfx("data/music/sfx/explosion.wav");
+    }
 }

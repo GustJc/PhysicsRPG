@@ -64,15 +64,22 @@ void GameState::load(int )
     world->SetDebugDraw(m_debug_render);
 
     // Cria Chão
-    b2BodyDef ground_def;
-    ground_def.position.Set(400.0f/pixelsPerMeter, 600.0/pixelsPerMeter);
+    //b2BodyDef ground_def;
+    //ground_def.position.Set(400.0f/pixelsPerMeter, 600.0/pixelsPerMeter);
 
-    b2Body* m_ground = world->CreateBody(&ground_def);
+    //b2Body* m_ground = world->CreateBody(&ground_def);
     mock = new SpriteBody();
-    m_ground->SetUserData(mock);
-    b2PolygonShape groundBox;
-    groundBox.SetAsBox(1000.f/pixelsPerMeter, 80.f/pixelsPerMeter);
-    m_ground->CreateFixture(&groundBox, 0.0f);
+    mock->getBodyDef()->position.Set(400.0f/pixelsPerMeter, 600.0/pixelsPerMeter);
+
+    b2PolygonShape* groundBox = mock->getBodyShape();
+
+    //m_ground->SetUserData(mock);
+    //b2PolygonShape groundBox;
+    groundBox->SetAsBox(1000.f/pixelsPerMeter, 80.f/pixelsPerMeter);
+    //m_ground->CreateFixture(&groundBox, 0.0f);
+    mock->createBody(*world);
+    mock->getBody()->SetType(b2_staticBody);
+
 
     this->flag = new Flag();
     flag->setTexture(TextureManager::TextureControl.get("flag"), 29, 46, 2, 400);
